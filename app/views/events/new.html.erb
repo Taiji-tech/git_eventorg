@@ -1,0 +1,18 @@
+<div class='event'>
+  <div class='event-area'>
+  <div class='event-form'>
+  <%= form_tag('/events', method: :post) do %>
+    <h3>
+      イベントを作成します
+    </h3>
+    <p>イベント名：<input type="text" name="title"></p>
+    <p>開催日時：<input type="text" name="start"></p>
+    <p>開催場所：<input type="text" name="venue"></p>
+    <p>イベント内容：</p>
+    <p><textarea name="content" placeholder="開催するイベントの内容を書いてください" rows="10" cols="30"></textarea></p>
+    <p>定員：<input type="integer" name="capacity"></p>
+    <input type="Submit" value="イベント作成"><br></br>
+  <% end %>
+  </div>
+  </div>
+</div>

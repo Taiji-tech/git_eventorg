@@ -1,0 +1,26 @@
+<div class='event'>
+<% @events.each do |event| %>
+<div class='event-area'>
+  <div class='event-box'>
+  <p>開催日時：<%= event.start.strftime("%-m月%-d日(%a) %H:%M %p") %></p>
+  <p>イベント：<%= event.title %></p>
+  <p>開催場所：<%= event.venue %></p>
+  <p>定　員　：<%= event.capacity %></p>
+  <p>主催者　：<%= event.user.nickname %></p>
+  
+  <p>
+    <%= link_to '詳細', "/events/#{event.id}", method: :get %>
+    <% if user_signed_in? && current_user.id == event.user_id %>
+    <%= link_to '削除', "/events/#{event.id}", method: :delete %>
+  <% end %>
+  </p>
+  </div>
+  
+  <!--<div class'event-image'>-->
+  <!--  <span><%= image_tag 'Cooking_sample.jpg' %></span>-->
+  <!--</div>-->
+  
+</div>
+<% end %>
+  <%= paginate(@events) %>
+</div>

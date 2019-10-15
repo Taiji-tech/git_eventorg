@@ -1,0 +1,41 @@
+<div class='event'>
+  <div class='event-area'>
+      <div class='event-box'>
+        <p>開催日時：<%= @event.start %></p>
+        <p>イベント：<%= @event.title %></p>
+        <p>開催場所：<%= @event.venue %></p>
+        <p>定　員　：<%= @event.capacity %></p>
+        <p>イベント主催者：<%= @event.user.nickname %></p>
+        <% if user_signed_in? && current_user.id == @event.user_id %>
+          <p>
+            <%= link_to '編集', "/events/#{@event.id}/edit", method: :get %>
+            <%= link_to '削除', "/events/#{@event.id}", method: :delete %>
+          </p>
+        <% end %>
+
+      </div>
+      <div class'event-image'>
+        <span><%= image_tag 'Cooking_sample.jpg' %></span>
+      </div>
+    </div>
+    
+    <% if @reserves %>
+	      <h3>＜予約者一覧＞</h3>
+        <% @reserves.each do |reserve| %>
+          <p>
+            <%= reserve.nickname %>
+          </p>
+        <% end %>
+      <% end %>
+      
+    <% if user_signed_in? && current_user.id == @event.user_id %>
+    <% else %>
+    <h3>このイベントに参加する</h3>
+    <%= form_tag("/events/#{@event.id}/reserves", method: :post) do %>
+    <p>Nickname：<input type="text" name="nickname"></p>
+    <p>Email：<input type="text" name="email"></p>
+    <input type="Submit" value="予約する"><br></br>
+    <% end %>
+    <% end %>
+    
+</div>

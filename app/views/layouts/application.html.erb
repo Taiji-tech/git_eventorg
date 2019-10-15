@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Eventorg</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class=header>
+      <div class=menu>
+       <h1><a class="button" href="/">Event Organizer</a></h1>
+     </div>
+      <div class=button>
+        <ul>
+        <% if user_signed_in? %>
+            <%= current_user.nickname %>
+            <a class="button" href="/users/<%= current_user.id %>">マイイベント</a>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'button' %>
+            <a class="button" href="/events/new">イベント作成</a>
+        <% else %>
+            <%= link_to "ログイン", new_user_session_path, class: 'button' %>
+            <%= link_to "新規登録", new_user_registration_path, class: 'button' %>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+    <%= yield %>
+  </body>
+</html>
