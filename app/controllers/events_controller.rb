@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   
    def show
      @event = Event.find(params[:id])
-     @reserves = @event.reserves.nickname
+     @reserves = @event.reserves
    end
   
   def destroy
