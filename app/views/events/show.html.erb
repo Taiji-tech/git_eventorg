@@ -1,41 +1,66 @@
 <div class='event'>
   <div class='event-area'>
-      <div class='event-box'>
-        <p>開催日時：<%= @event.start %></p>
-        <p>イベント：<%= @event.title %></p>
-        <p>開催場所：<%= @event.venue %></p>
-        <p>定　員　：<%= @event.capacity %></p>
-        <p>イベント主催者：<%= @event.user.nickname %></p>
-        <% if user_signed_in? && current_user.id == @event.user_id %>
+    <div class='event-box'>
+      <p>開催日時：<%= @event.start.strftime("%-m月%-d日(%a) %H:%M %p") %></p>
+      <p>イベント：<%= @event.title %></p>
+      <p>開催場所：<%= @event.venue %></p>
+      <p>定　員　：<%= @event.capacity %>人</p>
+      <p>主催者：<%= @event.user.nickname %></p>
+      <p>内容：</p>
+      <p><%= simple_format @event.content %></p>
+        
+      <% if user_signed_in? && current_user.id == @event.user_id %>
           <p>
-            <%= link_to '編集', "/events/#{@event.id}/edit", method: :get %>
-            <%= link_to '削除', "/events/#{@event.id}", method: :delete %>
+            <%= link_to '削除', "/events/#{@event.id}", method: :delete, class: 'event-button'  %>
+            <!--<%= form_for( '/events', method: :post )  do |f| %>-->
+            <!--画　像：<%= f.file_field :image %></br>-->
+            <!--<%= f.submit 'アップロード', class: 'event-button' %>-->
+            <!--<% end %>-->
           </p>
-        <% end %>
+      <% end %>
 
-      </div>
-      <div class'event-image'>
-        <span><%= image_tag 'Cooking_sample.jpg' %></span>
-      </div>
     </div>
-    
-    <% if @reserves %>
-	      <h3>＜予約者一覧＞</h3>
-        <% @reserves.each do |reserve| %>
-          <p>
-            <%= reserve.nickname %>
-          </p>
-        <% end %>
+    <div class'event-image'>
+      <% if "#{@event.image}" == "#{@event.title}-#{@event.user_id}.jpg" %>
+        <span><%= image_tag "#{@event.title}-#{@event.user_id}.jpg" %></span>
+      <% else %>
+       <span><%= image_tag "noimage.jpg" %></span>
       <% end %>
       
-    <% if user_signed_in? && current_user.id == @event.user_id %>
-    <% else %>
-    <h3>このイベントに参加する</h3>
-    <%= form_tag("/events/#{@event.id}/reserves", method: :post) do %>
-    <p>Nickname：<input type="text" name="nickname"></p>
-    <p>Email：<input type="text" name="email"></p>
-    <input type="Submit" value="予約する"><br></br>
-    <% end %>
-    <% end %>
+    </div>
+    </div>
+
+  <% if user_signed_in? && current_user.id == @event.user_id %>
+  <% else %>
+    <div class='event-area'>
+      <div class='event-box'>
+        <h3>このイベントに参加する</h3>
+        <%= form_tag("/events/#{@event.id}/reserves", method: :post) do %>
+          <p>Nickname：<input type="text" name="nickname"></p>
+          <p>Email：<input type="text" name="email"></p>
+          <input type="Submit" value="予約する" class='event-button'><br></br>
+        <% end %>
+      </div>
     
+      <div class='event-box'>
+        <h3>このイベントの参加をキャンセルする</h3>
+        <%= form_tag("/events/#{@event.id}/reserves/", method: :delete) do %>
+          <p>Nickname：<input type="text" name="nickname"></p>
+          <p>Email：<input type="text" name="email"></p>
+          <input type="Submit" value="キャンセル" class='event-button'><br></br>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+    <div class='event-area'>
+      <% if @reserves %>
+       <div class='event-box'>
+	       <h3>＜予約者一覧＞</h3>
+          <% @reserves.each do |reserve| %>
+          <p><%= reserve.nickname %>さん</p>
+        <% end %>
+    </div>
+   <% end %>
+   </div>
 </div>

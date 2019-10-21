@@ -1,17 +1,20 @@
 <div class='event'>
   <div class='event-area'>
   <div class='event-form'>
-  <%= form_tag('/events', method: :post) do %>
+  <%= form_for( '/events', method: :post )  do |f| %>
     <h3>
       イベントを作成します
     </h3>
-    <p>イベント名：<input type="text" name="title"></p>
-    <p>開催日時：<input type="text" name="start"></p>
-    <p>開催場所：<input type="text" name="venue"></p>
+    <p>イベント名：<%= f.text_field :title %></p>
+    <p>開催日時：<%= f.datetime_select :start %></p>
+    <p>開催場所：<%= f.text_field :venue %></p>
     <p>イベント内容：</p>
-    <p><textarea name="content" placeholder="開催するイベントの内容を書いてください" rows="10" cols="30"></textarea></p>
-    <p>定員：<input type="integer" name="capacity"></p>
-    <input type="Submit" value="イベント作成"><br></br>
+    <%= f.text_area :content,  placeholder: 'イベントの内容を書いてください！', style: 'width: 400px; height: 200px;' %>
+    <p>定　員：<%= f.number_field :capacity, min: 1, style: 'width: 40px; height: 20px;' %>人</p>
+    <p>画　像：<%= f.file_field :image %></p>
+    <p>※画像ファイルは400px x 300px 以内のJEPG形式でお願いします</p>
+    <p><%= f.submit 'イベント作成', class: 'event-button' %></p>
+    
   <% end %>
   </div>
   </div>

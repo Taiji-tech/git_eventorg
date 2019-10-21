@@ -11,7 +11,22 @@ class EventsController < ApplicationController
   end
   
   def create
-    Event.create(title: event_params[:title], start: event_params[:start], venue: event_params[:venue], content: event_params[:content], capacity: event_params[:capacity], user_id: current_user.id)
+
+    Event.create(
+      title: event_params[:title],
+      start: event_params['start(1i)']+'-'+event_params['start(2i)']+'-'+event_params['start(3i)']+' '+event_params['start(4i)']+':'+event_params['start(5i)'],
+      venue: event_params[:venue],
+      content: event_params[:content],
+      capacity: event_params[:capacity],
+      user_id: current_user.id,
+      )
+
+    if event_params[:image]
+      #受け取った画像データを保存（画像データを元に画像ファイルを作成）する
+      Event.create(image: "#{current_user.id}.jpg")
+      File.binwrite("app/assets/images/#{event_params[:title]}-#{current_user.id}.jpg", event_params[:image].read)
+    end
+      
   end
   
    def show
@@ -28,7 +43,7 @@ class EventsController < ApplicationController
   
   private
   def event_params
-    params.permit(:title, :start, :venue, :content, :capacity)
+   params.require('/events').permit(:title, :start, :venue, :content, :capacity, :image )
   end
   
   def move_to_index

@@ -69,3 +69,5 @@ gem 'hirb-unicode'
 
 gem 'devise'
 gem 'kaminari'
+
+gem 'mini_magick'

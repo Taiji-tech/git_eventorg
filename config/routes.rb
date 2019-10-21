@@ -5,4 +5,9 @@ Rails.application.routes.draw do
    resources :reserves, only: [:create]
   end
   resources :users, only: [:show]
+  
+  delete '/events/:event_id/reserves' => 'reserves#destroy'
+  
+  post '/events/new' => 'events#create'
+
 end
