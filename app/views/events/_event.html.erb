@@ -14,8 +14,8 @@
       </div>
       
     <div class'event-image'>
-      <% if "#{event.image}" == "#{event.title}-#{event.user_id}.jpg" %>
-        <span><%= image_tag "#{event.title}-#{event.user_id}.jpg" %></span>
+      <% if event.image %>
+        <span><%= image_tag "#{event.image}" %></span>
       <% else %>
        <span><%= image_tag "noimage.jpg" %></span>
       <% end %>
