@@ -71,3 +71,7 @@ gem 'devise'
 gem 'kaminari'
 
 gem 'mini_magick'
+
+group :production do
+  gem 'rails_12factor'
+end
