@@ -42,6 +42,7 @@ class EventsController < ApplicationController
     event = Event.find(params[:id])
     if event.user_id == current_user.id
       event.destroy
+      File.delete("/app/app/assets/images/#{event.title}-#{current_user.id}.jpg")
     end
   end
   
