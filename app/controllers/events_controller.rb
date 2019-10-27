@@ -14,6 +14,15 @@ class EventsController < ApplicationController
   
   def create
 
+    file_name = "#{event_params[:title]}-#{current_user.id}.jpg"
+    
+    if event_params[:image]
+      #受け取った画像データを保存（画像データを元に画像ファイルを作成）する
+      File.binwrite("/app/app/assets/images/#{file_name}", event_params[:image].read)
+    else
+      file_name = "noimage.jpg"
+    end
+    
     Event.create(
       title: event_params[:title],
       start: event_params['start(1i)']+'-'+event_params['start(2i)']+'-'+event_params['start(3i)']+' '+event_params['start(4i)']+':'+event_params['start(5i)'],
@@ -21,16 +30,10 @@ class EventsController < ApplicationController
       content: event_params[:content],
       capacity: event_params[:capacity],
       user_id: current_user.id,
-      image: "#{event_params[:title]}-#{current_user.id}.jpg"
+      image: file_name
       )
 
-    if event_params[:image]
-      #受け取った画像データを保存（画像データを元に画像ファイルを作成）する
-      image = event_params[:image]
-      File.binwrite("/app/app/assets/images/#{event_params[:title]}-#{current_user.id}.jpg", image.read)
-    else
-      Event.update(image: "noimage.jpg")
-    end
+    
       
   end
   
