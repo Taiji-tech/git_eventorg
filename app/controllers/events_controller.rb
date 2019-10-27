@@ -20,16 +20,16 @@ class EventsController < ApplicationController
       venue: event_params[:venue],
       content: event_params[:content],
       capacity: event_params[:capacity],
-      user_id: current_user.id
+      user_id: current_user.id,
+      image: "#{event_params[:title]}-#{current_user.id}.jpg"
       )
 
     if event_params[:image]
       #受け取った画像データを保存（画像データを元に画像ファイルを作成）する
       image = event_params[:image]
-      Event.create(image: "#{event_params[:title]}-#{current_user.id}.jpg")
       File.binwrite("/app/app/assets/images/#{event_params[:title]}-#{current_user.id}.jpg", image.read)
     else
-      Event.create(image: "noimage.jpg")
+      Event.update(image: "noimage.jpg")
     end
       
   end
