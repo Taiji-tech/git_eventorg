@@ -18,7 +18,8 @@ class EventsController < ApplicationController
     
     if event_params[:image]
       #受け取った画像データを保存（画像データを元に画像ファイルを作成）する
-      File.binwrite("/app/assets/images/#{file_name}", event_params[:image].read)
+      image = event_params[:image]
+      File.binwrite("/app/assets/images/#{file_name}", image.read)
     else
       file_name = "noimage.jpg"
     end
