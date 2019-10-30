@@ -19,7 +19,7 @@ class EventsController < ApplicationController
     if event_params[:image]
       #受け取った画像データを保存（画像データを元に画像ファイルを作成）する
       image = event_params[:image]
-      File.binwrite("app/assets/images/#{file_name}", image.read)
+      File.binwrite("app/app/assets/images/#{file_name}", image.read)
     else
       file_name = "noimage.jpg"
     end
@@ -48,7 +48,7 @@ class EventsController < ApplicationController
     if event.user_id == current_user.id
       event.destroy
       if event.image != "noimage.jpg"
-        File.delete("app/assets/images/#{event.title}-#{current_user.id}.jpg")
+        File.delete("app/app/assets/images/#{event.title}-#{current_user.id}.jpg")
       end
     end
   end
