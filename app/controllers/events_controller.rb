@@ -33,9 +33,6 @@ class EventsController < ApplicationController
       user_id: current_user.id,
       image: file_name
       )
-
-    
-      
   end
   
    def show
