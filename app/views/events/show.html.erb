@@ -55,8 +55,8 @@
 
     <div class='event-area'>
       <% if @reserves %>
+      	 <p>＜予約者一覧＞</p>
        <div class='event-box'>
-        <h3>＜予約者一覧＞</h3>
           <% @reserves.each do |reserve| %>
           <p><%= reserve.nickname %>さん</p>
         <% end %>
