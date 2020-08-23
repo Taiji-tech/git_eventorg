@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-6 offset-sm-3">
+      <div class="page-title">
+        <h1>予約完了</h1>
+      </div>
+      
+      <div class="">
+        <h2>予約が完了しました。予約完了メールに記載のリンクより決済を行ってください。
+            決済が完了後に、参加登録が完了します。</h2>
+        <table>
+          <tr>
+            <th>開催日時</th>
+            <th>主催者</th>
+            <th>開催URL</th>
+            <th>定員</th>
+            <th>内容</th>
+          </tr>
+          <tr>
+            <td><%= @event.start %></td>
+            <td><%= User.find(@event.user_id).nickname %></td>
+            <td><%= @event.venue %></td>
+            <td><%= @event.capacity %></td>
+            <td><%= @event.content %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

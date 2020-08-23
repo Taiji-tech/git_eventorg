@@ -1,0 +1,13 @@
+<% if flash[:notice] %>
+<div class="flash-notice">
+  <p><%= flash[:notice] %></p>
+</div>
+
+<script>
+$(function(){
+  setTimeout(function(){
+    $(".flash-notice").remove();  
+  }, 3000);
+});  
+</script>
+<% end %>

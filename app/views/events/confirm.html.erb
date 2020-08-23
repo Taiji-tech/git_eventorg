@@ -1,0 +1,60 @@
+<% provide(:title, '') %>
+<% provide(:content, '') %>
+
+<%= render "shared/flash" %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-3">
+      <%= render "shared/sidebar_organizer" %>
+    </div>
+    
+    <div class="col-12 col-sm-9">
+      <div class="page-title">
+        <h1>登録したイベントの確認</h1>
+      </div>  
+      
+      <div class='event'>
+        <% @events.each do |event| %>
+        <div class="event-box box-wrap">
+          <div class="event-box__btn">
+            <p><%= link_to "編集する", "/events/#{event.id}/edit", method: :get, class:"grey-btn" %></p>
+            <p><%= link_to "削除する", "/events/#{event.id}", method: :delete, class:"grey-btn" %></p>
+          </div>
+          <div class='event-box__detail'>
+            <p><span>開催日時</span><%= event.start %></p>
+            <p><span>イベント</span><%= event.title %></p>
+            <p><span>開催場所</span><%= event.venue %></p>
+            <p><span>定員</span><%= event.capacity %></p>
+          </div>
+          <div class="event-box__img">
+            <span><%= image_tag 'Cooking_sample.jpg' %></span>
+          </div>
+          <div class="event-box__reserve">
+            <p>5人：現在の予約者</p>
+            <p><%= link_to "予約者の情報を確認する", event_path(event.id) %></p>
+          </div>
+          
+          <% if @reserves %>
+      	      <h3>＜予約者一覧＞</h3>
+              <% @reserves.each do |reserve| %>
+                <p>
+                  <%= reserve.nickname %>
+                </p>
+              <% end %>
+            <% end %>
+            
+          <% if user_signed_in? && current_user.id == event.user_id %>
+          <% else %>
+          <h3>このイベントに参加する</h3>
+          <%= form_tag("/events/#{event.id}/reserves", method: :post) do %>
+          <p>Nickname：<input type="text" name="nickname"></p>
+          <p>Email：<input type="text" name="email"></p>
+          <input type="Submit" value="予約する"><br></br>
+          <% end %>
+          <% end %>
+          </div>
+          <% end %>
+      </div>
+    </div>
+</div>
+

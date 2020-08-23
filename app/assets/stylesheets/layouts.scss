@@ -1,0 +1,80 @@
+// views > layoutsフォルダ内
+
+// ヘッダー
+.header{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  background: #1971c2;
+  color: #fff;
+
+  a{
+    color: #fff;
+  }
+}
+.header-logo{
+  padding: 1rem 3rem;
+  
+  h2{
+    margin: 0;
+    font-size: 2.8rem;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #fff;
+    opacity: .8;
+  }
+}
+.header-link{
+  ul{
+    display: flex;
+    margin: 0;
+    padding: 1rem 3rem;
+  }
+  
+  li{
+    list-style: none;
+    font-size: 2rem;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #fff;
+    opacity: .8;
+  }
+}
+
+
+// footer
+.footer{
+  width: 95%;
+  margin: 2rem auto;
+  border-top: solid .2rem #adb5bd;
+
+  ul{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  li{
+    padding: 2rem;
+    list-style: none;
+    font-size: 2rem;
+  }
+  a{
+    color: #343a40;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #343a40;
+    opacity: .8;
+  }
+}
+.footer-copyright{
+  width: 100%;
+  
+  p{
+    font-size: 1.6rem;
+    text-align: center;
+  }
+}

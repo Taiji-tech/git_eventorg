@@ -1,0 +1,62 @@
+
+.box-wrap{
+	padding: 2rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 .5rem #ced4da;
+}
+
+// ボタン関連
+.submit-btn{
+	display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: .6rem 1.5rem;
+  line-height: 1.42857143;
+  border-radius: 4px;	
+}
+.blue-btn{
+	background: #1971c2;
+  color: #fff;
+}
+.pink-btn{
+	background: #fa5252;
+  color: #fff;
+}
+.grey-btn{
+	background: #dee2e6;
+	color: #343a40;
+	transition: .3s;
+}
+.grey-btn:hover{
+	background: #1971c2;
+  color: #fff;
+  text-decoration: none;
+}
+.unselect-btn{
+	background: #dee2e6;
+	color: #343a40;
+}
+
+
+// flashメッセージ
+.flash-notice{
+	width: 100%;
+	z-index: 10;
+	position: absolute;
+	padding: 1rem 0;
+	text-align: center;
+	font-size: 1.8rem;
+	background: #ff8787;
+	color: #fff;
+	
+	p{
+		margin: 0;
+	}
+}

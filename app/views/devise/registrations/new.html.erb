@@ -1,41 +1,36 @@
-<div class="event">
-  <div class="event-area">
-<h2>新規登録</h2>
+<div class="user">
+  <div class="page-title">
+    <h1>新規ユーザー登録</h1>
+  </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
-<div class="event-form">
-    <p>
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname, autofocus: true %>
-    </p>
-    
-    <p>
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </p>
-
-    <p>
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+  <div class="user-form">
+    <div class="user-form__box">
+      <%= f.label :nickname, "ニックネーム" %>
+      <%= f.text_field :nickname, autofocus: true, class: "form-control" %>
+    </div>
+    <div class="user-form__box">
+      <%= f.label :email, "E-mail" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>  
+    <div class="user-form__box">
+      <%= f.label :password, "パスワード" %>
+      <% if @minimum_password_length %>
+      <em>&#x203B;<%= @minimum_password_length %> 文字以上</em>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
+    <div class="user-form__box">
+      <%= f.label :password_confirmation, "パスワード（確認）" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
+    <div class="user-form__submit-box">
+      <%= f.submit "登録", class:"submit-btn btn-hover blue-btn" %>
+    </div>
     <% end %>
-    
-    <%= f.password_field :password, autocomplete: "new-password" %>
   
-
-    <p>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </p>
-    
-    <p>
-    <%= f.submit "登録" %>
-    </p>
-<% end %>
-
-<%= render "devise/shared/links" %>
-</div>
-</div>
-</div>
+    <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>  

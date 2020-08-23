@@ -1,41 +1,44 @@
-<div class='event'>
-  <div class='event-area'>
-      <div class='event-box'>
-        <p>開催日時：<%= @event.start %></p>
-        <p>イベント：<%= @event.title %></p>
-        <p>開催場所：<%= @event.venue %></p>
-        <p>定　員　：<%= @event.capacity %></p>
-        <p>イベント主催者：<%= @event.user.nickname %></p>
-        <% if user_signed_in? && current_user.id == @event.user_id %>
-          <p>
-            <%= link_to '編集', "/events/#{@event.id}/edit", method: :get %>
-            <%= link_to '削除', "/events/#{@event.id}", method: :delete %>
-          </p>
-        <% end %>
+<% provide(:title, '') %>
+<% provide(:content, '') %>
 
+
+<div class="event">
+  <div class="event-box">
+    <div class="event-box__info box-wrap">
+      <div class="event-box__info-title">
+        <h1><%= @event.title %></h1>
       </div>
-      <div class'event-image'>
+      <div class="event-box__detail">
+        <p><span><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</span><%= @event.start %></p>
+        <p><span><i class="fa fa-user-o" aria-hidden="true"></i> 定員</span><%= @event.capacity %> 名</p>
+        <p><span><i class="fa fa-user-secret" aria-hidden="true"></i> 主催者</span><%= @event.user.nickname %></p>
+        <p><span><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</span><%= @event.content %></p>
+      </div>
+      
+      <div class="event-box__img">
         <span><%= image_tag 'Cooking_sample.jpg' %></span>
+      </div>
+  
+      <div class="event-box__attend">
+        <% if @event.capacity > @reserves.size %>  
+        <p class="event-box__attend-btn blue-btn btn-hover" id="event-attend">このイベントに参加する</p>
+        <%= render "events/resistration", collection: @event %>
+        <% else %>
+        <p class="event-box__attend-btn pink-btn">こちらのイベントは満席です</p>
+        <% end %>
       </div>
     </div>
     
-    <% if @reserves %>
-	      <h3>＜予約者一覧＞</h3>
+    <div class="event-box__participate">
+      <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i> 参加者一覧（<%= @reserves.size %> 名）</h3>
+      <ul>
         <% @reserves.each do |reserve| %>
-          <p>
-            <%= reserve.nickname %>
-          </p>
+        <li><%= reserve.nickname %></li>
         <% end %>
-      <% end %>
-      
-    <% if user_signed_in? && current_user.id == @event.user_id %>
-    <% else %>
-    <h3>このイベントに参加する</h3>
-    <%= form_tag("/events/#{@event.id}/reserves", method: :post) do %>
-    <p>Nickname：<input type="text" name="nickname"></p>
-    <p>Email：<input type="text" name="email"></p>
-    <input type="Submit" value="予約する"><br></br>
-    <% end %>
-    <% end %>
-    
+      </ul>
+    </div>
+  
+  </div>
 </div>
+
+

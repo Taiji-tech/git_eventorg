@@ -1,25 +1,24 @@
-
-<%= render "shared/flash" %>
 <div class="container">
   <div class="row">
     <div class="col-12 col-sm-3">
       <%= render "shared/sidebar_organizer" %>
-    </div>  
-  
-    <div class='col-12 col-sm-9 event'>
+    </div>
+    <div class="col-12 col-sm-9">
       <div class="page-title">
-        <h1>イベント作成</h1>
+        <h1>イベント情報の編集</h1>
       </div>
-      
+      <% if flash["notice"].present? %>
+        <p><%= flash["notice"] %></p>
+      <% end %>
       <div class="event">
-        <%= form_with(model: @event, url: events_path, method: :post) do |f| %>
+        <%= form_with(model:@event, url: event_path, method: :patch) do |f| %>
           <div class="event-form">
             <%= f.label:title, "イベント名" %>
             <%= f.text_field:title, class:"form-control form-control-lg" %>
           </div>
           <div class="event-form">
             <%= f.label:start, "開催日" %>
-            <%= f.datetime_select:start, class:"form-control 11" %>
+            <%= f.text_field:start, class:"form-control form-control-lg" %>
           </div>
           <div class="event-form">
             <%= f.label:venue, "ズームID" %>
@@ -34,12 +33,11 @@
             <%= f.number_field:capacity, class:"form-control form-control-lg" %>
           </div>
           <div class="event-submit">
-            <%= f.submit "イベント作成", class:"submit-btn blue-btn btn-hover" %>
+            <%= f.submit "編集完了", class:"btn" %>
           </div>
         <% end %>
         
       </div>
     </div>
-    
   </div>
 </div>

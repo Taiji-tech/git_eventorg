@@ -1,0 +1,21 @@
+<div class="header">
+  <div class="header-logo">
+   <h2><%= link_to "Event Organizer", root_path %> </a></h2>
+  </div>
+  <div class="header-link">
+    <nav>
+      <ul>
+      <% if user_signed_in? %>
+        <li><%= current_user.nickname %></li>
+        <li><%= link_to "マイページ" %></li>
+        <li><a class="button" href="/users/<%= current_user.id %>">マイイベント</a></li>
+        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        <li><a class="button" href="/events/new">イベント作成</a></li>
+      <% else %>
+        <li><%= link_to "ログイン", new_user_session_path %></li>
+        <li><%= link_to "新規登録", new_user_registration_path %></li>
+      <% end %>
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+ 
+// bootstrapフレームワーク読み込み
+@import "bootstrap-sprockets";
+@import "bootstrap";
+// font awsome
+@import "font-awesome";
+
+// 共通設定
+// 画面を暗くする際の表示
+#display{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 49;
+  width: 100vw;
+  height: 100vh;
+  background: #495057;
+}

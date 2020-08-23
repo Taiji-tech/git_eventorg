@@ -33,6 +33,24 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
+# bootstrapフレームワーク
+gem 'bootstrap-sass', '~>3.3.6'
+
+# jqueryフレームワーク
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
+# devise関連
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
+# font-awsome
+gem 'font-awesome-rails'
+
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -66,6 +84,4 @@ gem 'compass-rails', '3.1.0'
 gem 'sprockets', '3.7.2'
 gem 'hirb'
 gem 'hirb-unicode'
-
-gem 'devise'
 gem 'kaminari'
