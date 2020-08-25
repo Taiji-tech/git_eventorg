@@ -1,0 +1,41 @@
+
+<%= render "shared/flash" %>
+<div class="container">
+<div class="row">
+  <div class="col-12 col-sm-3">
+    <%= render "shared/sidebar_organizer" %>
+  </div>
+  
+  <div class="col-12 col-sm-9">
+    <div class="page-title">
+      <h1>カード情報確認・変更</h1>
+    </div>
+    <div class="pay">
+      <div class="pay__header">
+        <h2><i class="fa fa-address-book-o" aria-hidden="true"></i> 現在登録されているカード</h2>
+      </div>
+      <div class="pay__card-info box-wrap">
+        <table>
+          <tr>
+            <th>カード番号</th>
+            <td>**** **** **** <%= @card_information.last4 %></td>
+          </tr>
+          <tr>
+            <th>有効期限</th>
+            <td><%= @card_information.exp_month.to_s %>/<%= @card_information.exp_year.to_s.slice(2,3) %></td>
+          </tr>
+          <tr>
+            <th>ブランド</th>
+            <td><%= @card_information.brand %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="pay__card-notice">
+        <p><%= link_to "登録されているカードを変更する", user_pays_edit_card_path %></p>
+      </div>
+    </div>
+    
+
+  </div>
+</div>
+</div>

@@ -40,6 +40,7 @@ gem 'bootstrap-sass', '~>3.3.6'
 # jqueryフレームワーク
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 
 # devise関連
 gem 'devise'
@@ -49,7 +50,11 @@ gem 'devise-i18n-views'
 # font-awsome
 gem 'font-awesome-rails'
 
+# 環境変数
+gem 'dotenv-rails'
 
+# payjp
+gem 'payjp'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

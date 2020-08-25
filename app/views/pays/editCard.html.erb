@@ -1,0 +1,58 @@
+<%= render "shared/flash" %>
+<div class="container">
+<div class="row">
+  <div class="col-12 col-sm-3">
+    <%= render "shared/sidebar_organizer" %>
+  </div>
+  
+  <div class="col-12 col-sm-9">
+    <div class="page-title">
+      <h1>登録カードの変更</h1>
+    </div>
+    
+    <div class="pay-form">
+      <div class="pay-form__notice">
+        <p>「カード情報を入力する」ボタンが表示されない場合は、更新ボタンを押してください。</p>
+      </div>
+      <div class="pay-form__box-card box-wrap">
+        <h3>現在のカード情報</h3>
+        <table>
+          <tr>
+            <th>カード番号</th>
+            <td>**** **** **** <%= @card_information.last4 %></td>
+          </tr>
+          <tr>
+            <th>有効期限</th>
+            <td><%= @card_information.exp_month.to_s %>/<%= @card_information.exp_year.to_s.slice(2,3) %></td>
+          </tr>
+          <tr>
+            <th>ブランド</th>
+            <td><%= @card_information.brand %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="pay-form__arrow">
+        <p>&#8595;</p>
+      </div>
+      <div class="pay-form__box-card box-wrap">
+        <p>カード情報を入力し、登録してください。</p>
+        <%= form_with(url: pays_path, data: {remote: false}) do |f| %>
+        <script
+          type="text/javascript"
+          src="https://checkout.pay.jp/"
+          class="payjp-button"
+          data-key="<%= ENV['PAYJP_KEY'] %>"
+          data-submit-text="トークンを作成する"
+          data-partial="true">
+        </script>
+
+        <div class="pay-form__submit-box">
+          <%= f.submit "登録する", class:"submit-btn blue-btn btn-hover"  %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>

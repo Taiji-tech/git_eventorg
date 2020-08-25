@@ -2,7 +2,7 @@
 .box-wrap{
 	padding: 2rem;
 	border-radius: 1rem;
-	box-shadow: 0 0 .5rem #ced4da;
+	box-shadow: 0 0 1rem #adb5bd;
 }
 
 // ボタン関連
@@ -30,8 +30,8 @@
   color: #fff;
 }
 .grey-btn{
-	background: #dee2e6;
-	color: #343a40;
+	background: #e9ecef;;
+	color: #1971c2;
 	transition: .3s;
 }
 .grey-btn:hover{
@@ -59,4 +59,14 @@
 	p{
 		margin: 0;
 	}
+}
+
+
+
+// form設定
+// number_fieldのスピンボタンなし
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

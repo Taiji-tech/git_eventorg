@@ -4,14 +4,28 @@ class ReservesController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     
-    @reserve = Reserve.new(reserve_params) 
-    @reserve.event_id = params[:event_id]
-    if @reserve.save
-      respond_to do |format|
-        format.js
+    # ログイン後の予約
+    if user_signed_in?
+      @reserve = Reserve.new(nickname: current_user.nickname, email: current_user.email, 
+                            event_id: params[:event_id])
+      if @reserve.save
+        respond_to do |format|
+          format.js
+        end
+      else
+        flash[:notice] = "入力に誤りがあります"
       end
+    # ログインのない予約＝ユーザー登録なし
     else
-      flash[:notice] = "入力に誤りがあります"
+      @reserve = Reserve.new(reserve_params) 
+      @reserve.event_id = params[:event_id]
+      if @reserve.save
+        respond_to do |format|
+          format.js
+        end
+      else
+        flash[:notice] = "入力に誤りがあります"
+      end
     end
   end
   

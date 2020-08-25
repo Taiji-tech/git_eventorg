@@ -12,7 +12,7 @@
       </div>
       
       <div class="event">
-        <%= form_with(model: @event, url: events_path, method: :post) do |f| %>
+        <%= form_with(model: @event, url: events_path, method: :post, data: { remote: false }) do |f| %>
           <div class="event-form">
             <%= f.label:title, "イベント名" %>
             <%= f.text_field:title, class:"form-control form-control-lg" %>
@@ -33,11 +33,18 @@
             <%= f.label:capacity, "定員" %>
             <%= f.number_field:capacity, class:"form-control form-control-lg" %>
           </div>
+          <div class="event-form">
+            <%= f.label:price, "費用" %>
+            <%= f.number_field:price, class:"form-control form-control-lg" %>
+          </div>
+          <div class="event-form">
+            <%= f.label:imgs, "画像" %>
+            <%= f.file_field:imgs, multiple: true, direct_upload: true, class:"form-control form-control-lg" %>
+          </div>
           <div class="event-submit">
             <%= f.submit "イベント作成", class:"submit-btn blue-btn btn-hover" %>
           </div>
         <% end %>
-        
       </div>
     </div>
     

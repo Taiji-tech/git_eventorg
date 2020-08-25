@@ -21,7 +21,7 @@ class EventsController < ApplicationController
       redirect_to events_confirm_path
     else
       flash[:notice] = "入力いただいた情報に誤りがあります。"
-      redirect_to new_event_path
+      render :new
     end
   end
   
@@ -63,7 +63,7 @@ class EventsController < ApplicationController
   
     private
       def event_params
-        params.require(:event).permit(:title, :start, :venue, :content, :capacity)
+        params.require(:event).permit(:title, :start, :venue, :price, :content, :capacity)
       end
       
       def move_to_index

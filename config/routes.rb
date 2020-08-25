@@ -14,6 +14,18 @@ Rails.application.routes.draw do
     post "/create_with_resistration", to: "reserves#createWithResistration" 
   end
   
+# ユーザー情報関連
+  get "user/profile",  to: "users#profile"
+  get "user/edit",     to: "users#edit"
+  patch "user/update", to: "users#update"
+
+# 支払い関連
+  resources :pays, only: [:new, :create]
+  get "user/pays/confirm_card",  to: "pays#confirmCard"
+  get "user/pays/edit_card",     to: "pays#editCard"
+  get "user/pays/confirm",       to: "pays#confirm"
+  get "user/pays/hostnew",       to: "pays#hostNew"
+  post "user/pays/host"  ,       to: "pays#hostCreate"
   
   
 end

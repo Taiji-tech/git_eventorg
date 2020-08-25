@@ -1,5 +1,11 @@
 <div class="sidebar">
   <div class="sidebar-box">
+    <h4>マイページ</h4>
+    <ul>
+      <li><%= link_to "ホーム", user_profile_path %></li>
+    </ul>
+  </div>
+  <div class="sidebar-box">
     <h4>イベント情報管理</h4>
     <ul>
         <li><%= link_to "イベント新規登録", new_event_path %></li>
@@ -8,9 +14,17 @@
   </div>
   
   <div class="sidebar-box">
-    <h4>お支払い情報管理</h4>
+    <h4>お支払い</h4>
     <ul>
-      <li>お支払い情報</li>
+      <li><%= link_to "カード登録", new_pay_path, data: {"turbolinks" => false} %></li>
+      <li><%= link_to "カード確認・変更", user_pays_confirm_card_path %></li>
+    </ul>
+  </div>
+  
+  <div class="sidebar-box">
+    <h4>売上管理</h4>
+    <ul>
+      <li><%= link_to "振込口座登録・確認", user_pays_hostnew_path %></li>
       <li>お支払い情報確認</li>
     </ul>
   </div>  

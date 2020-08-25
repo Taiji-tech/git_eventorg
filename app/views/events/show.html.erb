@@ -11,6 +11,7 @@
       <div class="event-box__detail">
         <p><span><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</span><%= @event.start %></p>
         <p><span><i class="fa fa-user-o" aria-hidden="true"></i> 定員</span><%= @event.capacity %> 名</p>
+        <p><span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 費用</span><%= @event.price.to_s(:delimited) %> 円</p>
         <p><span><i class="fa fa-user-secret" aria-hidden="true"></i> 主催者</span><%= @event.user.nickname %></p>
         <p><span><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</span><%= @event.content %></p>
       </div>

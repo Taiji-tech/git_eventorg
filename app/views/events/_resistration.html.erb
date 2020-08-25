@@ -6,7 +6,7 @@ $(function(){
     <div id="event-attend-form">
     <div class="event-attend-form">
       <div class="event-attend__top">
-        <h3>参加登録</h3>
+        <h3>イベント予約</h3>
         <p class="btn-hover" id="event-attend-form-close">&times;</p>
       </div>
       <% if flash["notice"].present? %>
@@ -14,9 +14,20 @@ $(function(){
       <% end %>
       
       <% if user_signed_in? %>
-      <div class="">
-        <p><span>ニックネーム</span></p>
-        <p><span>E-mail</span></p>
+      <div class="event-attend__detail">
+        <h4>参加者情報</h4>
+        <div class="event-attend__detail-info">
+          <table>
+            <tr>
+              <th>ニックネーム</th>
+              <td><%= current_user.nickname %></td>
+            </tr>
+            <tr>
+              <th>E-mail</th>
+              <td><%= current_user.email %></td>
+            </tr>
+          </table>
+        </div>
       </div>
       <% else %>
       <div class="event-attend__select">
@@ -31,23 +42,32 @@ $(function(){
         <div class="event-attend__detail-info">
           <table>
             <tr>
-              <th>開催日時</th>
+              <th>イベント名</th>
+              <td><%= @event.title %></td>
+            </tr>
+            <tr>
+              <th>日時</th>
               <td><%= @event.start %></td>
             </tr>
             <tr>
-              <th>開催場所</th>
-              <td><%= @event.venue %></td>
+              <th>費用</th>
+              <td><%= @event.price.to_s(:delimited) %> 円</td>
             </tr>
             <tr>
               <th>定員</th>
-              <td><%= @event.capacity %></td>
+              <td><%= @event.capacity %> 名</td>
             </tr>
             <tr>
-              <th>イベント主催者</th>
+              <th>主催者</th>
               <td><%= @event.user.nickname %></td>
             </tr>
           </table>
         </div>
+        <% if user_signed_in? %>
+        <div class="event-attend__submit-box">
+          <%= button_to "予約する", event_reserves_path(@event.id), remote: true, class:"submit-btn blue-btn btn-hover" %>
+        </div>
+        <% else %>
         <div class="event-attend__form" id="event-attend__form-with">
         <%= form_with(model: @user, url: event_create_with_resistration_path(@event.id)) do |f| %>
           <div class="event-attend__form-box">
@@ -70,10 +90,11 @@ $(function(){
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           </div>
           <div class="event-attend__submit-box">
-            <%= f.submit "予約する" %>
+            <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover" %>
           </div>
         <% end %>
         </div>
+        <% end %>
       </div>
     </div>
     </div>`
@@ -102,7 +123,7 @@ $(function(){
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
       <div class="event-attend__submit-box">
-        <%= f.submit "予約する" %>
+        <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover"  %>
       </div>
     <% end %>
     </div>`  
@@ -120,7 +141,7 @@ $(function(){
         <%= f.email_field:email %>
       </div>
       <div class="event-attend__submit-box">
-        <%= f.submit "予約する" %>
+        <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover" %>
       </div>
     <% end %>
     </div>`

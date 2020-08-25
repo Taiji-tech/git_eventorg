@@ -31,3 +31,13 @@
   height: 100vh;
   background: #495057;
 }
+
+
+// bootstrap validation時
+.field_with_errors{
+  display: contents;
+  
+  input {
+    @extend .is-invalid!optional;
+  }
+}
