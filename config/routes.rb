@@ -15,9 +15,10 @@ Rails.application.routes.draw do
   end
   
 # ユーザー情報関連
-  get "user/profile",  to: "users#profile"
-  get "user/edit",     to: "users#edit"
-  patch "user/update", to: "users#update"
+  get "user/profile",       to: "users#profile"
+  get "user/edit",          to: "users#edit"
+  patch "user/update",      to: "users#update"
+  patch "user/update_pass", to: "users#updatePass"
 
 # 支払い関連
   resources :pays, only: [:new, :create]

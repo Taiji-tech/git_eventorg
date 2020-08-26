@@ -1,0 +1,33 @@
+<div class="container">
+<div class="row">
+  <div class="col-12 col-sm-3">
+    <%= render "shared/sidebar_organizer" %>
+  </div>
+  
+  <div class="col-12 col-sm-9">
+    <div class="page-title">
+      <h1>ユーザー情報</h1>
+    </div>
+    <div class="">
+      <div class="">
+        <p>現在登録されているユーザー情報です。</p>
+      </div>
+      <table>
+        <tr>
+          <th>ニックネーム</th>
+          <td><%= current_user.nickname %></td>
+        </tr>
+        <tr>
+          <th>E-mail</th>
+          <td><%= current_user.email %></td>
+        </tr>
+      </table>
+      <div class="user-edit__info">
+        <li id="edit-info" >登録されている情報を編集する</li>
+        <li id="edit-pass">パスワードを変更する</li>
+      </div>
+    </div>
+  </div>
+  <%= render "users/edit_info", collection: @user %>
+</div>    
+</div>

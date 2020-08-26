@@ -1,0 +1,100 @@
+<script>
+$(function(){
+  // 情報編集
+  var editInfo = 
+    `<div class="user user-edit" id="edit-info">
+      <div class="">
+        <h2>登録情報の編集</h2>
+        <p class="user-edit-remove">&times;</p>
+      </div>
+      <div class="user-form">
+        <%= form_with(model:@user, url: user_update_path) do |f| %>
+          <div class="user-form__box">
+            <%= f.label:nickname, "ニックネーム" %>
+            <%= f.text_field:nickname %>
+          </div>
+          <div class="user-form__box">
+            <%= f.label:email, "E-mail" %>
+            <%= f.email_field:email %>
+          </div>
+          <div class="user-form__submit-box">
+            <%= f.submit "登録", class:"submit-btn blue-btn btn-hover" %>
+          </div>
+        <% end %>
+      </div>
+    </div>`
+  
+  // パスワードの編集
+  var editPass = 
+    `<div class="user user-edit" id="edit-pass">
+      <div class="user-header">
+        <h2>パスワードの編集</h2>
+        <p class="user-edit-remove">&times;</p>
+      </div>
+      <div class="user-form">
+        <%= form_with(model:@user, url: user_update_pass_path) do |f| %>
+          <div class="user-form__box">
+            <%= f.label :current_password, "現在のパスワード" %>
+            <%= f.password_field :current_password, autocomplete: "current-password" %>
+          </div>
+          <div class="user-form__box">
+            <%= f.label :password, "新しいパスワード" %> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "new-password" %>
+          </div>
+          <div class="user-form__box">
+            <%= f.label :password_confirmation, "新しいパスワード（確認）" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </div>
+          <div class="user-form__submit-box">
+            <%= f.submit "変更する" %>
+          </div>
+        <% end %>
+      </div>
+      
+    </div>`
+  
+  const removeAll = {
+    editBox(){
+      $(function(){
+        $(".user-edit-remove").on("click", function(){
+          $.when(
+            $("#display").css("opacity", 0)
+          ).done(function(){
+            $("#display").css("display", "none")
+            $(".user-edit").remove();
+          });
+        });
+      });
+    }
+  }
+  
+
+  $("#edit-info").on("click", function(){
+    $.when(
+      $("#display").css("display", "")
+    ).done(function(){
+      $("#display").css("opacity", .8);
+      $(".user-edit__info").append(editInfo);
+    });
+    
+    removeAll.editBox();
+  });
+  
+  $("#edit-pass").on("click", function(){
+    $.when(
+      $("#display").css("display", "")
+    ).done(function(){
+      $("#display").css("opacity", .8);
+      $(".user-edit__info").append(editPass);
+    });
+    
+    removeAll.editBox();
+  });
+
+
+  
+});  
+  
+  
+    
+</script>
