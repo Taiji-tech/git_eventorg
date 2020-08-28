@@ -4,16 +4,16 @@ class EventsController < ApplicationController
     # indexアクション以外が実行される前にindexが実行される。
     
   def top
-    @events_all = Event.includes(:user).order("start_date DESC").page(params[:page]).per(5)
+    @events = Event.includes(:user).order("start_date DESC").page(params[:page]).per(5)
     
     if params[:date].present?
-      @events = @events_all.where(start_date: params[:date].in_time_zone.all_day).page(params[:page]).per(5)
-    elsif params[:max].present? || params[:min].present?
-      @events = @events_all.where(price: params[:min].. params[:max]).page(params[:page]).per(5)
-    
-    else
-      @events = @events_all.order("start_date DESC").page(params[:page]).per(5)
-      
+      @events = @events.where(start_date: params[:date].in_time_zone.all_day).page(params[:page]).per(5)
+    elsif params[:max].present? && params[:min].present?
+      @events = @events.where(price: params[:min] .. params[:max]).page(params[:page]).per(5)
+    elsif params[:max].present?
+      @events = @events.where(price: Float::MIN .. params[:max].to_i).page(params[:page]).per(5)
+    elsif params[:min].present?
+      @events = @events.where(price: params[:min].to_i .. Float::INFINITY).page(params[:page]).per(5)
     end
   end
 

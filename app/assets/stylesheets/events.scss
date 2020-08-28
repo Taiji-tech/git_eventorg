@@ -167,11 +167,13 @@
 // イベント新規登録
 .event-form{
   display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: 1rem 0;
+  margin: auto;
+  font-size: 1.8rem;
 
   label{
-    font-size: 1.8rem;
     width: 20%;
   }
   input{
@@ -180,6 +182,14 @@
   .event-form-content{
     height: 10rem;
     width: 80%;
+  }
+}
+.event-form-date{
+  input{
+    width: 40%;
+  }
+  select{
+    width: 19.5%;
   }
 }
 .event-submit{
