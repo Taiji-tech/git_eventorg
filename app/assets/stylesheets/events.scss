@@ -23,7 +23,9 @@
 .top-search{
   width: 80%;
   margin: auto;
+  position: relative;
   top: -10rem;
+  background: #fff;
 }
 .top-search__header{
   width: 100%;
@@ -50,10 +52,47 @@
     margin: 0;
     padding: 0 0 1rem;
     font-size: 2rem;
+    font-weight: bold;
+  }
+}
+.top-search__form-box{
+  width: 100%;
+  
+  input{
+    width: 100%;
+    height: 5rem;
+    padding: 1rem;
+    font-size: 2rem;
+  }
+}
+.top-search__price-box{
+  width: 100%;
+  display: flex;
+  margin: auto;
+  
+  p{
+    width: 10%;
+    margin: auto;
+    padding: 0;
+    text-align: center;
+  }
+  input{
+    width: 45%;
+    height: 5rem;
+    padding: 1rem;
+    font-size: 2rem;
   }
 }
 .top-search__submit-box{
   width: 10%;
+  margin: auto auto 0;
+  
+  input{
+    width: 98%;
+    margin: 0 1%;
+    height: 5rem;
+    font-size: 2rem;
+  }
 }
 
 
@@ -268,6 +307,11 @@
     padding: 0 1rem;
     border-radius: 0 .5rem .5rem 0;
 	  border: solid .1rem #adb5bd;
+  }
+  input:focus{
+  	outline: none!important;
+  	border-radius: .5rem!important;
+  	box-shadow: 0 0 0 .2rem #1c7ed6!important;
   }
 }
 .event-attend__detail{

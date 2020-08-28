@@ -6,23 +6,21 @@
   <div class="top-search__wrap">
   <%= form_with(url: root_path, method: :get, data: {remote: false}) do |f| %>
   <div class="top-search__box">
-    <p>日付から探す</p>
-    <div>
+    <p><i class="fa fa-calendar" aria-hidden="true"></i> 日付から探す</p>
+    <div class="top-search__form-box">
       <%= f.date_field:date %>
     </div>
   </div>
   <div class="top-search__box">
-    <p>費用から探す</p>
-    <div class="">
-      <%= f.number_field:min %>
-    </div>
-    <p>～</p>
-    <div class="">
-      <%= f.number_field:max %>
+    <p><i class="fa fa-jpy" aria-hidden="true"></i> 費用から探す</p>
+    <div class="top-search__price-box">
+      <%= f.number_field:min, placeholder: "最低" %>
+      <p>～</p>
+      <%= f.number_field:max, placeholder: "最高" %>
     </div>
   </div>
   <div class="top-search__submit-box">
-    <%= f.submit "検索" %></p>
+    <%= f.submit "検索", class:"submit-btn btn-hover pink-btn" %>
   </div>
   <% end %>
   </div>

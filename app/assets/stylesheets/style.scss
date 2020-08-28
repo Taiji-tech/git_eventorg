@@ -75,6 +75,15 @@
 }
 
 
+// 疑似リンク
+.link{
+	color: #1864ab;
+	cursor: pointer;
+}
+.link:hover{
+	text-decoration: underline;
+}
+
 
 // form設定
 // number_fieldのスピンボタンなし
@@ -84,13 +93,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-
-// input枠線変更
-input:focus{
-	outline: none!important;
-	border-radius: .5rem!important;
-	box-shadow: 0 0 0 .2rem #1c7ed6!important;
-}
 
 .input-with-icon{
 	border-radius: 0 .5rem .5rem 0;

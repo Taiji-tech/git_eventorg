@@ -32,6 +32,11 @@
     border-radius: 0 .5rem .5rem 0;
 	  border: solid .1rem #adb5bd;
   }
+  input:focus{
+  	outline: none!important;
+  	border-radius: .5rem!important;
+  	box-shadow: 0 0 0 .2rem #1c7ed6!important;
+  }
 }
 .user-form__notice{
 
@@ -70,17 +75,74 @@
 // edit
 .user-edit{
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 10%;
+  margin: auto;
   z-index: 50;
+  border-radius: 1rem;
+  background: #fff;
 }
-.user-header{
+.user-edit__info{
   width: 100%;
-  padding: 0 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 2rem;
+  border-radius: .5rem;
+  box-shadow: 0 0 1rem #ced4da;
+  background: #f8f9fa;
   
   h2{
+    width: 100%;
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin: 0 0 3rem;
+  }
+}
+.user-edit__header{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0 2rem; 
+   
+  h2{
+    width: 90%;
+    font-size: 2.5rem;
+    font-weight: bold;
     margin: 0;
+    color: #343a40;
+  }
+  .user-edit-remove{
+    width: 10%;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: right;
+  }
+  p{
+    width: 100%;
+    font-size: 2rem;
+    margin: 0;
+  }
+}
+.user-edit__info-box{
+  width: 50%;
+  
+  h3{
     font-size: 2rem;
     font-weight: bold;
+    margin: 0 0 1rem;
+  }
+  p{
+    font-size: 2rem;
+    margin: 0;
+  }
+}
+.user-edit__link{
+  width: 100%;
+  padding: 2rem 0;
+  
+  li{
+    list-style: none;
+    font-size: 1.8rem;
   }
 }
