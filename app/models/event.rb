@@ -4,7 +4,8 @@ class Event < ApplicationRecord
   
   # 入力フォームのバリデーション
   validates :title, presence: true
-  validates :start, presence: true
+  validates :start_date, presence: true
+  validates :start_time, presence: true
   validates :venue, presence: true
   validates :content, presence: true
   validates :price, presence: true

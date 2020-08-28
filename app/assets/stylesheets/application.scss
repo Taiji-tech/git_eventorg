@@ -21,6 +21,18 @@
 @import "font-awesome";
 
 // 共通設定
+.page-title{
+  width: 100%;
+  padding: 2rem 0 1rem;
+  
+   h1{
+     font-size: 2.8rem;
+     font-weight: bold;
+     color: #343a40;
+     margin: 0;
+   }
+}
+
 // 画面を暗くする際の表示
 #display{
   position: fixed;
@@ -31,6 +43,7 @@
   height: 100vh;
   background: #495057;
 }
+
 
 
 // bootstrap validation時

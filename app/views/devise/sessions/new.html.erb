@@ -1,27 +1,33 @@
+<% provide(:title, "ログイン") %>
+
+
 <div class="user">
   <div class="page-title">
     <h1>ログイン</h1>
   </div>
-
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class="user-form">
     <div class="user-form__box">
-      <%= f.label :email, "E-mail" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+      <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-mail" %>
     </div>
     <div class="user-form__box">
-      <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
+      <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+      <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード" %>
     </div>
-    <% if devise_mapping.rememberable? %>
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me, "次回の入力を省略" %>
-    <% end %>
+    <div class="user-form__notice">
+      <p>パスワードをお忘れの方は<%= link_to "こちら" %></p>
+    </div>
     <div class="user-form__submit-box">
-      <%= f.submit "ログイン", class:"submit-btn btn-hover blue-btn" %>
+      <%= f.submit "ログイン", class:"wide-submit-btn btn-hover blue-btn" %>
     </div>
     <% end %>
-    <%= render "devise/shared/links" %>
+    <div class="user-form__link user-form__notice">
+      <p>新規ユーザー登録はこちら</p>
+      <p class="">
+        <%= link_to "新規ユーザー登録", new_user_registration_path, class:"wide-submit-btn btn-hover grey-btn" %>
+      </p>
+    </div>
   </div>
 </div>

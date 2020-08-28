@@ -4,7 +4,17 @@ class EventsController < ApplicationController
     # indexアクション以外が実行される前にindexが実行される。
     
   def top
-    @events = Event.includes(:user).order("start DESC").page(params[:page]).per(5)
+    @events_all = Event.includes(:user).order("start_date DESC").page(params[:page]).per(5)
+    
+    if params[:date].present?
+      @events = @events_all.where(start_date: params[:date].in_time_zone.all_day).page(params[:page]).per(5)
+    elsif params[:max].present? || params[:min].present?
+      @events = @events_all.where(price: params[:min].. params[:max]).page(params[:page]).per(5)
+    
+    else
+      @events = @events_all.order("start_date DESC").page(params[:page]).per(5)
+      
+    end
   end
 
   # イベントの新規登録
@@ -63,7 +73,7 @@ class EventsController < ApplicationController
   
     private
       def event_params
-        params.require(:event).permit(:title, :start, :venue, :price, :content, :capacity)
+        params.require(:event).permit(:title, :start_date, :start_time, :venue, :price, :content, :capacity)
       end
       
       def move_to_index

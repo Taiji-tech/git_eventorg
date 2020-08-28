@@ -1,15 +1,19 @@
-<div class='container'>
+<!--top画像表示-->
+<div class="top">
+  <div class="top-img">
+    <%= image_tag "top.jpg" %>
+  </div>
+  <!--検索バー-->
+  <%= render "events/search_event" %>
+</div>
+
+
+
+<div class="container">
   <div class="page-title">
-    <h1>イベント一覧</h1>
+    <h1>お探しのイベントは？</h1>
   </div>
-  <div class="">
-    <h2>イベントを探す</h2>
-    <div class="">
-      
-    </div>
-  </div>
-  
-  
+
   <div class="">
     <!--各イベント表示-->
     <div class="event">
@@ -20,7 +24,7 @@
           <h3><%= event.title %></h3>
         </div>
         <div class="event-box__detail">
-          <p><span><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</span><%= event.start.strftime("%-m月%-d日(%a) %H:%M %p") %></p>
+          <p><span><i class="fa fa-clock-o" aria-hidden="true"></i> 日付</span><%= event.start_date.strftime("%-m月%-d日(%a)") %></p>
           <p><span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 費用</span><%= event.price.to_s(:delimited) %> 円</p>
           <p><span><i class="fa fa-user-o" aria-hidden="true"></i> 定員</span><%= event.capacity %> 名</p>
           <p><span><i class="fa fa-user-secret" aria-hidden="true"></i> 主催者</span><%= event.user.nickname %></p>

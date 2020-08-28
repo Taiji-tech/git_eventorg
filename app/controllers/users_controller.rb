@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   # ユーザーのプロフィール設定
   def profile
-    @events = current_user.events.page(params[:page]).per(5).order("start DESC")
+    @events = current_user.events.page(params[:page]).per(5).order("start_date DESC")
   end
   
   def edit

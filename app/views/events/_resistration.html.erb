@@ -6,7 +6,7 @@ $(function(){
     <div id="event-attend-form">
     <div class="event-attend-form">
       <div class="event-attend__top">
-        <h3>イベント予約</h3>
+        <h3><i class="fa fa-thumb-tack" aria-hidden="true"></i> イベント予約</h3>
         <p class="btn-hover" id="event-attend-form-close">&times;</p>
       </div>
       <% if flash["notice"].present? %>
@@ -31,14 +31,14 @@ $(function(){
       </div>
       <% else %>
       <div class="event-attend__select">
-        <li class="blue-btn btn-hover" id="with-resistration">ユーザー登録も行う</li>
-        <li class="unselect-btn btn-hover" id="without-resistration">ユーザー登録は行わない</li>
-        <p>アカウントをすでにお持ちの方 <%= link_to "ログイン", user_session_path %></p>
+        <li class="blue-btn btn-hover" id="with-resistration">ユーザー登録もする</li>
+        <li class="unselect-btn btn-hover" id="without-resistration">今はしない</li>
+        <p>アカウントをお持ちの方 <%= link_to "ログイン", user_session_path %></p>
       </div>
       <% end %>
       
       <div class="event-attend__detail">
-        <h4>イベント詳細</h4>
+        <h4><i class="fa fa-bookmark-o" aria-hidden="true"></i> イベント詳細</h4>
         <div class="event-attend__detail-info">
           <table>
             <tr>
@@ -47,7 +47,7 @@ $(function(){
             </tr>
             <tr>
               <th>日時</th>
-              <td><%= @event.start %></td>
+              <td><%= @event.start_date %></td>
             </tr>
             <tr>
               <th>費用</th>
@@ -71,23 +71,20 @@ $(function(){
         <div class="event-attend__form" id="event-attend__form-with">
         <%= form_with(model: @user, url: event_create_with_resistration_path(@event.id)) do |f| %>
           <div class="event-attend__form-box">
-            <%= f.label:nickname, "ニックネーム" %>
-            <%= f.text_field:nickname %>
+            <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
+            <%= f.text_field:nickname, placeholder: "ニックネーム" %>
           </div>
           <div class="event-attend__form-box">
-            <%= f.label:email, "E-mail" %>
-            <%= f.text_field:email %>
+            <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
+            <%= f.text_field:email, placeholder: "E-mail" %>
           </div>
           <div class="event-attend__form-box">
-            <%= f.label :password, "パスワード" %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %>
-            <%= f.password_field :password, autocomplete: "new-password" %>
+            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（6文字以上）"  %>
           </div>
           <div class="event-attend__form-box">
-            <%= f.label :password_confirmation, "パスワード（確認）" %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）" %>
           </div>
           <div class="event-attend__submit-box">
             <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover" %>
@@ -104,23 +101,20 @@ $(function(){
     <div class="event-attend__form" id="event-attend__form-with">
     <%= form_with(model: @user, url: event_create_with_resistration_path(@event.id)) do |f| %>
       <div class="event-attend__form-box">
-        <%= f.label:nickname, "ニックネーム" %>
-        <%= f.text_field:nickname %>
+        <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
+        <%= f.text_field:nickname, placeholder: "ニックネーム" %>
       </div>
       <div class="event-attend__form-box">
-        <%= f.label:email, "E-mail" %>
-        <%= f.text_field:email %>
+        <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
+        <%= f.text_field:email, placeholder:"E-mail" %>
       </div>
       <div class="event-attend__form-box">
-        <%= f.label :password, "パスワード" %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password" %>
+        <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード" %>
       </div>
       <div class="event-attend__form-box">
-        <%= f.label :password_confirmation, "パスワード（確認）" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）" %>
       </div>
       <div class="event-attend__submit-box">
         <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover"  %>
@@ -133,12 +127,12 @@ $(function(){
     <div class="event-attend__form" id="event-attend__form-without">
     <%= form_with(model: @reserve, url: event_reserves_path(@event.id)) do |f| %>
       <div class="event-attend__form-box">
-        <%= f.label:nickname, "ニックネーム" %>
-        <%= f.text_field:nickname %>
+        <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
+        <%= f.text_field:nickname, placeholder: "ニックネーム" %>
       </div>
       <div class="event-attend__form-box">
-        <%= f.label:email, "E-mail" %>
-        <%= f.email_field:email %>
+        <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
+        <%= f.email_field:email, placeholder: "E-mail" %>
       </div>
       <div class="event-attend__submit-box">
         <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover" %>

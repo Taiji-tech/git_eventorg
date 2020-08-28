@@ -5,6 +5,7 @@
 	box-shadow: 0 0 1rem #adb5bd;
 }
 
+
 // ボタン関連
 .submit-btn{
 	display: inline-block;
@@ -20,6 +21,18 @@
   padding: .6rem 1.5rem;
   line-height: 1.42857143;
   border-radius: 4px;	
+}
+.wide-submit-btn{
+	width: 100%;
+	padding: 1rem 0;
+	text-align: center;
+	font-size: 2rem;
+	border-radius: .5rem;
+	border: none;
+	cursor: pointer;
+}
+.wide-submit-btn:focus{
+	outline:0;
 }
 .blue-btn{
 	background: #1971c2;
@@ -69,4 +82,21 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+
+// input枠線変更
+input:focus{
+	outline: none!important;
+	border-radius: .5rem!important;
+	box-shadow: 0 0 0 .2rem #1c7ed6!important;
+}
+
+.input-with-icon{
+	border-radius: 0 .5rem .5rem 0;
+	border: solid .1rem #e9ecef;
+}
+.icon-with-input{
+	border-radius: .5rem 0 0 .5rem;
+	border: solid .1rem #e9ecef;
 }

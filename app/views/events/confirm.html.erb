@@ -21,7 +21,7 @@
             <p><%= link_to "削除する", "/events/#{event.id}", method: :delete, class:"grey-btn" %></p>
           </div>
           <div class='event-box__detail'>
-            <p><span>開催日時</span><%= event.start %></p>
+            <p><span>開催日時</span><%= event.start_date %><%= event.start_time %></p>
             <p><span>イベント</span><%= event.title %></p>
             <p><span>開催場所</span><%= event.venue %></p>
             <p><span>定員</span><%= event.capacity %></p>

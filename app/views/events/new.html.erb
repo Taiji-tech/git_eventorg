@@ -18,8 +18,12 @@
             <%= f.text_field:title, class:"form-control form-control-lg" %>
           </div>
           <div class="event-form">
-            <%= f.label:start, "開催日" %>
-            <%= f.datetime_select:start, class:"form-control 11" %>
+            <%= f.label:start_date, "開催日" %>
+            <%= f.date_field:start_date, class:"form-control" %>
+          </div>
+          <div class="event-form">
+            <%= f.label:start_time, "時間" %>
+            <%= f.time_select:start_time, {}, class:"form-control", ignore_data:true %>
           </div>
           <div class="event-form">
             <%= f.label:venue, "ズームID" %>
