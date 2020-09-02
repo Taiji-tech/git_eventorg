@@ -62,6 +62,7 @@
 
 # ==================
 # nakoshi 開発用
+
 development:
   adapter: mysql2
   encoding: utf8

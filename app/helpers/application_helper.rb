@@ -2,7 +2,7 @@ module ApplicationHelper
   
   # 各ページのタイトル設定
   def full_title(page_title = ' ')
-    base_title = 'EventOrg'
+    base_title = 'Realtime Social'
     if page_title.empty?
       base_title
     else

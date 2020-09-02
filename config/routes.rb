@@ -22,11 +22,15 @@ Rails.application.routes.draw do
 
 # 支払い関連
   resources :pays, only: [:new, :create]
-  get "user/pays/confirm_card",  to: "pays#confirmCard"
-  get "user/pays/edit_card",     to: "pays#editCard"
-  get "user/pays/confirm",       to: "pays#confirm"
-  get "user/pays/hostnew",       to: "pays#hostNew"
-  post "user/pays/host"  ,       to: "pays#hostCreate"
-  
+  get "user/pays/confirm_card",           to: "pays#confirmCard"
+  get "user/pays/edit_card",              to: "pays#editCard"
+  get "user/pays/confirm",                to: "pays#confirm"
+  get "user/pays/hostnew",                to: "pays#hostNew"
+  post "user/pays/host"  ,                to: "pays#hostCreate"
+  get "user/pays/hostinfo" ,              to: "pays#hostInfo"
+  get "user/pays/hostedit",               to: "pays#hostEdit"
+  post "user/pays/hostupdate",            to: "pays#hostUpdate"
+  get "pays/new_withoutresistration",     to: "pays#newWithoutResistration"
+  post "pays/create_withoutresistration", to: "pays#createWithoutResistration"
   
 end

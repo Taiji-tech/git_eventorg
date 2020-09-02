@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_26_093347) do
+ActiveRecord::Schema.define(version: 2020_08_28_122635) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_093347) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "price"
-    t.string "img"
+    t.string "imgs"
     t.boolean "end"
     t.datetime "start_date"
     t.time "start_time"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_093347) do
     t.integer "host_id"
     t.integer "price"
     t.integer "card_id"
+    t.integer "reserve_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_093347) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "payed", default: false
   end
 
   create_table "tenants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

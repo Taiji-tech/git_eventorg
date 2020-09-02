@@ -12,10 +12,11 @@
     
     <div class="pay-form">
       <div class="pay-form__notice">
+        <p>現在登録中のカードから新しいカードへ変更ができます。</p>
         <p>「カード情報を入力する」ボタンが表示されない場合は、更新ボタンを押してください。</p>
       </div>
       <div class="pay-form__box-card box-wrap">
-        <h3>現在のカード情報</h3>
+        <h2><i class="fa fa-address-book-o" aria-hidden="true"></i> 現在登録されているカード</h2>
         <table>
           <tr>
             <th>カード番号</th>
@@ -37,6 +38,7 @@
       <div class="pay-form__box-card box-wrap">
         <p>カード情報を入力し、登録してください。</p>
         <%= form_with(url: pays_path, data: {remote: false}) do |f| %>
+        <div>
         <script
           type="text/javascript"
           src="https://checkout.pay.jp/"
@@ -45,9 +47,10 @@
           data-submit-text="トークンを作成する"
           data-partial="true">
         </script>
+        </div>
 
         <div class="pay-form__submit-box">
-          <%= f.submit "登録する", class:"submit-btn blue-btn btn-hover"  %>
+          <%= f.submit "支払いカードを変更する", class:"submit-btn blue-btn btn-hover", data: {"turbolinks" => false}  %>
         </div>
         <% end %>
       </div>

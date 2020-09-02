@@ -6,7 +6,7 @@
       <%= render "shared/sidebar_organizer" %>
     </div>  
   
-    <div class='col-12 col-sm-9 event'>
+    <div class='col-12 col-sm-9 content'>
       <div class="page-title">
         <h1>イベント作成</h1>
       </div>
@@ -23,12 +23,12 @@
             <%= f.time_select:start_time, {}, class:"form-control", ignore_data:true %>
           </div>
           <div class="event-form">
-            <%= f.label:venue, "ズームID" %>
-            <%= f.text_field:venue, class:"form-control form-control-lg" %>
-          </div>
-          <div class="event-form">
             <%= f.label:content, "イベント内容" %>
             <%= f.text_area:content, class:"form-control form-control-lg event-form-content", placeholder: "開催するイベントの内容を書いてください" %>
+          </div>
+          <div class="event-form">
+            <%= f.label:venue, "ズームID" %>
+            <%= f.text_field:venue, class:"form-control form-control-lg" %>
           </div>
           <div class="event-form">
             <%= f.label:capacity, "定員" %>
@@ -38,9 +38,10 @@
             <%= f.label:price, "費用" %>
             <%= f.number_field:price, class:"form-control form-control-lg" %>
           </div>
-          <div class="event-form">
+          <div class="event-form" id="event-form__img">
             <%= f.label:imgs, "画像" %>
-            <%= f.file_field:imgs, multiple: true, direct_upload: true, class:"form-control form-control-lg" %>
+            <label class="event-form__img-field" for="form-img"><i class="fa fa-image" aria-hidden="true"></i><br>クリックしてアップロード</label>
+            <%= f.file_field:imgs, multiple: true, class:"", id:"form-img", style:"display:none" %>
           </div>
           <div class="event-submit">
             <%= f.submit "イベント作成", class:"submit-btn blue-btn btn-hover" %>
@@ -51,3 +52,37 @@
     
   </div>
 </div>
+
+
+
+
+<script>
+// 画像アップロード設定
+$(function(){
+  var imgBox =
+    `<div class="event-form__img-wrap">
+      <div class="event-form__img-box">
+        <%= image_tag "top.jpg", class:"event-form__img" %>
+      </div>
+      <div class="event-form__img-remove">
+        <p><i class="fa fa-remove btn-hover" aria-hidden="true"></i></p>
+      </div>
+    </div>`
+  
+  
+  $("#form-img").on("change", function(e){
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#event-form__img").append(imgBox);
+        $(".event-form__img").attr('src', e.target.result);
+        
+        $(".event-form__img-remove").on("click", function(){
+          $(this).parent().remove();
+        });
+    }
+    reader.readAsDataURL(e.target.files[0]);
+    console.log("done");
+    
+  });  
+});
+</script>

@@ -6,45 +6,39 @@
   </div>
   <div class="col-12 col-sm-9 content">
     <div class="page-title">
-        <h1>イベント主催者向け口座情報登録</h1>
+        <h1>イベント主催者向け口座情報変更</h1>
     </div>
     <div class="pay">
-      <% if @tenant.present? %>
-      <div class="pay-form__notice">
-        <p>口座情報は登録されています</p>
-      </div>
-      <% else %>
       <div class="pay-form">
         <div class="pay-form__notice">
           <p>売り上げを入金するお振込口座を設定してください。</p>
         </div>
-        <%= form_with(url: user_pays_host_path, data:{remote: false}) do |f| %>
+        <%= form_with(url: user_pays_hostupdate_path, data:{remote: false}) do |f| %>
           <div class="pay-form__box">
             <%= f.label:bank_code, "銀行コード" %>
-            <%= f.number_field:bank_code, class:"form-control" %>
+            <%= f.number_field:bank_code, value: @data["bank_code"] , class:"form-control" %>
           </div>
           <div class="pay-form__box">
             <%= f.label:bank_branch_code, "支店コード" %>
-            <%= f.number_field:bank_branch_code, class:"form-control" %>
+            <%= f.number_field:bank_branch_code, value: @data["bank_branch_code"], class:"form-control" %>
           </div>
           <div class="pay-form__box">
             <%= f.label:bank_account_type, "預金種別" %>
-            <%= f.select:bank_account_type, {'普通': "普通", '当座': "当座"}, {}, class:"form-control" %>
+            <%= f.select:bank_account_type, {'普通': "普通", '当座': "当座"}, {selected: @data["bank_account_type"]}, class:"form-control" %>
           </div>
           <div class="pay-form__box">
             <%= f.label:bank_account_number, "口座番号" %>
-            <%= f.number_field:bank_account_number, class:"form-control" %>
+            <%= f.number_field:bank_account_number, value: @data["bank_account_number"], class:"form-control" %>
           </div>
           <div class="pay-form__box">
             <%= f.label:bank_account_holder_name, "口座名義" %>
-            <%= f.text_field:bank_account_holder_name, class:"form-control" %>
+            <%= f.text_field:bank_account_holder_name, value: @data["bank_account_holder_name"], class:"form-control" %>
           </div>
           <div class="pay-form__submit-box">
-            <%= f.submit "登録する", class:"submit-btn blue-btn btn-hover" %>
+            <%= f.submit "変更する", class:"submit-btn blue-btn btn-hover" %>
           </div>
         <% end %>
       </div>
-      <% end %>
     </div>
   </div>
 </div>    

@@ -12,5 +12,5 @@ class Event < ApplicationRecord
   validates :capacity, presence: true
   
   # active storage 使用
-  has_many_attached :img
+  has_many_attached :imgs
 end

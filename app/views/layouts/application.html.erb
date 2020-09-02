@@ -3,11 +3,18 @@
   <head>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <!--動的タイトル・メタディスクリプション-->
     <title><%= full_title(yield(:title)) %></title>
     <meta name="discription" content="<%= meta_discription(yield(:content)) %>">
-
+    <!--logo フォント	-->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <!--assets-->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--slickプラグイン-->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </head>
 
   <body>

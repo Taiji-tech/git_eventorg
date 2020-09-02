@@ -1,15 +1,18 @@
 <div class="header">
   <div class="header-logo">
-   <h2><%= link_to "Event Organizer", root_path %> </a></h2>
+   <h2><%= link_to "Realtime Social", root_path %> </a></h2>
   </div>
   <div class="header-link">
     <nav>
       <ul>
       <% if user_signed_in? %>
-        <li><%= current_user.nickname %></li>
-        <li><%= link_to "マイページ", user_profile_path %></li>
-        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-        <li><%= link_to "イベント作成", new_event_path %></li>
+        <li class="ham btn-hover">
+          <span class="ham-top"></span>
+          <span class="ham-mid"></span>
+          <span class="ham-bot"></span>
+        </li>
+        <li id="ham"></li>
+        
       <% else %>
         <li><%= link_to "ログイン", new_user_session_path %></li>
         <li><%= link_to "新規登録", new_user_registration_path %></li>
@@ -18,3 +21,51 @@
     </nav>
   </div>
 </div>
+
+
+
+<% if user_signed_in? %>
+<script>
+$(function(){
+  var menu = `
+    <div class="header-menu" id="header-menu">
+      <p class="btn-hover" id="menu-close">&times;</p>
+      <li><i class="fa fa-home" aria-hidden="true"></i> <%= link_to "ホーム", root_path %></li>
+      <li><i class="fa fa-user" aria-hidden="true"></i> <%= link_to "マイページ", user_profile_path %></li>
+      <li><i class="fa fa-thumb-tack" aria-hidden="true"></i> <%= link_to "イベント作成", new_event_path %></li>
+      <li><i class="fa fa-sign-out" aria-hidden="true"></i> <%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+    </div>`
+  
+  
+  // ヘッダーメニューを表示
+  $(".ham").on("click", function(){
+    $.when(
+      $("#display").css("display", ""),
+      $("#ham").append(menu)  
+    ).done(function(){
+      $("#header-menu").animate({
+        'marginRight': '30rem'
+      });
+      $("#display").animate({
+        'opacity': '.8'
+      });
+      
+      // メニューを閉じる
+      $("#menu-close").on("click", function(){
+        $.when(
+          $("#header-menu").animate({
+            'marginRight': '-30rem'
+          }),
+          $("#display").animate({
+            'opacity': '0'
+          })
+        ).done(function(){
+          $("#display").css("display", "none");
+          $("#header-menu").remove(); 
+        });
+      });
+    });
+  });  
+});
+</script>
+<% end %>

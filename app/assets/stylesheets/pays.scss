@@ -1,18 +1,5 @@
 // views > payフォルダ内のスタイル
 // 共通設定
-.pay{
-  width: 100%;
-} 
-.pay__header{
-  padding: 1rem 0;
-  
-  h2{
-    font-size: 2rem;
-    font-weight: bold;
-  }
-}
-
-
 
 
 .pay-form{
@@ -25,6 +12,10 @@
   p{
     margin: 0;
     font-size: 1.6rem;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #fff;
   }
 }
 .pay-form__box{
@@ -51,30 +42,37 @@
 // new（カード登録、カード確認）
 .pay-form__box-card{
   width: 39rem;
-  margin: 4rem auto 0;
+  margin: 4rem auto;
   background: #f8f9fa;
   
+  table{
+    width: 100%;
+  }
   th,td{
-    padding: 1rem;
+    padding: .5rem 1rem;
     font-size: 1.8rem;
   }
-  
+  h2{
+    margin: 1rem 0 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
   h3{
     margin: 0 0 1.5rem;
     font-size: 2rem;
     font-weight: bold;
   }
-  
   p{
     margin: 0;
     padding: 1rem 0 2rem;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
+    font-weight: bold;
     text-align: center;
   }
-  
   #payjp_checkout_box{
     text-align: center;
     margin-bottom: 2rem;
+    
     
     input{
       width: 90%;
@@ -117,4 +115,45 @@
     font-size: 3rem;
     font-weight: bold;
   }
+}
+
+
+// newWithoutResistration
+.payment{
+  width: 50rem;
+  margin: auto;
+}
+.payment-box{
+  width: 100%;
+  padding: 0 0 2rem;
+  
+  h2{
+    font-size: 2.2rem;
+    font-weight: bold;
+  }
+  p{
+    font-size: 1.6rem;
+  }
+  table{
+    width: 100%;
+  }
+  th, td{
+    padding: .5rem 1rem;
+    border: solid .1rem #495057;
+    font-size: 1.8rem;
+  }
+  th{
+    width: 30%;
+    background: #dee2e6;
+  }
+  input{
+    font-size: 2rem!important;
+    width: 100%;
+  }
+}
+.payment-box__submit{
+  margin: 4rem 0 0;
+}
+.payment-box__link{
+  margin: 2rem 0;
 }

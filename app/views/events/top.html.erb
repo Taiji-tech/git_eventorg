@@ -16,26 +16,28 @@
 
   <div class="">
     <!--各イベント表示-->
-    <div class="event">
+    <div class="event-top">
       <% @events.each do |event| %>
-      <div class="event-box box-wrap">
-        <div class="event-box__header" style="width: 100%;">
+      <div class="event-top__box box-wrap">
+        <div class="event-top__header" style="width: 100%;">
           <p class="pink-btn">募集中</p>
-          <h3><%= event.title %></h3>
         </div>
-        <div class="event-box__detail">
-          <p><span><i class="fa fa-clock-o" aria-hidden="true"></i> 日付</span><%= event.start_date.strftime("%-m月%-d日(%a)") %></p>
-          <p><span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 費用</span><%= event.price.to_s(:delimited) %> 円</p>
-          <p><span><i class="fa fa-user-o" aria-hidden="true"></i> 定員</span><%= event.capacity %> 名</p>
-          <p><span><i class="fa fa-user-secret" aria-hidden="true"></i> 主催者</span><%= event.user.nickname %></p>
+        <div class="event-top__img">
+          <% event.imgs.each do |img| %>
+            <%= image_tag img, class:"event-img" %>
+          <% end %>
+          <% if event.imgs.empty? %>
+            <%= image_tag "NoImage.png", class:"event-img" %>
+          <% end %>
+        </div>
+        <div class="event-top__detail">
+          <h2><%= event.title %></h2>
+          <p><span><i class="fa fa-clock-o" aria-hidden="true"></i> 開催日時</span><%= event.start_date.strftime("%-m月%-d日(%a)") %>　<%= event.start_time.strftime("%H:%M") %>～</p>
+          <p><span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</span><%= event.price.to_s(:delimited) %> 円</p>
         </div>
         
-        <div class="event-box__img">
-          <%= image_tag 'Cooking_sample.jpg' %>
-        </div>
-        
-        <div class="event-box__btn">
-          <p class=""><%= link_to "詳細をみる", event_path(event.id), class:"btn-hover blue-btn" %></p>
+        <div class="event-top__btn">
+          <p class=""><%= link_to "詳細をみる", event_path(event.id), class:"wide-submit-btn btn-hover blue-btn" %></p>
         </div>
       </div>
       <% end %>
@@ -43,3 +45,13 @@
     </div>
   </div>
 </div>
+
+
+
+<script>
+$(function() {
+  $(".event-top__img").slick({
+      dots: true,
+  });
+});  
+</script>

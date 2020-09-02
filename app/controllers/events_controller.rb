@@ -1,11 +1,12 @@
 class EventsController < ApplicationController
-    before_action :user_info, only: [:new, :create, :confirm]  
+    before_action :user_info, only: [:new, :create, :confirm] 
+    before_action :tenant_resistration, only: [:new, :create]
     # before_action :move_to_index, except: [:index,:show ]
     # indexアクション以外が実行される前にindexが実行される。
-    
+  
+  # トップ画面、イベント検索  
   def top
     @events = Event.includes(:user).order("start_date DESC").page(params[:page]).per(5)
-    
     if params[:date].present?
       @events = @events.where(start_date: params[:date].in_time_zone.all_day).page(params[:page]).per(5)
     elsif params[:max].present? && params[:min].present?
@@ -17,12 +18,12 @@ class EventsController < ApplicationController
     end
   end
 
-  # イベントの新規登録
+  # イベントの新規登録画面
   def new
     @event = Event.new
   end
   
-  # イベント作成アクション
+  # イベントの新規登録
   def create
     @event = Event.new(event_params)
     @event.user_id = current_user.id
@@ -35,12 +36,12 @@ class EventsController < ApplicationController
     end
   end
   
-  # イベントの編集
+  # イベントの編集画面
   def edit
     @event = Event.find(params[:id])
   end
   
-  
+  # イベント情報の更新
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
@@ -57,7 +58,7 @@ class EventsController < ApplicationController
 
   # イベント詳細表示
   def show
-    @event = Event.find(params[:id])
+    @event = Event.includes(:user).find(params[:id])
     @reserves = Reserve.where(event_id: params[:id])
     
     @reserve = Reserve.new
@@ -73,10 +74,19 @@ class EventsController < ApplicationController
   
     private
       def event_params
-        params.require(:event).permit(:title, :start_date, :start_time, :venue, :price, :content, :capacity)
+        params.require(:event).permit(:title, :start_date, :start_time, :venue, :price, :content, :capacity, imgs: [])
       end
       
       def move_to_index
        redirect_to action: :index unless user_signed_in?
+      end
+      
+      # テナント登録してない場合、新規イベント登録不可
+      def tenant_resistration 
+        @tenant = Tenant.find_by(user_id: current_user.id)
+        unless @tenant.present?
+          flash.now[:notice] = "銀行口座登録を行ってください"
+          redirect_to user_pays_hostnew_path
+        end
       end
 end

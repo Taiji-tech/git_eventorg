@@ -1,40 +1,54 @@
 <div class="sidebar">
+  <h3><i class="fa fa-bars" aria-hidden="true"></i> MENU</h3>
   <div class="sidebar-box">
-    <h4>マイページ</h4>
-    <ul>
+    <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-home" aria-hidden="true"></i> マイページ</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>
+    <ul style="display:none;">
       <li><%= link_to "ホーム", user_profile_path %></li>
     </ul>
   </div>
   <div class="sidebar-box">
-    <h4>イベント情報管理</h4>
-    <ul>
+    <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i> イベント情報管理</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>
+    <ul style="display:none;">
         <li><%= link_to "イベント新規登録", new_event_path %></li>
         <li><%= link_to "登録したイベントの確認", events_confirm_path %></li>
     </ul>    
   </div>
   
   <div class="sidebar-box">
-    <h4>お支払い</h4>
-    <ul>
+    <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-credit-card" aria-hidden="true"></i> お支払い</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>
+    <ul style="display:none;">
       <li><%= link_to "カード登録", new_pay_path, data: {"turbolinks" => false} %></li>
       <li><%= link_to "カード確認・変更", user_pays_confirm_card_path %></li>
     </ul>
   </div>
   
   <div class="sidebar-box">
-    <h4>売上管理</h4>
-    <ul>
+    <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-database" aria-hidden="true"></i> 売上管理</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>
+    <ul style="display:none;">
       <li><%= link_to "振込口座登録・確認", user_pays_hostnew_path %></li>
-      <li>お支払い情報確認</li>
+      <li><%= link_to "お支払い情報確認", user_pays_hostinfo_path %></li>
     </ul>
   </div>  
   
   <div class="sidebar-box">
-    <h4>登録情報管理</h4>    
-    <ul>
+    <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-user" aria-hidden="true"></i> 登録情報管理</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>    
+    <ul style="display:none;">
       <li><%= link_to "ユーザー情報", user_edit_path %></li>
       <li><%= link_to "ログアウト", destroy_user_session_path %></li>
     </ul>
   </div>  
 
 </div>
+
+
+
+<script>
+$(function(){
+  $(".sidebar-subtitle").on("click", function(){
+    $(this).next("ul").css("display", "");
+    
+    
+    
+  });  
+});
+</script>

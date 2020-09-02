@@ -41,6 +41,7 @@ gem 'bootstrap-sass', '~>3.3.6'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
+gem 'jquery-fileupload-rails', '~> 0.4.7'
 
 # devise関連
 gem 'devise'

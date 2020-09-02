@@ -2,27 +2,22 @@
 <div class="row">
   <div class="payment">
     <div class="page-title">
-      <h1>お支払い</h1>
+      <h1>イベントのキャンセル</h1>
     </div>
     <div class="payment-box">
       <p>お支払いいただくことで、参加登録が完了します。表示された情報をご確認いただき、お支払いをお願いいたします。</p>
-      <% unless @reserve.present? %>
-      <p class="wide-submit-btn pink-btn">イベント情報の取得が正常にできておりません。誠に恐れ入りますが、再度ご予約いただくか運営までご連絡ください。</p>
-      <% end %>
+      <p></p>
     </div>
     <div class="payment-box">
       <h2><i class="fa fa-user" aria-hidden="true"></i> お客様の情報</h2>
       <table>
         <tr>
           <th>ニックネーム</th>
-          <td><%= @reserve.nickname if @reserve.present? %></td>
+          <td>a</td>
         </tr>
         <tr>
           <th>E-mail</th>
-          <% if @reserve.present? %>
-          <% @size = @reserve.email.size.to_i - 2 %>
-          <td><%= @reserve.email[0, 2] %><%= "*"*@size %></td>
-          <% end %>
+          <td>a@gmail.com</td>
         </tr>
       </table>  
     </div>
@@ -35,32 +30,32 @@
         </tr>
         <tr>
           <th>開催日時</th>
-          <td><%= @event.start_date.strftime("%Y年%m月%d日") if @event.present? %> <%= @event.start_time.strftime("%H:%m～") if @event.present? %></td>
+          <td><%= @event.start_date if @event.present? %></td>
         </tr>
         <tr>
           <th>費用</th>
-          <td><%= @event.price.to_s(:delimited) if @event.present? %> 円</td>
+          <td><%= @event.price if @event.present? %></td>
         </tr>
         <tr>
           <th>定員</th>
-          <td><%= @event.capacity if @event.present? %> 名</td>
+          <td><%= @event.capacity if @event.present? %></td>
         </tr>
         <tr>
           <th>主催者</th>
-          <td><%= User.find(@event.user_id).nickname if @event.present? %></td>
+          <td><%= User.find(@event.organizer) if @event.present? %></td>
         </tr>
       </table>
     </div>
     <div class="payment-box">
       <h2><i class="fa fa-credit-card" aria-hidden="true"></i> カード情報の登録</h2>
       <p>有効なカード情報の入力を行ってください。</p>
-      <%= form_with(model: @pay, url: pays_create_withoutresistration_path, data: {remote: false}) do |f| %>
-      <%= f.hidden_field:reserve_id if @reserve.present? %>
+      <%= form_with(model: @pay, url: pays_create_withoutresistration_path) do |f| %>
+      
       <script
         type="text/javascript"
         src="https://checkout.pay.jp/"
         class="payjp-button"
-        data-key="<%= ENV["PAYJP_KEY"] %>"
+        data-key="pk_test_0383a1b8f91e8a6e3ea0e2a9"
         data-submit-text="トークンを作成する"
         data-partial="true">
       </script>

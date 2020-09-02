@@ -12,11 +12,11 @@
     </div>
   </div>
   <div class="top-search__box">
-    <p><i class="fa fa-jpy" aria-hidden="true"></i> 費用から探す</p>
+    <p><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費から探す</p>
     <div class="top-search__price-box">
-      <%= f.number_field:min, value: params[:min], placeholder: "最低" %>
+      <%= f.number_field:min, value: params[:min], placeholder: "min" %>
       <p>～</p>
-      <%= f.number_field:max, value: params[:max], placeholder: "最高" %>
+      <%= f.number_field:max, value: params[:max], placeholder: "max" %>
     </div>
   </div>
   <div class="top-search__submit-box">

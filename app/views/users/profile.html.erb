@@ -1,5 +1,4 @@
-<% provide(:title, '') %>
-<% provide(:content, '') %>
+<% provide(:title, "マイページ") %>
 
 
 <div class="container">
@@ -8,18 +7,18 @@
     <%= render "shared/sidebar_organizer" %>
   </div>
   
-  <div class="col-12 col-sm-9">
+  <div class="col-12 col-sm-9 content">
     <div class="page-title">
       <h1>マイページ</h1>
     </div>
     
-    <div class="">
+    <div class="user-prof">
       <h2><%= @events.size %>件：これまでに登録したイベント</h2>
       <div class="">
         <li><%= link_to "これまでに登録したイベントを確認する" %></li>
       </div>
     </div>
-    <div class="">
+    <div class="user-prof">
       <h2>3:現在募集中のイベント</h2>
       <div class="">
         <li><%= link_to "現在募集中のイベントを管理する" %></li>
