@@ -40,8 +40,8 @@
           </div>
           <div class="event-form" id="event-form__img">
             <%= f.label:imgs, "画像" %>
-            <label class="event-form__img-field" for="form-img"><i class="fa fa-image" aria-hidden="true"></i><br>クリックしてアップロード</label>
-            <%= f.file_field:imgs, multiple: true, class:"", id:"form-img", style:"display:none" %>
+            <label class="event-form__img-field" for="img-file"><i class="fa fa-image" aria-hidden="true"></i><br>クリックしてアップロード</label>
+            <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display:none" %>
           </div>
           <div class="event-submit">
             <%= f.submit "イベント作成", class:"submit-btn blue-btn btn-hover" %>
@@ -57,32 +57,62 @@
 
 
 <script>
-// 画像アップロード設定
 $(function(){
-  var imgBox =
-    `<div class="event-form__img-wrap">
-      <div class="event-form__img-box">
-        <%= image_tag "top.jpg", class:"event-form__img" %>
-      </div>
-      <div class="event-form__img-remove">
-        <p><i class="fa fa-remove btn-hover" aria-hidden="true"></i></p>
-      </div>
-    </div>`
+  var dataBox = new DataTransfer();
+  var file_field = document.querySelector('input[type=file]');
+  $('#img-file').change(function(){
+    var files = $('input[type="file"]').prop('files')[0];
+    $.each(this.files, function(i, file){
+      var fileReader = new FileReader();
+      dataBox.items.add(file);
+      file_field.files = dataBox.files
+      var num = $('.item-image').length + 1 + i
+      fileReader.readAsDataURL(file);
+
+      if (num == 10){
+        $('#image-box__container').css('display', 'none');   
+      }
   
+      fileReader.onloadend = function() {
+        var src = fileReader.result
+        var imgBox= 
+          `<div class="event-form__img-wrap item-image" data-image="${file.name}">
+            <div class="event-form__img-box">
+              <img src=${src} class="event-form__img">
+            </div>
+            <div class="event-form__img-remove">
+              <p><i class="fa fa-remove btn-hover" aria-hidden="true"></i></p>
+            </div>
+          </div>`
+          
+        $('#event-form__img').append(imgBox);
+      };
+      $('#image-box__container').attr('class', `item-num-${num}`);
+    });
+  });
   
-  $("#form-img").on("change", function(e){
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        $("#event-form__img").append(imgBox);
-        $(".event-form__img").attr('src', e.target.result);
-        
-        $(".event-form__img-remove").on("click", function(){
-          $(this).parent().remove();
-        });
-    }
-    reader.readAsDataURL(e.target.files[0]);
-    console.log("done");
+  //削除関連
+  $(document).on("click", '.event-form__img-remove', function(){
+    var target_image = $(this).parent();
+    var target_name = $(target_image).data('image')
     
-  });  
+    if(file_field.files.length == 1){
+      ("input[type=file]").val(null);
+      dataBox.clearData();
+      console.log(dataBox);
+    }else{
+      
+      $.each(file_field.files, function(i,input){
+        if(input.name == target_name){
+          dataBox.items.remove(i);
+        }
+      });
+      file_field.files = dataBox.files
+    }
+    target_image.remove();
+    var num = $('.item-image').length
+    $('#image-box__container').show()
+    $('#image-box__container').attr('class', `item-num-${num}`)
+  })
 });
 </script>
