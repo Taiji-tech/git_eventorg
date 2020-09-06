@@ -1,0 +1,32 @@
+<% provide(:title, "マイページ") %>
+
+
+<div class="container">
+<div class="row">
+  <div class="col-12 col-sm-3">
+    <%= render "shared/sidebar_organizer" %>
+  </div>
+  
+  <div class="col-12 col-sm-9 content">
+    <div class="page-title">
+      <h1>マイページ</h1>
+    </div>
+    
+    <div class="user-prof">
+      <h2><span class="user-prof__count pink-btn"><%= @reserves.size %></span> 参加予定のイベント</h2>
+      <ul class="user-prof__box">
+        <li><%= link_to "参加予定のイベントをみる", user_reserved_path(future:true, past:true) %></li>
+      </ul>
+    </div>
+    <div class="user-prof">
+      <h2><span class="user-prof__count pink-btn"><%= @events.size %></span> ホストしたイベント</h2>
+      <ul class="user-prof__box">
+        <li><%= link_to "自分のホストしたイベントをみる", events_confirm_path %></li>
+        <li><%= link_to "新しいイベントをつくる", new_event_path %></li>
+      </ul>
+    </div>
+  </div>
+</div>  
+</div>
+
+

@@ -1,0 +1,10 @@
+// hoverアクションなど、共通化できるアクションを管理・定義しております。
+
+// ボタン作成時
+.btn-hover{
+  transition: .3s; 
+}
+.btn-hover:hover{
+  cursor: pointer;
+  opacity: .8;
+}

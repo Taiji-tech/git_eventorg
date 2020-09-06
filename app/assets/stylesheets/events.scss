@@ -1,3 +1,531 @@
-// Place all the styles related to the events controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// views > eventsフォルダ内のスタイル
+
+
+// eventsフォルダ内共通設定
+.event{
+  width: 100%;
+  padding: 2rem 0;
+}
+
+
+// top
+.top{
+  width: 100vw;
+}
+.top-img{
+  width: 100%;
+  
+  img{
+    width: 100%;
+    filter: grayscale(1);
+  }
+}
+.top-search{
+  width: 80%;
+  margin: auto;
+  position: relative;
+  top: -10rem;
+  background: #f8f9fa;
+  box-shadow: 0 0 1rem #343a40!important;
+}
+.top-search__header{
+  width: 100%;
+  
+  p{
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+}
+.top-search__wrap{
+  width: 100%;
+  padding: 2rem 0 0;
+  
+  form{
+    width: 100%;
+    display: flex;
+  }
+}
+.top-search__box{
+  width: 44%;
+  margin: auto;
+  
+  p{
+    margin: 0;
+    padding: 0 0 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+.top-search__form-box{
+  width: 100%;
+  
+  input{
+    width: 100%;
+    height: 5rem;
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: .5rem;
+    border: solid .2rem #adb5bd;
+    transition: .3s;
+  }
+  input:focus{
+    outline: none !important;
+    border: solid .2rem #1c7ed6;
+    box-shadow: 0 0 0 .2rem #1c7ed6;
+  }
+}
+.top-search__price-box{
+  width: 100%;
+  display: flex;
+  margin: auto;
+  
+  p{
+    width: 10%;
+    margin: auto;
+    padding: 0;
+    text-align: center;
+  }
+  input{
+    width: 45%;
+    height: 5rem;
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: .5rem;
+    border: solid .2rem #adb5bd;
+    transition: .3s;
+  }
+  input:focus{
+    outline: none !important;
+    border: solid .2rem #1c7ed6;
+    box-shadow: 0 0 0 .2rem #1c7ed6;
+  }
+}
+.top-search__submit-box{
+  width: 10%;
+  margin: auto auto 0;
+  
+  input{
+    width: 98%;
+    margin: 0 1%;
+    height: 5rem;
+    font-size: 2rem;
+  }
+}
+.event-top{
+  width: 90rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+.event-top__header{
+  width: 100%;
+  padding: 0 0 1rem;
+  
+  p{
+    display: inline-block;
+    padding: 0 1rem;
+    border-radius: 2rem;
+    font-size: 2rem;
+  }
+}
+.event-top__box{
+  width: 43rem;
+  margin: 0 auto 4rem;
+}
+.event-top__img{
+  
+  img{
+    height: 25rem;
+    margin: .3rem;
+    object-fit: cover;
+    border-radius: .5em;
+    box-shadow: 0 0 0.5em #dee2e6;
+  }
+}
+.event-top__detail{
+  width: 100%;
+
+  h2{
+    margin: 0 0 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  p{
+    margin: 0;
+    padding: 0 1rem;
+    font-size: 1.8rem;
+  }
+  span{
+    display: inline-block;
+    width: 12rem;
+  }  
+}
+.event-top__btn{
+  width: 100%;
+  margin: 2rem 0 0;
+  
+  a{
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #fff;
+  }
+  a:focus{
+    text-decoration: none;
+  }
+}
+
+
+
+
+.event-box{
+  display: flex;
+  flex-wrap: wrap;
+  width: 70rem;
+  margin: 0 auto 2rem;
+  background: #f8f9fa;
+}
+.event-box__detail{
+  width: 100%;
+  
+  h2{
+    margin: 1rem 0;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  table{
+    width: 100%;
+  }
+  th,td{
+    padding: .2rem 1rem;
+    font-size: 2rem;
+    font-weight: normal;
+  }
+  th{
+    width: 30%;
+  }
+  i{
+    width: 2rem;
+    text-align: center;
+  }
+}
+.event-box__img{
+  width: 100%;
+  padding: 1rem;
+  
+  img{
+    width: 20rem;
+    height: 15rem;
+    margin: .3rem;
+    object-fit: cover;
+    border-radius: .5em;
+    box-shadow: 0 0 .5em #dee2e6;
+  }
+}
+.event-box__btn{
+  width: 100%;
+  padding: 0 0 1rem;
+  
+  a{
+    padding: .2rem 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 2rem;
+    box-shadow: 0 0 .2rem #dee2e6;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #fff;
+  }
+  a:focus{
+    text-decoration: none;
+  }
+  p{
+    display: inline;
+    padding-right: 1rem;
+  }
+}
+
+
+// new
+// イベント新規登録
+.event-form{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 0;
+  margin: auto;
+  font-size: 1.8rem;
+
+  label{
+    width: 20%;
+    line-height: 1em;
+  }
+  input{
+    width: 80%;
+  }
+  .event-form-content{
+    height: 10rem;
+    width: 80%;
+  }
+  .event-form__img-field{
+    width: 80%;
+    
+    span{
+      margin: 0 0 2rem;
+    }
+  }
+}
+.event-form-date{
+  input{
+    width: 40%;
+  }
+  select{
+    width: 19.5%;
+  }
+}
+.event-submit{
+  width: 100%;
+  padding: 2rem 0;
+  text-align: center;
+  
+  input{
+    font-size: 1.8rem;
+  }
+}
+.event-form__img-wrap{
+  display: inline-block;
+  width: 20rem;
+  height: 15rem;
+  margin: 0 .5rem .5rem 0;
+}
+#event-form__img{
+  width: 80%;
+  margin: 0 0 0 auto;
+}
+.event-form__img-box{
+  
+  img{
+    width: 20rem;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: .5em;
+    box-shadow: 0 0 .5em #dee2e6;
+  }
+}
+.event-form__img-remove{
+    position: relative;
+    top: -15rem;
+    right: 0;
+  
+  i{
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+    margin: 1rem;
+    border-radius: 50%;
+    font-size: 3rem;
+    opacity: .8;
+    background: #495057;
+    color: #fff;
+    box-shadow: 0 0 .3rem #343a40;
+  }
+}
+
+
+
+// confirm
+.event-box__reserve{
+  font-weight: bold;
+  color: #fff;
+  padding: 0 .7rem;
+  border-radius: 1rem;
+  background: #e03131;
+}
+
+
+
+
+// show
+.event-box__info{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 0 2rem;
+  background: #f8f9fa;
+}
+.event-box__info-title{
+  width: 100%;
+  
+  h1{
+    margin: 0;
+    padding-bottom: 2rem;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
+.event-box__attend{
+  width: 100%;
+  
+  h3{
+    font-size: 2rem;
+  } 
+}
+.event-box__attend-btn{
+  margin: 1rem 0;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: .5rem;
+  text-align: center;
+}
+.event-box__attend-info{
+  width: 100%;
+}
+#event-attend-form{
+  position: fixed;
+  top: 5%;
+  left: 0;
+  z-index: 50;
+  width: 100vw;
+  height: 100vh;
+}
+.event-attend-form{
+  width: 50rem;
+  max-height: 90%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: #fff;
+}
+.event-attend__top{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 0 1rem;
+  
+  h3{
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  p{
+    margin: 0;
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+.event-attend__select{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem 0 0;
+  
+  li{
+    width: 50%;
+    padding: .5rem 0;
+    list-style: none;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+  p{
+    margin: 0;
+    padding: .5rem 0;
+    font-size: 1.6rem;
+  }
+}
+.event-attend__form{
+  width: 100%;
+}
+.event-attend__form-box{
+  width: 100%;
+  display: flex;
+  margin: 0 0 1rem;
+  font-size: 1.8rem;
+  
+  p{
+    width: 6rem;
+    margin: 0;
+    padding: .7rem 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+    background: #e9ecef;
+    border-radius: .5rem 0 0 .5rem;
+	  border: solid .1rem #adb5bd;
+  }
+  input{
+    width: 100%;
+    padding: 0 1rem;
+    border-radius: 0 .5rem .5rem 0;
+	  border: solid .1rem #adb5bd;
+  }
+  input:focus{
+  	outline: none!important;
+  	border-radius: .5rem!important;
+  	box-shadow: 0 0 0 .2rem #1c7ed6!important;
+  }
+}
+.event-attend__content{
+  
+}
+.event-attend__detail{
+  width: 100%;
+  padding: 0 0 1rem;
+  max-height: calc(90vh - 10rem);
+  overflow: auto;
+  
+  h4{
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+.event-attend__detail-info{
+  width: 100%;
+  padding: .5rem 0;
+  
+  table{
+    width: 100%;
+  }
+  th{
+    width: 35%;
+    background: #f8f9fa;
+    color: #495057;
+  }
+  th, td{
+    padding: .5rem;
+    font-size: 1.4rem;
+    border: solid .1rem #dee2e6;
+  }
+  .error-notice{
+    margin: 3rem 0 0; 
+  }
+}
+.event-attend__submit-box{
+  width: 100%;
+  margin: 2rem 0 0;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.event-box__participate{
+  width: 100%;
+  padding: 4rem 0;
+  
+  h3{
+    margin: 0;
+    font-size: 2.4rem;
+  }
+  li{
+    padding: 1rem 0;
+    font-size: 2rem;
+  }
+  
+}
+
+

@@ -1,0 +1,140 @@
+
+.box-wrap{
+	padding: 2rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 1rem #adb5bd;
+}
+
+
+// ボタン関連
+.submit-btn{
+	display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: .6rem 1.5rem;
+  line-height: 1.42857143;
+  border-radius: 4px;	
+}
+.wide-submit-btn{
+	width: 100%;
+	padding: 1rem 0;
+	text-align: center;
+	font-size: 2rem;
+	border-radius: .5rem;
+	border: none;
+	cursor: pointer;
+}
+.wide-submit-btn:focus{
+	outline:0;
+}
+.blue-btn{
+	background: #1971c2;
+  color: #fff;
+}
+.blue-btn:hover{
+	text-decoration: none;
+	color: #fff;
+}
+.blue-border-btn{
+	border: solid .1rem #1971c2;
+	color: #1971c2;
+	transition: .3s;
+}
+.blue-border-btn:hover{
+	background: #d0ebff;
+}
+.pink-btn{
+	background: #fa5252;
+  color: #fff;
+}
+.grey-btn{
+	background: #e9ecef;;
+	color: #1971c2;
+	transition: .3s;
+}
+.grey-btn:hover{
+	background: #1971c2;
+  color: #fff;
+  text-decoration: none;
+}
+.unselect-btn{
+	background: #dee2e6;
+	color: #343a40;
+}
+
+
+// flashメッセージ
+.flash-notice{
+	width: 100%;
+	z-index: 10;
+	position: absolute;
+	padding: 1rem 0;
+	text-align: center;
+	font-size: 1.8rem;
+	background: #ff8787;
+	color: #fff;
+	
+	p{
+		margin: 0;
+	}
+}
+
+
+// 疑似リンク
+.link{
+	color: #1864ab;
+	cursor: pointer;
+}
+.link:hover{
+	text-decoration: underline;
+}
+
+
+// form設定
+// number_fieldのスピンボタンなし
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.input-with-icon{
+	border-radius: 0 .5rem .5rem 0;
+	border: solid .1rem #e9ecef;
+}
+.icon-with-input{
+	border-radius: .5rem 0 0 .5rem;
+	border: solid .1rem #e9ecef;
+}
+
+
+
+// 必須
+.form-necessary{
+	padding: .1rem .3rem;
+  border-radius: .5rem;
+  font-weight: normal;
+  font-size: 1.3rem;
+}
+
+
+
+// slick
+.slick-prev{
+	left: -2rem!important;
+}
+.slick-next{
+	right: -2rem!important;
+}
+.slick-prev:before, .slick-next:before{
+	color: #495057!important;
+}
+

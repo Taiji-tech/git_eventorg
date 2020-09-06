@@ -1,0 +1,115 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ 
+// bootstrapフレームワーク読み込み
+@import "bootstrap-sprockets";
+@import "bootstrap";
+// font awsome
+@import "font-awesome";
+
+// 共通設定
+.page-title{
+  width: 100%;
+  padding: 2rem 0 1rem;
+  
+  h1{
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #343a40;
+    margin: 0;
+  }
+  h1:before{
+    padding-right: 1rem;
+    font-family: FontAwesome;
+    content: '\f14b';
+  }
+}
+.content{
+  padding: 1.5rem 3rem;
+}
+
+// 画面を暗くする際の表示
+#display{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 49;
+  width: 100vw;
+  height: 100vh;
+  background: #495057;
+}
+
+
+// ajaxによるエラーメッセージ
+.error-notice{
+  padding: .5rem 0;
+  border-radius: .5rem;
+  
+  ul{
+    margin: 0;
+  }
+}
+
+
+// 画像拡大
+.wide-img{
+  position: fixed;
+  top: 10vh;
+  left: 0;
+  width: 100vw;
+  z-index: 50;
+  text-align: center;
+  
+  img{
+    width: 70vw;
+    height: 80vh;
+    border-radius: .5rem;
+    object-fit: contain;
+  }
+  .wide-img-close{
+    position: relative;
+    top: -81vh;
+    width: 85vw;
+    margin: auto;
+    text-align: right;
+    font-size: 4rem;
+    color: #fff;
+  
+    p{
+      display: inline-block;
+      padding: 1rem 2rem;
+    }
+  }
+}
+
+
+// pagenation
+.container{
+  nav{
+    width: 100%;
+    text-align: center;
+  } 
+}
+
+
+// bootstrap validation時
+.field_with_errors{
+  display: contents;
+  
+  input {
+    @extend .is-invalid!optional;
+  }
+}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class='event'>
   <div class='event-area'>
     <div class='event-box'>
@@ -64,3 +65,78 @@
    <% end %>
    </div>
 </div>
+=======
+<% provide(:title, @event.title) %>
+<% provide(:content, @event.content) %>
+
+
+<div class="content">
+  <div class="event-box">
+    <div class="event-box__info box-wrap">
+      <div class="event-box__info-title">
+        <h1><%= @event.title %></h1>
+      </div>
+      <div class="event-box__detail">
+      <table>
+        <tr>
+          <th><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</th>
+          <td><%= @event.start_date.strftime("%-m月%-d日(%a)") %>　<%= @event.start_time.strftime("%H:%M") %>～</td>
+        </tr>
+        <tr>
+          <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>
+          <td><%= @event.price.to_s(:delimited) %> 円</td>
+        </tr>
+        <tr>
+          <th><i class="fa fa-user-o" aria-hidden="true"></i> 定員</th>
+          <td><%= @event.capacity %> 名</td>
+        </tr>
+        <tr>
+          <th><i class="fa fa-user-secret" aria-hidden="true"></i> 主催者</th>
+          <td><%= @event.user.nickname %></td>
+        </tr>
+        <tr>
+          <th><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</th>
+          <td><%= @event.content %></td>
+        </tr>
+      </table>
+      <div class="event-box__img">
+        <% @event.imgs.each do |img| %>
+          <%= image_tag img, class:"event-img wide-img-hover" %>
+        <% end %>
+        <% if @event.imgs.size == 0 %>
+          <%= image_tag "NoImage.png", class:"event-img" %>
+          <%= image_tag "NoImage.png", class:"event-img" %>
+          <%= image_tag "NoImage.png", class:"event-img" %>
+        <% elsif @event.imgs.size == 1 %>
+          <%= image_tag "NoImage.png", class:"event-img" %>
+          <%= image_tag "NoImage.png", class:"event-img" %>
+        <% elsif @event.imgs.size == 2 %>
+          <%= image_tag "NoImage.png", class:"event-img" %>
+        <% end %>
+      </div>
+      </div>
+      
+      <div class="event-box__attend">
+        <% if @event.capacity > @reserves.size %>  
+        <p class="event-box__attend-btn blue-btn btn-hover" id="event-attend">このイベントに参加する</p>
+        <%= render "events/resistration", collection: @event %>
+        <% else %>
+        <p class="event-box__attend-btn pink-btn">こちらのイベントは満席です</p>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="event-box__participate">
+      <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i> 参加者一覧（<%= @reserves.size %> 名）</h3>
+      <ul>
+        <% @reserves.each do |reserve| %>
+        <li><%= reserve.nickname %></li>
+        <% end %>
+      </ul>
+    </div>
+  
+  </div>
+</div>
+
+
+>>>>>>> dc21a8650bcc40630bd6fd1c0917b48181565942

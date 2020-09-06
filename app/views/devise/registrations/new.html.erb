@@ -1,27 +1,36 @@
-<div class="event">
-  <div class="event-area">
-<h2>新規登録</h2>
+<div class="user">
+  <div class="page-title">
+    <h1>新規ユーザー登録</h1>
+  </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
-<div class="event-form">
-    <p>
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname, autofocus: true %>
-    </p>
-    
-    <p>
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </p>
-
-    <p>
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+  <div class="user-form">
+    <div class="user-form__box">
+      <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
+      <%= f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", class: "" %>
+    </div>
+    <div class="user-form__box">
+      <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-mail", class: "" %>
+    </div>  
+    <div class="user-form__box">
+      <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+      <% if @minimum_password_length %>
+        <% @caution = @minimum_password_length.to_s + "文字以上" %>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "" %>
+    </div>
+    <div class="user-form__box">
+      <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）", class: "" %>
+    </div>
+    <div class="user-form__submit-box">
+      <%= f.submit "ユーザー登録", class:"wide-submit-btn btn-hover blue-btn" %>
+    </div>
     <% end %>
     
+<<<<<<< HEAD
     <%= f.password_field :password, autocomplete: "new-password" %>
   
 
@@ -39,3 +48,14 @@
 </div>
 </div>
 </div>
+=======
+    <div class="user-form__link user-form__notice">
+      <p>アカウントをお持ちの方はこちら</p>
+      <p class="">
+        <%= link_to "ログイン", new_user_session_path, class:"wide-submit-btn btn-hover grey-btn" %>
+      </p>
+    </div>
+    </div>
+  </div>
+</div>  
+>>>>>>> dc21a8650bcc40630bd6fd1c0917b48181565942
