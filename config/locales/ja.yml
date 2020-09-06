@@ -31,3 +31,23 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
+  
+  activerecord:
+    models:
+      reserve: "予約"
+      event: "イベント"
+    attributes:
+      reserve:
+        nickname: "ニックネーム"
+        email: "E-mail"
+      event: 
+        title: "タイトル"
+        start_date: "開催日時"
+        content: "イベント内容"
+        venue: "Zoom ID"
+        venue_pass: "Zoom Password"
+        capacity: "定員"
+        price: "参加費"
+        imgs: "画像"
+
+  

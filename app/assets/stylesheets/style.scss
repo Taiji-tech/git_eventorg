@@ -42,6 +42,14 @@
 	text-decoration: none;
 	color: #fff;
 }
+.blue-border-btn{
+	border: solid .1rem #1971c2;
+	color: #1971c2;
+	transition: .3s;
+}
+.blue-border-btn:hover{
+	background: #d0ebff;
+}
 .pink-btn{
 	background: #fa5252;
   color: #fff;
@@ -106,3 +114,27 @@ input[type=number]::-webkit-outer-spin-button {
 	border-radius: .5rem 0 0 .5rem;
 	border: solid .1rem #e9ecef;
 }
+
+
+
+// 必須
+.form-necessary{
+	padding: .1rem .3rem;
+  border-radius: .5rem;
+  font-weight: normal;
+  font-size: 1.3rem;
+}
+
+
+
+// slick
+.slick-prev{
+	left: -2rem!important;
+}
+.slick-next{
+	right: -2rem!important;
+}
+.slick-prev:before, .slick-next:before{
+	color: #495057!important;
+}
+

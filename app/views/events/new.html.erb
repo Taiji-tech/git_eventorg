@@ -12,37 +12,43 @@
       </div>
       
       <div class="event">
-        <%= form_with(model: @event, url: events_path, method: :post, data: { remote: false }) do |f| %>
+        <div id="error-notice"></div>
+        <%= form_with(model: @event, url: events_path, method: :post) do |f| %>
           <div class="event-form">
-            <%= f.label:title, "イベント名" %>
+            <label for="event_title">イベント名<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.text_field:title, class:"form-control form-control-lg" %>
           </div>
           <div class="event-form event-form-date">
-            <%= f.label:start_date, "開催日時" %>
+            <label for="event_start_date">開催日時<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.date_field:start_date, class:"form-control" %>
             <%= f.time_select:start_time, {}, class:"form-control", ignore_data:true %>
           </div>
           <div class="event-form">
-            <%= f.label:content, "イベント内容" %>
+            <label for="event_content">イベント内容<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.text_area:content, class:"form-control form-control-lg event-form-content", placeholder: "開催するイベントの内容を書いてください" %>
           </div>
           <div class="event-form">
-            <%= f.label:venue, "ズームID" %>
+            <label for="event_venue">Zoom ID<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.text_field:venue, class:"form-control form-control-lg" %>
           </div>
           <div class="event-form">
-            <%= f.label:capacity, "定員" %>
+            <label for="event_venue_pass">Zoom Password<br><span class="pink-btn form-necessary">必須</span></label>
+            <%= f.text_field:venue_pass, class:"form-control form-control-lg" %>
+          </div>
+          <div class="event-form">
+            <label for="event_capacity">定員<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.number_field:capacity, class:"form-control form-control-lg" %>
           </div>
           <div class="event-form">
-            <%= f.label:price, "費用" %>
+            <label for="event_price">参加費<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.number_field:price, class:"form-control form-control-lg" %>
           </div>
-          <div class="event-form" id="event-form__img">
-            <%= f.label:imgs, "画像" %>
-            <label class="event-form__img-field" for="img-file"><i class="fa fa-image" aria-hidden="true"></i><br>クリックしてアップロード</label>
+          <div class="event-form">
+            <label for="event_imgs">画像<br><span class="pink-btn form-necessary">必須</span></label>
+            <label class="event-form__img-field" for="img-file"><span class="submit-btn blue-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
             <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display:none" %>
           </div>
+          <div id="event-form__img"></div>
           <div class="event-submit">
             <%= f.submit "イベント作成", class:"submit-btn blue-btn btn-hover" %>
           </div>

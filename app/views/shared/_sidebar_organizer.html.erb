@@ -6,8 +6,16 @@
       <li><%= link_to "ホーム", user_profile_path %></li>
     </ul>
   </div>
+  
   <div class="sidebar-box">
-    <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i> イベント情報管理</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>
+    <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i> イベント参加管理</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>
+    <ul style="display:none;">
+      <li><%= link_to "参加するイベントの確認", user_reserved_path(future:true, past:true) %></li>
+    </ul>
+  </div>
+  
+  <div class="sidebar-box">
+    <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i> イベントホスト管理</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>
     <ul style="display:none;">
         <li><%= link_to "イベント新規登録", new_event_path %></li>
         <li><%= link_to "登録したイベントの確認", events_confirm_path %></li>
@@ -27,6 +35,7 @@
     <ul style="display:none;">
       <li><%= link_to "振込口座登録・確認", user_pays_hostnew_path %></li>
       <li><%= link_to "お支払い情報確認", user_pays_hostinfo_path %></li>
+      <li><%= link_to "売り上げ管理", user_pays_profit_path %></li>
     </ul>
   </div>  
   

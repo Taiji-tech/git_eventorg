@@ -38,8 +38,6 @@ class PaysController < ApplicationController
     end
   end
   
-  
-  
   # カード情報の登録
   def new
     @card = Card.find_by(user_id: current_user.id)
@@ -122,8 +120,11 @@ class PaysController < ApplicationController
   def confirm
     
   end  
-
   
+  # 売り上げ
+  def profit
+    payjp_transfer_info
+  end
   
   
   # イベントホストのカード情報入力
@@ -252,6 +253,25 @@ class PaysController < ApplicationController
               "bank_account_number" => params[:bank_account_number],
             })
             res = http.request(req)
+            @data = JSON.parse(res.body)
+          end
+        end
+        
+        # 入金情報の取得
+        def payjp_transfer_info
+          @tenant = Tenant.find_by(user_id: current_user.id)
+          if @tenant.present?
+            token = ENV["PAYJP_PRIVATE_KEY"]
+            uri = URI.parse("https://api.pay.jp/v1/tenant_transfers")
+            http = Net::HTTP.new(uri.host, uri.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+            
+            req = Net::HTTP::Get.new(uri)
+            req.basic_auth("#{token}", "")
+            res = http.request(req)
+            
+            puts res.body
             @data = JSON.parse(res.body)
           end
         end

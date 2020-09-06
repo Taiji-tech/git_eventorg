@@ -43,6 +43,9 @@ gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
 
+# 日本語化
+gem 'rails-i18n'
+
 # devise関連
 gem 'devise'
 gem 'devise-i18n'

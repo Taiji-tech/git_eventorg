@@ -13,16 +13,17 @@
     </div>
     
     <div class="user-prof">
-      <h2><%= @events.size %>件：これまでに登録したイベント</h2>
-      <div class="">
-        <li><%= link_to "これまでに登録したイベントを確認する" %></li>
-      </div>
+      <h2><span class="user-prof__count pink-btn"><%= @reserves.size %></span> 参加予定のイベント</h2>
+      <ul class="user-prof__box">
+        <li><%= link_to "参加予定のイベントをみる", user_reserved_path(future:true, past:true) %></li>
+      </ul>
     </div>
     <div class="user-prof">
-      <h2>3:現在募集中のイベント</h2>
-      <div class="">
-        <li><%= link_to "現在募集中のイベントを管理する" %></li>
-      </div>
+      <h2><span class="user-prof__count pink-btn"><%= @events.size %></span> ホストしたイベント</h2>
+      <ul class="user-prof__box">
+        <li><%= link_to "自分のホストしたイベントをみる", events_confirm_path %></li>
+        <li><%= link_to "新しいイベントをつくる", new_event_path %></li>
+      </ul>
     </div>
   </div>
 </div>  

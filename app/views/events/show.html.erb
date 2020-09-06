@@ -33,7 +33,7 @@
       </table>
       <div class="event-box__img">
         <% @event.imgs.each do |img| %>
-          <%= image_tag img, class:"event-img" %>
+          <%= image_tag img, class:"event-img wide-img-hover" %>
         <% end %>
         <% if @event.imgs.size == 0 %>
           <%= image_tag "NoImage.png", class:"event-img" %>

@@ -7,6 +7,8 @@ class EventsController < ApplicationController
   # トップ画面、イベント検索  
   def top
     @events = Event.includes(:user).order("start_date DESC").page(params[:page]).per(10)
+    not_expired_event
+    @events = @events.order("start_date DESC").page(params[:page]).per(10)
     if params[:date].present?
       @events = @events.where(start_date: params[:date].in_time_zone.all_day).page(params[:page]).per(10)
     elsif params[:max].present? && params[:min].present?
@@ -28,11 +30,10 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     if @event.save
-      flash[:notice] = "イベントの登録が完了しました！"
+      flash.now[:notice] = "イベントの登録が完了しました！"
       redirect_to events_confirm_path
     else
-      flash[:notice] = "入力いただいた情報に誤りがあります。"
-      render :new
+      render "inputError.js.erb"
     end
   end
   
@@ -45,9 +46,10 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
+      flash.now[:notice] = "イベントの情報が更新されました！"
       redirect_to events_confirm_path  
     else
-      flash[:notice] = "エラーが発生しました。もう一度やり直してください。"
+      render "inputError.js.erb"
     end
   end
   
@@ -74,7 +76,7 @@ class EventsController < ApplicationController
   
     private
       def event_params
-        params.require(:event).permit(:title, :start_date, :start_time, :venue, :price, :content, :capacity, imgs: [])
+        params.require(:event).permit(:title, :start_date, :start_time, :venue, :venue_pass, :price, :content, :capacity, imgs: [])
       end
       
       def move_to_index
@@ -85,7 +87,7 @@ class EventsController < ApplicationController
       def tenant_resistration 
         @tenant = Tenant.find_by(user_id: current_user.id)
         unless @tenant.present?
-          flash.now[:notice] = "銀行口座登録を行ってください"
+          flash[:notice] = "イベント登録前に銀行口座登録を行ってください"
           redirect_to user_pays_hostnew_path
         end
       end

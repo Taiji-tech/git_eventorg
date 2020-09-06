@@ -80,8 +80,20 @@
     font-size: 2.5rem;
     font-weight: bold;
   }
+  .user-prof__count{
+    padding: 0 1rem;
+    border-radius: .5rem;
+    font-size: 3rem;
+  }
 }
-
+.user-prof__box{
+  padding: .5rem 0 .5rem 4rem;
+  font-size: 2rem;
+  
+  li{
+    list-style:none;
+  }
+}
 
 
 // edit
@@ -98,9 +110,6 @@
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  padding: 2rem;
-  border-radius: .5rem;
-  box-shadow: 0 0 1rem #ced4da;
   background: #f8f9fa;
   
   h2{

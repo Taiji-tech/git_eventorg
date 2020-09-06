@@ -20,5 +20,14 @@ module ApplicationHelper
       page_content + '｜' + base_content
     end
   end
-    
+  
+  # boolean変換メソッド
+  def to_bool(func)
+    if func == "true"
+      return true
+    elsif func == "false"
+      return false
+    end
+  end
+  
 end

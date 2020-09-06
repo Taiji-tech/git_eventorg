@@ -1,6 +1,5 @@
 class Reserve < ApplicationRecord
   belongs_to :event
-  
   has_many :pays
   
   validates :nickname, presence: true

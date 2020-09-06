@@ -25,7 +25,8 @@
   margin: auto;
   position: relative;
   top: -10rem;
-  background: #fff;
+  background: #f8f9fa;
+  box-shadow: 0 0 1rem #343a40!important;
 }
 .top-search__header{
   width: 100%;
@@ -46,7 +47,8 @@
   }
 }
 .top-search__box{
-  width: 45%;
+  width: 44%;
+  margin: auto;
   
   p{
     margin: 0;
@@ -63,6 +65,14 @@
     height: 5rem;
     padding: 1rem;
     font-size: 2rem;
+    border-radius: .5rem;
+    border: solid .2rem #adb5bd;
+    transition: .3s;
+  }
+  input:focus{
+    outline: none !important;
+    border: solid .2rem #1c7ed6;
+    box-shadow: 0 0 0 .2rem #1c7ed6;
   }
 }
 .top-search__price-box{
@@ -81,6 +91,14 @@
     height: 5rem;
     padding: 1rem;
     font-size: 2rem;
+    border-radius: .5rem;
+    border: solid .2rem #adb5bd;
+    transition: .3s;
+  }
+  input:focus{
+    outline: none !important;
+    border: solid .2rem #1c7ed6;
+    box-shadow: 0 0 0 .2rem #1c7ed6;
   }
 }
 .top-search__submit-box{
@@ -245,6 +263,7 @@
 
   label{
     width: 20%;
+    line-height: 1em;
   }
   input{
     width: 80%;
@@ -255,9 +274,10 @@
   }
   .event-form__img-field{
     width: 80%;
-    padding: 4rem 0;
-    text-align: center;
-    background: #f1f3f5;
+    
+    span{
+      margin: 0 0 2rem;
+    }
   }
 }
 .event-form-date{
@@ -278,8 +298,14 @@
   }
 }
 .event-form__img-wrap{
+  display: inline-block;
   width: 20rem;
   height: 15rem;
+  margin: 0 .5rem .5rem 0;
+}
+#event-form__img{
+  width: 80%;
+  margin: 0 0 0 auto;
 }
 .event-form__img-box{
   
@@ -330,6 +356,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  margin: 0 0 2rem;
   background: #f8f9fa;
 }
 .event-box__info-title{
@@ -443,9 +470,14 @@
   	box-shadow: 0 0 0 .2rem #1c7ed6!important;
   }
 }
+.event-attend__content{
+  
+}
 .event-attend__detail{
   width: 100%;
   padding: 0 0 1rem;
+  max-height: calc(90vh - 10rem);
+  overflow: auto;
   
   h4{
     font-size: 1.8rem;
@@ -470,6 +502,9 @@
     font-size: 1.4rem;
     border: solid .1rem #dee2e6;
   }
+  .error-notice{
+    margin: 3rem 0 0; 
+  }
 }
 .event-attend__submit-box{
   width: 100%;
@@ -492,3 +527,5 @@
   }
   
 }
+
+

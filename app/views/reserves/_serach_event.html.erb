@@ -1,0 +1,76 @@
+<div class="reserve-search">
+  <h2><i class="fa fa-search-plus" aria-hidden="true"></i> イベントを絞る</h2>
+
+  <div class="reserve-search__box">
+    <% if to_bool(@future) && to_bool(@past) %>
+      <%= check_box_tag :all, "all", checked: true %>
+    <% else %>
+      <%= check_box_tag :all, "all" %>
+    <% end %>
+    <%= label_tag :all, "すべて" %>
+  </div>
+  <div class="reserve-search__box">
+    <% if to_bool(@future) %>
+      <%= check_box_tag :future, "future", checked: true %>
+    <% else %>
+      <%= check_box_tag :future, "future" %>
+    <% end %>
+    <%= label_tag :future, "これから参加" %>
+  </div>
+  <div class="reserve-search__box">
+    <% if to_bool(@past) %>
+      <%= check_box_tag :past, "past", checked: true %>
+    <% else %>
+      <%= check_box_tag :past, "past" %>
+    <% end %>
+    <%= label_tag :past, "すでに終了" %>
+  </div>
+</div>
+
+
+
+<script>
+$(function(){
+  $('input[type="checkbox"]').on("change", function(){
+    var val = $(this).val();
+    var check = $(this).prop('checked');
+    var pass = location.href;
+    
+    console.log(pass);
+    if (val == "all"){
+      if(check){
+        window.location.href = "/user/reserved/?future=true&past=true";
+      }
+    }else if(val == "future"){
+      if(check){
+        <% if to_bool(@past) %>
+        window.location.href = "/user/reserved/?future=true&past=true";
+        <% else %>
+        window.location.href = "/user/reserved/?future=true&past=false";
+        <% end %>
+      }else{
+        <% if to_bool(@past) %>
+        window.location.href = "/user/reserved/?future=false&past=true";
+        <% else %>
+        window.location.href = "/user/reserved/?future=false&past=false";
+        <% end %>
+      }
+    }else if(val == "past"){
+      if(check){
+        <% if to_bool(@future) %>
+        window.location.href = "/user/reserved/?future=true&past=true";
+        <% else %>
+        window.location.href = "/user/reserved/?future=false&past=true";
+        <% end %>
+      }else{
+        <% if to_bool(@future) %>
+        window.location.href = "/user/reserved/?future=true&past=false";
+        <% else %>
+        window.location.href = "/user/reserved/?future=false&past=false";
+        <% end %>
+      }
+    }
+    
+  });
+});
+</script>
