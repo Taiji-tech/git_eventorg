@@ -1,0 +1,5 @@
+$(function(){
+  <% if @event.present? %>
+  $("#error-notice").html("<%= j(render 'shared/error_notice', { model: @event }) %>");
+  <% end %>
+});

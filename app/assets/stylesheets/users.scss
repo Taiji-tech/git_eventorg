@@ -1,3 +1,169 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// views > deviseフォルダ内
+
+// new（新規登録フォーム）
+.user{
+  width: 50rem;
+  margin: 4rem auto 0;
+  padding: 1rem 2rem;
+}
+.user-form{
+  padding: 2rem 0;
+}
+.user-form__box{
+  width: 100%;
+  display: flex;
+  padding: 0 0 1rem;
+  margin: 0 0 1rem;
+  font-size: 1.8rem;
+  
+  p{
+    width: 6rem;
+    margin: 0;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+    background: #e9ecef;
+    border-radius: .5rem 0 0 .5rem;
+	  border: solid .1rem #adb5bd;
+  }
+  input{
+    width: 100%;
+    padding: 0 1rem;
+    border-radius: 0 .5rem .5rem 0;
+	  border: solid .1rem #adb5bd;
+  }
+  input:focus{
+  	outline: none!important;
+  	border-radius: .5rem!important;
+  	box-shadow: 0 0 0 .2rem #1c7ed6!important;
+  }
+}
+.user-form__notice{
+
+  p{
+    margin: 0;
+    font-size: 1.6rem;
+  }
+}
+.user-form__submit-box{
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 1.8rem;
+}
+.user-form__link{
+  padding: 2rem 0;
+  
+  p{
+    margin: 1rem 0;
+  }
+  a{
+    display: block;
+    font-weight: bold;
+    color: #1971c2;
+  }
+  a:hover{
+    text-decoration: none;
+    color: #fff;
+  }
+  
+}
+
+
+
+// profile
+.user-prof{
+  width: 100%;
+  margin: 1rem 0 2rem;
+  
+  h2{
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  .user-prof__count{
+    padding: 0 1rem;
+    border-radius: .5rem;
+    font-size: 3rem;
+  }
+}
+.user-prof__box{
+  padding: .5rem 0 .5rem 4rem;
+  font-size: 2rem;
+  
+  li{
+    list-style:none;
+  }
+}
+
+
+// edit
+.user-edit{
+  position: fixed;
+  top: 10%;
+  margin: auto;
+  z-index: 50;
+  border-radius: 1rem;
+  background: #fff;
+}
+.user-edit__info{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  background: #f8f9fa;
+  
+  h2{
+    width: 100%;
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin: 0 0 3rem;
+  }
+}
+.user-edit__header{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0 2rem; 
+   
+  h2{
+    width: 90%;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #343a40;
+  }
+  .user-edit-remove{
+    width: 10%;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: right;
+  }
+  p{
+    width: 100%;
+    font-size: 2rem;
+    margin: 0;
+  }
+}
+.user-edit__info-box{
+  width: 50%;
+  
+  h3{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 0 1rem;
+  }
+  p{
+    font-size: 2rem;
+    margin: 0;
+  }
+}
+.user-edit__link{
+  width: 100%;
+  padding: 2rem 0;
+  
+  li{
+    list-style: none;
+    font-size: 1.8rem;
+  }
+}

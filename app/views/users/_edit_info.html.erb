@@ -1,0 +1,102 @@
+<script>
+$(function(){
+  // 情報編集
+  var editInfo = 
+    `<div class="user user-edit" id="edit-info">
+      <div class="user-edit__header">
+        <h2><i class="fa fa-thumb-tack" aria-hidden="true"></i> 登録情報の編集</h2>
+        <p class="user-edit-remove btn-hover">&times;</p>
+        <p>登録されている情報の編集を行ってください。すでに、登録されているニックネームやE-mailはご利用できません。</p>
+      </div>
+      <div class="user-form">
+        <%= form_with(model:@user, url: user_update_path) do |f| %>
+          <div class="user-form__box">
+            <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
+            <%= f.text_field:nickname, placeholder: "ニックネーム" %>
+          </div>
+          <div class="user-form__box">
+            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+            <%= f.email_field:email, placeholder: "E-mail" %>
+          </div>
+          <div class="user-form__submit-box">
+            <%= f.submit "登録", class:"wide-submit-btn blue-btn btn-hover" %>
+          </div>
+        <% end %>
+      </div>
+    </div>`
+  
+  // パスワードの編集
+  var editPass = 
+    `<div class="user user-edit" id="edit-pass">
+      <div class="user-edit__header">
+        <h2><i class="fa fa-thumb-tack" aria-hidden="true"></i> パスワードの編集</h2>
+        <p class="user-edit-remove btn-hover">&times;</p>
+        <p>現在のパスワード、新しいパスワードを入力してください。</p>
+      </div>
+      <div class="user-form">
+        <%= form_with(model:@user, url: user_update_pass_path) do |f| %>
+          <div class="user-form__box">
+            <p><i class="fa fa-unlock-alt" aria-hidden="true"></i></p>
+            <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワード" %>
+          </div>
+          <div class="user-form__box">
+            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "新しいパスワード（6文字以上）" %>
+          </div>
+          <div class="user-form__box">
+            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "新しいパスワード（確認）" %>
+          </div>
+          <div class="user-form__submit-box">
+            <%= f.submit "変更する", class: "wide-submit-btn btn-hover blue-btn" %>
+          </div>
+        <% end %>
+      </div>
+      
+    </div>`
+  
+  const removeAll = {
+    editBox(){
+      $(function(){
+        $(".user-edit-remove").on("click", function(){
+          $.when(
+            $("#display").css("opacity", 0)
+          ).done(function(){
+            $("#display").css("display", "none")
+            $(".user-edit").remove();
+          });
+        });
+      });
+    }
+  }
+  
+
+  $("#edit-info").on("click", function(){
+    $.when(
+      $("#display").css("display", "")
+    ).done(function(){
+      $("#display").css("opacity", .8);
+      $(".user-edit__info").append(editInfo);
+    });
+    
+    removeAll.editBox();
+  });
+  
+  $("#edit-pass").on("click", function(){
+    $.when(
+      $("#display").css("display", "")
+    ).done(function(){
+      $("#display").css("opacity", .8);
+      $(".user-edit__info").append(editPass);
+    });
+    
+    removeAll.editBox();
+  });
+
+
+  
+});  
+  
+  
+    
+</script>

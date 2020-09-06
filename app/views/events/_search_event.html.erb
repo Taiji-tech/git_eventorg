@@ -1,0 +1,27 @@
+<div class="top-search box-wrap">
+  <div class="top-search__header">
+    <p>イベントを探す</p>
+  </div>
+  
+  <div class="top-search__wrap">
+  <%= form_with(url: root_path, method: :get, data: {remote: false}) do |f| %>
+  <div class="top-search__box">
+    <p><i class="fa fa-calendar" aria-hidden="true"></i> 日付から探す</p>
+    <div class="top-search__form-box">
+      <%= f.date_field:date, value: params[:date] %>
+    </div>
+  </div>
+  <div class="top-search__box">
+    <p><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費から探す</p>
+    <div class="top-search__price-box">
+      <%= f.number_field:min, value: params[:min], placeholder: "min" %>
+      <p>～</p>
+      <%= f.number_field:max, value: params[:max], placeholder: "max" %>
+    </div>
+  </div>
+  <div class="top-search__submit-box">
+    <%= f.submit "検索", class:"submit-btn btn-hover pink-btn" %>
+  </div>
+  <% end %>
+  </div>
+</div>

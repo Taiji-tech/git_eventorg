@@ -1,0 +1,52 @@
+<%= render "shared/flash" %>
+<div class="container">
+<div class="row">
+  <div class="col-12 col-sm-3">
+    <%= render "shared/sidebar_organizer" %>
+  </div>
+  <div class="col-12 col-sm-9 content">
+    <div class="page-title">
+        <h1>イベント主催者向け口座情報確認</h1>
+    </div>
+    <% if @tenant.present? %>
+    <div class="pay-form__notice">
+      <p>イベントにより売り上げが発生した場合、手数料10%を差し引いた売り上げが、以下登録されている口座へ振り込まれます。</p>
+    </div>
+    <div class="payment">
+      <div class="payment-box">
+        <table>
+          <tr>
+            <th>銀行コード</th>
+            <td><%= @data["bank_code"] %></td>
+          </tr>
+          <tr>
+            <th>支店コード</th>
+            <td><%= @data["bank_branch_code"] %></td>
+          </tr>
+          <tr>
+            <th>預金種別</th>
+            <td><%= @data["bank_account_type"] %></td>
+          </tr>
+          <tr>
+            <th>口座番号</th>
+            <td><%= @data["bank_account_number"] %></td>
+          </tr>
+          <tr>
+            <th>口座名義</th>
+            <td><%= @data["bank_account_holder_name"] %></td>
+          </tr>
+        </table>
+        <div class="payment-box__link">
+          <%= link_to "振込口座を変更する", user_pays_hostedit_path, class: "submit-btn btn-hover blue-btn" %>
+        </div>
+      </div>
+      <% else %>
+      <div class="pay-form__notice">
+        <p>銀行口座が登録されていません。<%= link_to "振込口座登録", user_pays_hostnew_path %>へお進みください。</p>
+      </div>
+    <% end %>
+  </div>
+        
+    </div>
+</div>
+</div>

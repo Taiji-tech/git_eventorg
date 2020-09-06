@@ -1,0 +1,7 @@
+$(function(){
+  <% if @reserve.present? %>
+  $("#error-notice").html("<%= j(render 'shared/error_notice', { model: @reserve }) %>");
+  <% elsif @user.present? %>
+  $("#error-notice").html("<%= j(render 'shared/error_notice', { model: @user }) %>");
+  <% end %>
+});

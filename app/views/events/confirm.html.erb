@@ -1,0 +1,85 @@
+<% provide(:title, '') %>
+<% provide(:content, '') %>
+
+<%= render "shared/flash" %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-3">
+      <%= render "shared/sidebar_organizer" %>
+    </div>
+    
+    <div class="col-12 col-sm-9 content">
+      <div class="page-title">
+        <h1>登録したイベントの確認</h1>
+      </div>  
+      
+      <div class='event'>
+        <% @events.each do |event| %>
+        <div class="event-box box-wrap">
+          <div class="event-box__btn">
+            <p><%= link_to "編集する", "/events/#{event.id}/edit", method: :get, class:"grey-btn" %></p>
+            <p><%= link_to "削除する", "/events/#{event.id}", method: :delete, class:"grey-btn" %></p>
+          </div>
+          <div class='event-box__detail'>
+            <h2><%= event.title %></h2>
+            <table>
+              <tr>
+                <th><i class="fa fa-group" aria-hidden="true"></i> 参加者</th>
+                <td><span class="event-box__reserve"><%= Reserve.where(event_id: event.id).size %>人</span> <%= link_to "予約者を確認する", event_path(event.id) %></td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</th>
+                <td><%= event.start_date.strftime("%-m月%-d日(%a)") %>　<%= event.start_time.strftime("%H:%M") %>～</td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>
+                <td><%= event.price.to_s(:delimited) %> 円</td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-user-o" aria-hidden="true"></i> 定員</th>
+                <td><%= event.capacity %> 名</td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-desktop" aria-hidden="true"></i> 開催URL</th>
+                <td><%= event.venue %></td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</th>
+                <td><%= event.content %></td>
+              </tr>
+            </table>
+          </div>
+          <div class="event-box__img">
+            <% event.imgs.each do |img| %>
+              <%= image_tag img, class:"event-img" %>
+            <% end %>
+            <% if event.imgs.size == 0 %>
+              <%= image_tag "NoImage.png", class:"event-img" %>
+              <%= image_tag "NoImage.png", class:"event-img" %>
+              <%= image_tag "NoImage.png", class:"event-img" %>
+            <% elsif event.imgs.size == 1 %>
+              <%= image_tag "NoImage.png", class:"event-img" %>
+              <%= image_tag "NoImage.png", class:"event-img" %>
+            <% elsif event.imgs.size == 2 %>
+              <%= image_tag "NoImage.png", class:"event-img" %>
+            <% end %>
+              
+          </div>
+          </div>
+          <% end %>
+      </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+$(function(){
+  $(".event-box__img-confirm").slick({
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  });
+});
+</script>
+

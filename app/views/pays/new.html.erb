@@ -1,0 +1,46 @@
+
+<%= render "shared/flash" %>
+<div class="container">
+<div class="row">
+  <div class="col-12 col-sm-3">
+    <%= render "shared/sidebar_organizer" %>
+  </div>
+  
+  <div class="col-12 col-sm-9 content">
+    <div class="page-title">
+      <h1>お支払いカード登録</h1>
+    </div>
+    <% if @card.present? %>
+    <div class="pay-form">
+      <div class="pay-form__notice">
+        <p>カード情報はすでに登録されています。登録されているカードの変更を行う場合は、「<%= link_to "カード確認・変更", user_pays_confirm_card_path %> 」よりお進みください。</p>
+      </div>
+    </div>
+    <% else %>
+    <div class="pay-form">
+      <div class="pay-form__notice">
+        <p>カードを登録することで、イベント予約と同時にお支払いが完了します。</p>
+        <p>「カード情報を入力する」ボタンが表示されない場合は、更新ボタンを押してください。</p>
+      </div>
+      <div class="pay-form__box-card box-wrap">
+        <p>カード情報を入力し、登録してください。</p>
+        <%= form_with(url: pays_path, data: {remote: false}) do |f| %>
+        <script
+          type="text/javascript"
+          src="https://checkout.pay.jp/"
+          class="payjp-button"
+          data-key="<%= ENV['PAYJP_KEY'] %>"
+          data-submit-text="トークンを作成する"
+          data-partial="true">
+        </script>
+
+        <div class="pay-form__submit-box">
+          <%= f.submit "登録する", class:"submit-btn blue-btn btn-hover"  %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+</div>

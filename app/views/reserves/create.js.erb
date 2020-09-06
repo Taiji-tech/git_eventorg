@@ -1,0 +1,15 @@
+$(function(){
+  var resistered = `
+    <div>
+      <div>
+        <p>予約が完了しました。予約完了メールに記載のリンクより決済を行ってください。
+            決済完了後に、参加登録が完了します。</p>
+      </div>
+    </div>`
+  
+  $(".event-attend__top h3").text("イベント予約完了");
+  $(".event-attend__select").remove();
+  $(".event-attend__form").remove();
+  $(".event-attend__submit-box").remove();
+  $(".event-attend-form").append(resistered);
+});
