@@ -9,6 +9,5 @@ class User < ApplicationRecord
   
   # association
   has_many :events
-  has_many :pays
   has_one :tenant
 end

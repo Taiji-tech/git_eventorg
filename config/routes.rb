@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     post "/create_with_resistration", to: "reserves#createWithResistration" 
   end
   resources :reserves, only: [:destroy]
+  get "reserves/:id/cancel",    to: "reserves#cancel"
   get "user/reserved",          to: "reserves#reserved"
   
   

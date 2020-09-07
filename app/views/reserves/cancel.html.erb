@@ -1,12 +1,12 @@
-<%= render "shared/flash" %>
 <div class="container">
 <div class="row">
   <div class="payment">
     <div class="page-title">
-      <h1>お支払い</h1>
+      <h1>キャンセル</h1>
     </div>
     <div class="payment-box">
-      <p>お支払いいただくことで、参加登録が完了します。表示された情報をご確認いただき、お支払いをお願いいたします。</p>
+      <p>下記記載のイベントをキャンセルしますか？キャンセルする場合は、「キャンセルする」を押してください。お支払いいただいている場合は返金となります。</p>
+      <p>すでに開催日時を過ぎたイベントのキャンセルはできません。</p>
       <% unless @reserve.present? %>
       <p class="wide-submit-btn pink-btn">イベント情報の取得が正常にできておりません。誠に恐れ入りますが、再度ご予約いただくか運営までご連絡ください。</p>
       <% end %>
@@ -53,20 +53,10 @@
       </table>
     </div>
     <div class="payment-box">
-      <h2><i class="fa fa-credit-card" aria-hidden="true"></i> カード情報の登録</h2>
-      <p>有効なカード情報の入力を行ってください。</p>
-      <%= form_with(url: pays_create_withoutresistration_path, data: {remote: false}) do |f| %>
-      <%= f.hidden_field:reserve_id, value: @reserve.id  if @reserve.present? %>
-      <script
-        type="text/javascript"
-        src="https://checkout.pay.jp/"
-        class="payjp-button"
-        data-key="<%= ENV["PAYJP_KEY"] %>"
-        data-submit-text="トークンを作成する"
-        data-partial="true">
-      </script>
+      <%= form_with(url: reserf_path, method: :delete, data: {remote: false}) do |f| %>
+      <%= f.hidden_field:reserve_id if @reserve.present? %>
       <div class="payment-box__submit">
-        <%= f.submit "支払いする", class: "blue-btn wide-submit-btn btn-hover" %>
+        <%= f.submit "キャンセルする", class: "blue-btn wide-submit-btn btn-hover" %>
       </div>
       <% end %>
     </div>

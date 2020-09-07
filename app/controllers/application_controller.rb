@@ -1,10 +1,19 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
- 
+  
+   
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
   end
   
+  # ログイン後のページ
+  def after_sign_in_path_for(resource) 
+    if session[:privious_url] != root_path
+      session[:privious_url]
+    else
+      user_profile_path
+    end
+  end
   
     private 
       def user_info 
@@ -23,5 +32,13 @@ class ApplicationController < ActionController::Base
         elsif func == "false"
           return false
         end
+      end
+      
+      # url情報の保管
+      def store_location
+        session[:privious_url] = request.fullpath if request.path != new_user_session_path &&
+                                                     request.path != new_user_registration_path &&
+                                                     request.fullpath != '/users' && # 入力エラー後
+                                                     !request.xhr?
       end
 end

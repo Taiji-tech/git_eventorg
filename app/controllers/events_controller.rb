@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
     before_action :user_info, only: [:new, :create, :confirm] 
     before_action :tenant_resistration, only: [:new, :create]
+    after_action :store_location
     # before_action :move_to_index, except: [:index,:show ]
     # indexアクション以外が実行される前にindexが実行される。
   
