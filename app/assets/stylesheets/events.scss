@@ -249,7 +249,24 @@
     padding-right: 1rem;
   }
 }
-
+.event-box__participate-info{
+  width: 100%;
+  padding: 1rem;
+  
+  p{
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  .event-box__participate-label{
+    margin: 0 0 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    font-weight: bold;
+  }
+  .event-box__participate-btn{
+    padding: 1rem 0;
+  }
+}
 
 // new
 // イベント新規登録

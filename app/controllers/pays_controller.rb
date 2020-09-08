@@ -26,8 +26,8 @@ class PaysController < ApplicationController
     if params["payjp-token"].present?
       pay_action_createWithoutResistration
     else 
-      flash.now[:notice] = "お支払い情報が入力されていません"
-      render :newWithoutResistration
+      flash[:notice] = "お支払い情報が入力されていません"
+      redirect_to pays_new_withoutresistration_path(reserve_id: 6)
     end
   end
   
@@ -134,6 +134,7 @@ class PaysController < ApplicationController
         payjp_create_tenant
         @tenant = Tenant.new(user_id: current_user.id, tenant_id: @tenant_id)
         @tenant.save
+        flash[:notice] = "銀行口座登録が完了しました！"  
         redirect_to user_pays_hostinfo_path
       rescue 
         flash[:notice] = "入力した情報に不備があります。再度入力してください"    
@@ -162,9 +163,10 @@ class PaysController < ApplicationController
       begin
         # payjp通信
         payjp_update_tenant
+        flash[:notice] = "口座情報を更新しました！" 
         redirect_to user_pays_hostinfo_path
       rescue 
-        flash[:notice] = "入力���た情報に不備があります。再度入力してください"    
+        flash[:notice] = "入力された情報に不備があります。再度入力してください"    
         render :hostNew
       end
     else
@@ -201,21 +203,20 @@ class PaysController < ApplicationController
         def pay_action_createWithoutResistration
           begin 
             Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
-            # チャージ→cardデータベース内セーブ→render
             @customer = Payjp::Customer.create(
               card: params['payjp-token'],
-              email: @reserve.email,
+              email: @reserve.email
             )
             card_db_resister
-            
             @charge = Payjp::Charge.create(
-              amount: @event.price,
+              amount: @event.price.to_i,
               customer: @customer.id,
               currency: 'jpy',
-              tenant: @tenant.tenanat_id,
-              capture: true
+              tenant: @tenant.tenant_id
             )
             pay_db_resister
+            @reserve.update(payed: true)
+            PayMailer.mail_pay_complite(@reserve).deliver_now
             render :createWithoutResistration
           
           rescue Payjp::CardError => e

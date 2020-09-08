@@ -17,73 +17,78 @@
         <% @event = reserve.event %>
         <div class="event-box__info box-wrap">
           <div class="event-box__payed">
+            <% if to_bool(@future) %>
+            <p class="pink-btn">これから参加</p>
+            <% elsif to_bool(@past) %>
+            <p class="blue-btn">すでに終了</p>
+            <% end %>
             <% if reserve.payed %>
             <p class="blue-btn">支払い済み</p>
             <% else %>
             <p class="pink-btn">未払い</p><br>
-            <%= link_to "お支払いへ進む" %>
+            <%= link_to "お支払いへ進む", pays_new_withoutresistration_path(reserve_id: reserve.id), data: {"turbolinks" => false} %>
             <% end %>
           </div>
           <div class="event-box__info-title">
             <h1><%= @event.title %></h1>
           </div>
           <div class="event-box__detail">
-          <table>
-            <tr>
-              <th><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</th>
-              <td><%= @event.start_date.strftime("%-m月%-d日(%a)") %>　<%= @event.start_time.strftime("%H:%M") %>～</td>
-            </tr>
-            <tr>
-              <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>
-              <td><%= @event.price.to_s(:delimited) %> 円</td>
-            </tr>
-            <tr>
-              <th><i class="fa fa-user-o" aria-hidden="true"></i> 定員</th>
-              <td><%= @event.capacity %> 名</td>
-            </tr>
-            <tr>
-              <th><i class="fa fa-user-secret" aria-hidden="true"></i> 主催者</th>
-              <td><%= @event.user.nickname %></td>
-            </tr>
-            <tr>
-              <th><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</th>
-              <td><%= @event.content %></td>
-            </tr>
-          </table>
-          <div class="event-box__img">
-            <% @event.imgs.each do |img| %>
-              <%= image_tag img, class:"event-img wide-img-hover" %>
-            <% end %>
-            <% if @event.imgs.size == 0 %>
-              <%= image_tag "NoImage.png", class:"event-img" %>
-              <%= image_tag "NoImage.png", class:"event-img" %>
-              <%= image_tag "NoImage.png", class:"event-img" %>
-            <% elsif @event.imgs.size == 1 %>
-              <%= image_tag "NoImage.png", class:"event-img" %>
-              <%= image_tag "NoImage.png", class:"event-img" %>
-            <% elsif @event.imgs.size == 2 %>
-              <%= image_tag "NoImage.png", class:"event-img" %>
-            <% end %>
-          </div>
-          <% if reserve.payed %>
-          <% end %>
-          <div class="">
-            <p class="pink-btn">イベント参加</p>
-            <p>開催時間になりましたら、以下URLよりイベントへご参加ください。</p>
             <table>
               <tr>
-                <th>Zoom ID</th>
-                <td><%= @event.venue %></td>
+                <th><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</th>
+                <td><%= @event.start_date.strftime("%-m月%-d日(%a)") %>　<%= @event.start_time.strftime("%H:%M") %>～</td>
               </tr>
               <tr>
-                <th>Zoom Password</th>
-                <td><%= @event.venue_pass %></td>
+                <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>
+                <td><%= @event.price.to_s(:delimited) %> 円</td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-user-o" aria-hidden="true"></i> 定員</th>
+                <td><%= @event.capacity %> 名</td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-user-secret" aria-hidden="true"></i> 主催者</th>
+                <td><%= @event.user.nickname %></td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</th>
+                <td><%= @event.content %></td>
               </tr>
             </table>
-          </div>
-          <div class="">
-            <p><%= button_to "キャンセルする", reserf_path(reserve.id), method: :delete, class:"submit-btn blue-btn btn-hover" %></p>
-          </div>
+            <div class="event-box__img">
+              <% @event.imgs.each do |img| %>
+                <%= image_tag img, class:"event-img wide-img-hover" %>
+              <% end %>
+              <% if @event.imgs.size == 0 %>
+                <%= image_tag "NoImage.png", class:"event-img" %>
+                <%= image_tag "NoImage.png", class:"event-img" %>
+                <%= image_tag "NoImage.png", class:"event-img" %>
+              <% elsif @event.imgs.size == 1 %>
+                <%= image_tag "NoImage.png", class:"event-img" %>
+                <%= image_tag "NoImage.png", class:"event-img" %>
+              <% elsif @event.imgs.size == 2 %>
+                <%= image_tag "NoImage.png", class:"event-img" %>
+              <% end %>
+            </div>
+            <% if reserve.payed %>
+            <div class="event-box__participate-info">
+              <p class="event-box__participate-label dark-grey-btn">イベント参加</p>
+              <p>開催時間になりましたら、以下URLよりイベントへご参加ください。</p>
+              <table>
+                <tr>
+                  <th>Zoom ID</th>
+                  <td><%= @event.venue %></td>
+                </tr>
+                <tr>
+                  <th>Zoom Password</th>
+                  <td><%= @event.venue_pass %></td>
+                </tr>
+              </table>
+              <div class="event-box__participate-btn">
+                <p><%= button_to "キャンセルする", reserf_path(reserve.id), method: :delete, class:"submit-btn blue-btn btn-hover" %></p>
+              </div>
+            </div>
+            <% end %>
           </div>
         </div>
         <% end %>

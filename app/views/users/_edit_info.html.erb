@@ -33,6 +33,7 @@ $(function(){
         <p class="user-edit-remove btn-hover">&times;</p>
         <p>現在のパスワード、新しいパスワードを入力してください。</p>
       </div>
+      <div id="error-notice"></div>
       <div class="user-form">
         <%= form_with(model:@user, url: user_update_pass_path) do |f| %>
           <div class="user-form__box">

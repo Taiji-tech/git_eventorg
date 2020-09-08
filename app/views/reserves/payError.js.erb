@@ -1,0 +1,12 @@
+<% if flash[:notice] %>
+$(function(){
+var passError = 
+    `<div class="pink-btn error-notice">
+      <ul>
+        <li><%= flash[:notice] %></li>
+      </ul>
+    </div>`
+  
+  $("#error-notice").append(passError);
+});
+<% end %>

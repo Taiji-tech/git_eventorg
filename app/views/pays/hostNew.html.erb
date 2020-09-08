@@ -11,12 +11,12 @@
     <div class="pay">
       <% if @tenant.present? %>
       <div class="pay-form__notice">
-        <p>口座情報は登録されています</p>
+        <p>口座情報は登録されています。登録した銀行口座は<%= link_to "口座情報確認", user_pays_hostinfo_path %>から確認してください。</p>
       </div>
       <% else %>
       <div class="pay-form">
         <div class="pay-form__notice">
-          <p>売り上げを入金するお振込口座を設定してください。</p>
+          <p>売り上げを入金する銀行口座を設定してください。</p>
         </div>
         <%= form_with(url: user_pays_host_path, data:{remote: false}) do |f| %>
           <div class="pay-form__box">

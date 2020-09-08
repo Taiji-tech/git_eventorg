@@ -1,29 +1,30 @@
 <%= @reserve.nickname %> 様
 
+
 下記イベントの予約が完了しました。
+
 イベント名：<%= @event.title %>
-開催日時　：<%= @event.start_date %>
+開催日時　：<%= @event.start_date.strftime("%-m月%-d日(%a)") %> <%= @event.start_time.strftime("%H:%M") %>
+参加費　　：<%= @event.price.to_s(:delimited) %> 円
 内容　　　：<%= @event.content %>
 
 
-まだ、参加登録は確定しておりません。
+まだ、参加登録は確定しておりません！
+お支払い完了後に、イベント参加用URLとパスワードをお送りします。
 下記リンクより、お支払いを行ってください。
 https://bf7b3a218bff4ad6ab998569f487a6c8.vfs.cloud9.ap-northeast-1.amazonaws.com/pays/new_withoutresistration/?reserve_id=<%= @reserve.id %>
 
-お支払いが完了後に、イベント参加を招待URLをお送りします。
-
-
 
 イベントをキャンセルする際はこちらからお願いいたします。
-＠キャンセルリンク
+https://bf7b3a218bff4ad6ab998569f487a6c8.vfs.cloud9.ap-northeast-1.amazonaws.com/reserves/<%= @reserve.id %>/cancel
 
 
 
-==========================
+==============================
 Realtime Social 運営
 
 お問い合わせはこちらまで
-htps://
-==========================
+https://www.realtimesocial.jp
+==============================
 
 

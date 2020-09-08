@@ -70,6 +70,7 @@ group :development, :test do
   # テスト
   gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails', '~> 4.10.0'
+  gem 'rails-controller-testing'
 end
 
 group :development do

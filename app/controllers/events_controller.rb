@@ -31,7 +31,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     if @event.save
-      flash.now[:notice] = "イベントの登録が完了しました！"
+      flash[:notice] = "イベントの登録が完了しました！"
       redirect_to events_confirm_path
     else
       render "inputError.js.erb"

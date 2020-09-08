@@ -118,6 +118,14 @@ class ReservesController < ApplicationController
         end
       end
       
+      # 支払い情報の管理
+      def pay_db_resister
+        @pay = Pay.new(host_id: @event.user_id, price: @event.price, 
+                       card_id: @card.id, reserve_id: @reserve.id, charge_id: @charge.id)
+        @pay.user_id = current_user.id if user_signed_in?
+        @pay.save
+      end
+      
       # アカウント持ちユーザーの支払いアクション
       def pay_action_has_account 
         @card = Card.find_by(user_id: current_user.id)
@@ -128,38 +136,38 @@ class ReservesController < ApplicationController
           # 支払い
           begin 
             Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
-            charge = Payjp::Charge.create(
-              :amount => @event.price,
-              :customer => @card.customer_id,
-              :currency => 'jpy',
-              :tenant => @tenant.tenant_id
+            @charge = Payjp::Charge.create(
+              amount: @event.price.to_i,
+              customer: @card.customer_id,
+              currency: 'jpy',
+              tenant: @tenant.tenant_id
             )
-            # 支払い完了メールの送信
+            pay_db_resister
             @reserve.update(payed: true)
-            ReserveMailer.mail_pay_complite(@reserve).deliver_now
             redirect_to user_profile_path
+            PayMailer.mail_pay_complite(@reserve).deliver_now
           
           rescue Payjp::CardError => e
-            flash.now[:notice] = 'カード情報の取得ができませんでした。'
-            render :new
+            flash[:notice] = '支払い時に必要なカード情報の取得ができませんでした。'
+            render "payError.js"
           rescue Payjp::InvalidRequestError => e
-            flash.now[:notice] = '不正なパラメータが入力されました。'
-            render :new
+            flash[:notice] = '支払い時に不正なパラメータが入力されました。'
+            render "payError.js"
           rescue Payjp::AuthenticationError => e
-            flash.now[:notice] = 'カード情報の取得ができませんでした。'
-            render :new
+            flash[:notice] = '支払い時にカード情報の取得ができませんでした。'
+            render "payError.js"
           rescue Payjp::APIConnectionError => e
-            flash.now[:notice] = '通信エラーが発生しました。もう一度登録をしてください。'
-            render :new
+            flash[:notice] = '支払い時に通信エラーが発生しました。'
+            render "payError.js"
           rescue Payjp::APIError => e
-            flash.now[:notice] = '通信エラーが発生しました。もう一度登録をしてください。'
-            render :new
+            flash[:notice] = '支払い時に通信エラーが発生しました。'
+            render "payError.js"
           rescue Payjp::PayjpError => e
-            flash.now[:notice] = 'カード情報の取得ができませんでした。'
-            render :new
+            flash[:notice] = 'カード情報の取得ができませんでした。'
+            render "payError.js"
           rescue StandardError
-            flash.now[:notice] = 'エラーが発生しました。もう一度登録してください。'
-            render :new
+            flash[:notice] = 'エラーが発生しました。'
+            render "payError.js"
           end
           
         # 支払い情報を持っていない場合  

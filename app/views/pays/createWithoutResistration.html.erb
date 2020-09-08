@@ -1,0 +1,59 @@
+<%= render "shared/flash" %>
+<div class="container">
+<div class="row">
+  <div class="payment">
+    <div class="page-title">
+      <h1>お支払い完了</h1>
+    </div>
+    <div class="payment-box">
+      <p class="wide-submit-btn pink-btn">お支払いが完了しました！</p>
+    </div>
+    <div class="payment-box">
+      <p>イベント参加用URLやパスワードはご登録いただいたメールアドレスへ送信されています。</p>    
+    </div>
+    <div class="payment-box">
+      <h2><i class="fa fa-user" aria-hidden="true"></i> お客様の情報</h2>
+      <table>
+        <tr>
+          <th>ニックネーム</th>
+          <td><%= @reserve.nickname if @reserve.present? %></td>
+        </tr>
+        <tr>
+          <th>E-mail</th>
+          <% if @reserve.present? %>
+          <% @size = @reserve.email.size.to_i - 2 %>
+          <td><%= @reserve.email[0, 2] %><%= "*"*@size %></td>
+          <% end %>
+        </tr>
+      </table>  
+    </div>
+    <div class="payment-box">
+      <h2><i class="fa fa-bookmark-o" aria-hidden="true"></i> 予約したイベント</h2>
+      <table>
+        <tr>
+          <th>イベント名</th>
+          <td><%= @event.title if @event.present? %></td>
+        </tr>
+        <tr>
+          <th>開催日時</th>
+          <td><%= @event.start_date.strftime("%Y年%m月%d日") if @event.present? %> <%= @event.start_time.strftime("%H:%m～") if @event.present? %></td>
+        </tr>
+        <tr>
+          <th>費用</th>
+          <td><%= @event.price.to_s(:delimited) if @event.present? %> 円</td>
+        </tr>
+        <tr>
+          <th>定員</th>
+          <td><%= @event.capacity if @event.present? %> 名</td>
+        </tr>
+        <tr>
+          <th>主催者</th>
+          <td><%= User.find(@event.user_id).nickname if @event.present? %></td>
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+  
+</div>  
+</div>

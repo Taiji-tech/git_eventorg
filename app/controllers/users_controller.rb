@@ -41,8 +41,7 @@ class UsersController < ApplicationController
         render :edit
       end
     else 
-      flash[:notice] = "編集に失敗しました。入力いただいた情報をご確認ください。"
-      render :edit
+      render "inputError.js"
     end
   end
   
