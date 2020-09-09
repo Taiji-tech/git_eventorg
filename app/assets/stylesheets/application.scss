@@ -113,3 +113,14 @@
     @extend .is-invalid!optional;
   }
 }
+
+
+// data confirm時のmodal デザイン
+.modal-header{
+  h5{
+    font-weight: bold;
+  }
+}
+.modal-footer{
+  border: none;
+}

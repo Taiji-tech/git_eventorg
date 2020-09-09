@@ -357,6 +357,14 @@
 
 
 // confirm
+.event-box__notice{
+  padding: 1rem 0;
+  
+  p{
+    margin: 0;
+    font-size: 1.8rem;
+  }
+}
 .event-box__reserve{
   font-weight: bold;
   color: #fff;

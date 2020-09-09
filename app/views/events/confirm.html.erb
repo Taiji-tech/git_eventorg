@@ -12,7 +12,11 @@
       <div class="page-title">
         <h1>登録したイベントの確認</h1>
       </div>  
-      
+      <% unless @events.present? %>
+      <div class="event-box__notice">
+        <p>主催するイベントはまだ登録されていません。イベントを主催する場合は<%= link_to "イベントの主催", new_event_path %>から登録してください。</p>
+      </div>
+      <% end %>
       <div class='event'>
         <% @events.each do |event| %>
         <div class="event-box box-wrap">
@@ -51,7 +55,7 @@
           </div>
           <div class="event-box__img">
             <% event.imgs.each do |img| %>
-              <%= image_tag img, class:"event-img" %>
+              <%= image_tag img, class:"event-img event-box__img-confirm" %>
             <% end %>
             <% if event.imgs.size == 0 %>
               <%= image_tag "NoImage.png", class:"event-img" %>
@@ -67,6 +71,7 @@
           </div>
           </div>
           <% end %>
+          <%= paginate(@events) %>
       </div>
     </div>
 </div>

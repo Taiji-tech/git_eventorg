@@ -18,7 +18,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
-
+// = require data-confirm-modal
 
 
 $(document).on('turbolinks:load', function(){

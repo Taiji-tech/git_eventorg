@@ -1,4 +1,7 @@
 class PaysController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :confirmCard, :editCard, :updateCard, :profit, 
+                                            :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
+  
   
   # http通信実装のためのライブラリ
   require 'net/https'

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Reserves", type: :request do
-  describe "GET /reserves" do
-    it "works! (now write some real specs)" do
-      get reserves_path
-      expect(response).to have_http_status(200)
+  describe "cannot access without login" do
+    it "user_reserved_path" do
+      get user_reserved_path
+      expect(response).to have_http_status(302)
     end
   end
 end

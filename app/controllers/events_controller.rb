@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :confirm]
     before_action :user_info, only: [:new, :create, :confirm] 
     before_action :tenant_resistration, only: [:new, :create]
     after_action :store_location
@@ -56,7 +57,7 @@ class EventsController < ApplicationController
   
   
   def confirm
-    @events = Event.where(user_id: @user.id)
+    @events = Event.where(user_id: @user.id).page(params[:page]).per(5)
   end
 
   # イベント詳細表示
@@ -68,6 +69,7 @@ class EventsController < ApplicationController
     @user = User.new
   end
   
+  # イベントの削除
   def destroy
     event = Event.find(params[:id])
     if event.user_id == current_user.id

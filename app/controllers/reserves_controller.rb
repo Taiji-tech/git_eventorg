@@ -1,6 +1,7 @@
 class ReservesController < ApplicationController
   require 'payjp'
   before_action :authenticate_user!, only: [:reserved]
+  before_action :only_one_reserve, only: [:create, :createWithResistration]
   before_action :same_user, only: [:create, :createWithResistration]
   after_action :store_location
   
@@ -58,7 +59,6 @@ class ReservesController < ApplicationController
       render :reserved
     end
   end
-  
   
   # ユーザー登録も行う予約
   def createWithResistration
@@ -183,5 +183,24 @@ class ReservesController < ApplicationController
         # 予約完了メールの送信
         # 支払いリンクの送信
         ReserveMailer.mail_reserve_complite(@reserve).deliver_now
+      end
+      
+      # イベント予約重複不可
+      def only_one_reserve 
+        if user_signed_in?
+          @already_reserved = Reserve.where(email: current_user.email, event_id: params[:event_id])
+          already_reserved_action
+        else
+          @already_reserved = Reserve.where(email: params[:email], event_id: params[:event_id])
+          already_reserved_action
+        end
+      end
+      
+      # 予約済みアクション
+      def already_reserved_action
+        if @already_reserved.present?
+          flash[:notice] = "すでにこのイベントは予約済みです。"
+          redirect_to session[:privious_url] || root_path
+        end
       end
 end

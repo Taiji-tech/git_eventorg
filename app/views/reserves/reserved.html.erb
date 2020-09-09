@@ -57,7 +57,7 @@
             </table>
             <div class="event-box__img">
               <% @event.imgs.each do |img| %>
-                <%= image_tag img, class:"event-img wide-img-hover" %>
+                <%= image_tag img, class:"event-img wide-img-hover event-box__img-confirm" %>
               <% end %>
               <% if @event.imgs.size == 0 %>
                 <%= image_tag "NoImage.png", class:"event-img" %>
@@ -73,11 +73,11 @@
             <% if reserve.payed %>
             <div class="event-box__participate-info">
               <p class="event-box__participate-label dark-grey-btn">イベント参加</p>
-              <p>開催時間になりましたら、以下URLよりイベントへご参加ください。</p>
+              <p>開催時間になったら、以下URLよりイベントへご参加ください。</p>
               <table>
                 <tr>
                   <th>Zoom ID</th>
-                  <td><%= @event.venue %></td>
+                  <td><a href="<%= @event.venue %>" target="_blank" rel="noopener noreferrer"><%= @event.venue %></a></td>
                 </tr>
                 <tr>
                   <th>Zoom Password</th>
@@ -85,7 +85,7 @@
                 </tr>
               </table>
               <div class="event-box__participate-btn">
-                <p><%= button_to "キャンセルする", reserf_path(reserve.id), method: :delete, class:"submit-btn blue-btn btn-hover" %></p>
+                <p><%= button_to "キャンセルする", reserf_path(reserve.id), method: :delete, data: {confirm: "本当にキャンセルしてよろしいですか？", cancel: "やめる", commit: "確定"}, title: "予約のキャンセル", class:"submit-btn blue-btn btn-hover" %></p>
               </div>
             </div>
             <% end %>
@@ -98,3 +98,5 @@
     </div>
   </div>
 </div>
+
+
