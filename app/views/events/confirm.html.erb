@@ -33,7 +33,7 @@
               </tr>
               <tr>
                 <th><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</th>
-                <td><%= event.start_date.strftime("%-m月%-d日(%a)") %>　<%= event.start_time.strftime("%H:%M") %>～</td>
+                <td><%= event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(event.start_date.strftime("%u")) %> 　<%= event.start_time.strftime("%H:%M") %>～</td>
               </tr>
               <tr>
                 <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>

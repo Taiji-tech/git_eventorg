@@ -94,7 +94,7 @@ class ReservesController < ApplicationController
     if to_bool(@future) && to_bool(@past)
       @reserves = @reserves_current_user.page(params[:page]).per(5)
     elsif to_bool(@future)
-      @reserves = @reserves_current_user.where(events: {start_date: Time.zone.now .. Float::INFINITY}).page(params[:page]).per(5)
+      @reserves = @reserves_current_user.where(events: {start_date: Time.zone.now..Float::INFINITY}).page(params[:page]).per(5)
     elsif to_bool(@past)
       @reserves = @reserves_current_user.where(events: {start_date: "1900-01-01 00:00:00 +0900" .. Time.zone.now}).page(params[:page]).per(5)
     else  

@@ -7,6 +7,11 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+# factory_bot読み込み用
+require 'support/factory_bot'
+# devise 読み込み用
+require 'devise'
+require File.expand_path("spec/support/controller_macros.rb")
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -63,7 +68,7 @@ RSpec.configure do |config|
   
   
   # # for factory bot
-  # config.include FactoryBot::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # # for devise
   # config.include Devise::Test::ControllerHelpers, type: :controller
@@ -72,4 +77,8 @@ RSpec.configure do |config|
 
   # for capybara
   config.include Capybara::DSL
+  
+  # for devise
+  config.include Devise::TestHelpers, type: :controller
+  config.include ControllerMacros, type: :controller
 end

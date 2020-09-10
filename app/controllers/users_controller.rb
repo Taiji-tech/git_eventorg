@@ -19,12 +19,15 @@ class UsersController < ApplicationController
   # ユーザー情報の更新
   def update
     @user = User.find(current_user.id)
-    if @user.update(user_params)
-      flash[:notice] = "ユーザー情報の編集が完了しました！"
-      redirect_to user_edit_path
-    else
-      flash[:notice] = "編集に失敗しました。入力いただいた情報をご確認ください。"
-      render :edit
+    if @user.valid_password?(params[:user][:current_password])
+      if @user.update(user_params)
+        flash[:notice] = "ユーザー情報の編集が完了しました！"
+        redirect_to user_edit_path
+      else
+        render "shared/errorDetail"
+      end
+    else 
+      render "inputError.js"
     end
   end
   
@@ -37,8 +40,7 @@ class UsersController < ApplicationController
         flash[:notice] = "ユーザー情報の編集が完了しました！"
         redirect_to user_edit_path
       else
-        flash[:notice] = "編集に失敗しました。入力いただいた情報をご確認ください。"
-        render :edit
+        render "shared/errorDetail"
       end
     else 
       render "inputError.js"

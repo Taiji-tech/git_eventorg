@@ -39,4 +39,10 @@ module ApplicationHelper
     return @start_datetime
   end
   
+  # 日本語表記の曜日を返す
+  def day_of_the_week(number)
+    weeks = ["月","火","水","木","金","土","日"]
+    @day_of_the_week = "（" + weeks[number.to_i - 1] + "）"
+    return @day_of_the_week
+  end
 end

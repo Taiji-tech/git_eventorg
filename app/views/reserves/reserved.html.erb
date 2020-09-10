@@ -18,9 +18,9 @@
         <% @deadline = to_date_and_time(@event.start_date, @event.start_time) %>
         <div class="event-box__info box-wrap">
           <div class="event-box__payed">
-            <% if to_bool(@future) %>
+            <% if @deadline >= Time.zone.now %>
             <p class="pink-btn">これから参加</p>
-            <% elsif to_bool(@past) %>
+            <% else %>
             <p class="blue-btn">すでに終了</p>
             <% end %>
             <% if reserve.payed %>
@@ -37,7 +37,7 @@
             <table>
               <tr>
                 <th><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</th>
-                <td><%= @event.start_date.strftime("%-m月%-d日(%a)") %>　<%= @event.start_time.strftime("%H:%M") %>～</td>
+                <td><%= @event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(@event.start_date.strftime("%u")) %> 　<%= @event.start_time.strftime("%H:%M") %>～</td>
               </tr>
               <tr>
                 <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>

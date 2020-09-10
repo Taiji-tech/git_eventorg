@@ -15,7 +15,7 @@
     }
   }
   .header-logo{
-    width: 80%;
+    width: 70%;
     padding: 1rem;
     margin: auto 0;
     
@@ -37,7 +37,7 @@
     }
   }
   .header-link{
-    width: 20%;
+    width: 30%;
     margin: auto;
     
     ul{
@@ -74,6 +74,7 @@
     }
     .ham{
       display: block;
+      margin: 0 0 0 auto;
     }
     .ham:hover{
       border: solid .1rem #fff;
@@ -86,6 +87,20 @@
     }
     .ham-bot{
       top: 3rem;
+    }
+    .not-login{
+      padding: 0;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .not-login-signin:before{
+      font-family: FontAwesome;
+      content: '\f090';
+    }
+    .not-login-signup:before{
+      font-family: FontAwesome;
+      content: '\f007';
     }
   }
   .header-menu{

@@ -33,8 +33,16 @@
         </div>
         <div class="event-top__detail">
           <h2><%= event.title %></h2>
-          <p><span><i class="fa fa-clock-o" aria-hidden="true"></i> 開催日時</span><%= event.start_date.strftime("%-m月%-d日(%a)") %>　<%= event.start_time.strftime("%H:%M") %>～</p>
-          <p><span><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</span><%= event.price.to_s(:delimited) %> 円</p>
+          <table>
+            <tr>
+              <th><i class="fa fa-clock-o" aria-hidden="true"></i> 開催日時</th>
+              <td><%= event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(event.start_date.strftime("%u")) %> <%= event.start_time.strftime("%H:%M") %>～</td>
+            </tr>
+            <tr>
+              <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>
+              <td><%= event.price.to_s(:delimited) %> 円</td>
+            </tr>
+          </table>
         </div>
         
         <div class="event-top__btn">

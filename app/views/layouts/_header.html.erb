@@ -14,8 +14,8 @@
         <li id="ham"></li>
         
       <% else %>
-        <li><%= link_to "ログイン", new_user_session_path %></li>
-        <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <li class="not-login not-login-signin"><%= link_to "ログイン", new_user_session_path %></li>
+        <li class="not-login not-login-signup"><%= link_to "新規登録", new_user_registration_path %></li>
       <% end %>
       </ul>
     </nav>
@@ -36,7 +36,23 @@ $(function(){
       <li><i class="fa fa-sign-out" aria-hidden="true"></i> <%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
     </div>`
   
+  function menuClose(){
+    $("#menu-close").on("click", function(){
+      $.when(
+        $("#header-menu").animate({
+          'marginRight': '-30rem'
+        }),
+        $("#display").animate({
+          'opacity': '0'
+        })
+      ).done(function(){
+        $("#display").css("display", "none");
+        $("#header-menu").remove(); 
+      });
+    });
+  }
   
+  menuClose();
   // ヘッダーメニューを表示
   $(".ham").on("click", function(){
     $.when(
@@ -51,19 +67,7 @@ $(function(){
       });
       
       // メニューを閉じる
-      $("#menu-close").on("click", function(){
-        $.when(
-          $("#header-menu").animate({
-            'marginRight': '-30rem'
-          }),
-          $("#display").animate({
-            'opacity': '0'
-          })
-        ).done(function(){
-          $("#display").css("display", "none");
-          $("#header-menu").remove(); 
-        });
-      });
+      menuClose();
     });
   });  
 });
