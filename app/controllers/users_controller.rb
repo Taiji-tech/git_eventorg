@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @reserves = Reserve.where(email: current_user.email)
   end
   
+  # ユーザー情報の表示
   def edit
     @user = User.find(current_user.id)
   end
@@ -47,10 +48,20 @@ class UsersController < ApplicationController
     end
   end
   
+  # パスワード忘れ時の再設定
+  def resetPass
+    user = User.find_by(email: create_params[:email])
+    user&.send_reset_password_instructions
+    render json: {}
+  end
   
     private
       def user_params
         params.require(:user).permit(:nickname, :email, :password, :password_confirmation)
+      end
+      
+      def create_params
+        params.require(:user).permit(:email)
       end
 
   

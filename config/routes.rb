@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root "events#top"
   
   devise_for :users
-  
 #   ユーザー管理関連
   resources :users, only: [:show]
   
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
   get "user/edit",          to: "users#edit"
   patch "user/update",      to: "users#update"
   patch "user/update_pass", to: "users#updatePass"
+  post "passwords",         to: "users#resetPass"
 
 # 支払い関連
   resources :pays, only: [:new, :create]
