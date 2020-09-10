@@ -189,7 +189,12 @@ class ReservesController < ApplicationController
         else
           # 予約完了メールの送信
           # 支払いリンクの送信
-          ReserveMailer.mail_reserve_complite(@reserve).deliver_now
+          begin
+            ReserveMailer.mail_reserve_complite(@reserve).deliver_now
+          rescue StandardError
+            flash[:notice] = 'メール通信のエラーが発生しました。'
+            render "payError.js"
+          end
         end
       end
       
@@ -197,7 +202,12 @@ class ReservesController < ApplicationController
       def pay_action_hasnt_account
         # 予約完了メールの送信
         # 支払いリンクの送信
-        ReserveMailer.mail_reserve_complite(@reserve).deliver_now
+        begin
+          ReserveMailer.mail_reserve_complite(@reserve).deliver_now
+        rescue StandardError
+          flash[:notice] = 'メール通信のエラーが発生しました。'
+          render "payError.js"
+        end
       end
       
       # イベント予約重複不可
