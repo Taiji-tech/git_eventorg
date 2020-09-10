@@ -25,6 +25,14 @@
   label{
     font-weight: normal;
   }
+  @media only screen and (max-width: 575px){
+    font-size: 1.6rem;
+    text-align: center;
+    
+    label{
+      width: 100%;
+    }
+  }
 }
 .event-box__payed{
   width: 100%;
