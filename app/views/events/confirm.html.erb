@@ -53,9 +53,9 @@
               </tr>
             </table>
           </div>
-          <div class="event-box__img">
+          <div class="event-box__img event-box__img-confirm">
             <% event.imgs.each do |img| %>
-              <%= image_tag img, class:"event-img event-box__img-confirm" %>
+              <%= image_tag img, class:"event-img wide-img-hover" %>
             <% end %>
             <% if event.imgs.size == 0 %>
               <%= image_tag "NoImage.png", class:"event-img" %>
@@ -80,11 +80,20 @@
 
 <script>
 $(function(){
-  $(".event-box__img-confirm").slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  });
+  var screenWidth = window.parent.screen.width;
+  console.log(screenWidth);
+  
+  if(screenWidth < 575 ){
+    $(".event-box__img-confirm").slick({
+      dots: true
+    });
+  }else{
+    $(".event-box__img-confirm").slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3
+    });
+  } 
 });
 </script>
 

@@ -41,4 +41,13 @@ class ApplicationController < ActionController::Base
                                                      request.fullpath != '/users' && # 入力エラー後
                                                      !request.xhr?
       end
+      
+      # 開催日時を返す
+      def to_date_and_time(date, datetime)
+        @date = date
+        @datetime = datetime
+        @start_datetime = Time.new(@date.year, @date.month, @date.day, @datetime.hour, 
+                            @datetime.min, 0, "+09:00")
+        return @start_datetime
+      end
 end

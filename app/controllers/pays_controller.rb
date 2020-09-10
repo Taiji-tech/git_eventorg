@@ -34,12 +34,12 @@ class PaysController < ApplicationController
     end
   end
   
-  # カード情報の登録
+  # カード情報の新規登録
   def new
     @card = Card.find_by(user_id: current_user.id)
   end
   
-  # ユーザーからイベントホストへの支払い作成
+  # クレカ情報の登録
   def create
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     if params['payjp-token'].blank?
@@ -272,7 +272,7 @@ class PaysController < ApplicationController
           @tenant_id = data["id"]
         end
         
-        # payjpよりテント情報取得
+        # payjpからテナント情報取得
         def payjp_confirm_tenant
           @tenant = Tenant.find_by(user_id: current_user.id)
           if @tenant.present?
@@ -319,7 +319,7 @@ class PaysController < ApplicationController
           @tenant = Tenant.find_by(user_id: current_user.id)
           if @tenant.present?
             token = ENV["PAYJP_PRIVATE_KEY"]
-            uri = URI.parse("https://api.pay.jp/v1/tenant_transfers")
+            uri = URI.parse("https://api.pay.jp/v1/tenants/#{@tenant.tenant_id}/transfers?limit=999")
             http = Net::HTTP.new(uri.host, uri.port)
             http.use_ssl = true
             http.verify_mode = OpenSSL::SSL::VERIFY_NONE

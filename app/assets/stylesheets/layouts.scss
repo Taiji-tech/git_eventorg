@@ -1,6 +1,8 @@
 // views > layoutsフォルダ内
 
 // ヘッダー
+@media only screen and (min-width: 576px) {
+  
 .header{
   display: flex;
   justify-content: space-between;
@@ -110,6 +112,8 @@
 
 
 
+
+
 // footer
 .footer{
   width: 95%;
@@ -142,4 +146,8 @@
     font-size: 1.6rem;
     text-align: center;
   }
+}
+
+
+
 }

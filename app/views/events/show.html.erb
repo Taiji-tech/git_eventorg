@@ -31,7 +31,7 @@
           <td><%= @event.content %></td>
         </tr>
       </table>
-      <div class="event-box__img">
+      <div class="event-box__img event-box__img-confirm">
         <% @event.imgs.each do |img| %>
           <%= image_tag img, class:"event-img wide-img-hover" %>
         <% end %>
@@ -47,7 +47,6 @@
         <% end %>
       </div>
       </div>
-      
       <div class="event-box__attend">
         <% if @event.capacity > @reserves.size %>  
         <p class="event-box__attend-btn blue-btn btn-hover" id="event-attend">このイベントに参加する</p>
@@ -69,5 +68,26 @@
   
   </div>
 </div>
+
+
+
+<script>
+$(function(){
+  var screenWidth = window.parent.screen.width;
+  console.log(screenWidth);
+  
+  if(screenWidth < 575 ){
+    $(".event-box__img-confirm").slick({
+      dots: true
+    });
+  }else{
+    $(".event-box__img-confirm").slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3
+    });
+  } 
+});
+</script>
 
 

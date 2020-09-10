@@ -1,11 +1,12 @@
 class EventsController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :confirm]
-    before_action :user_info, only: [:new, :create, :confirm] 
-    before_action :tenant_resistration, only: [:new, :create]
-    after_action :store_location
-    # before_action :move_to_index, except: [:index,:show ]
-    # indexアクション以外が実行される前にindexが実行される。
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :confirm]
+  before_action :user_info, only: [:new, :create, :confirm] 
+  before_action :tenant_resistration, only: [:new, :create]
+  after_action :store_location
+  # before_action :move_to_index, except: [:index,:show ]
+  # indexアクション以外が実行される前にindexが実行される。
   
+    
   # トップ画面、イベント検索  
   def top
     @events = Event.includes(:user).order("start_date DESC").page(params[:page]).per(10)
@@ -94,4 +95,5 @@ class EventsController < ApplicationController
           redirect_to user_pays_hostnew_path
         end
       end
+      
 end

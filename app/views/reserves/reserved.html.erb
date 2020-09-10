@@ -15,6 +15,7 @@
         <% if @reserves.present? %>
         <% @reserves.each do |reserve| %>
         <% @event = reserve.event %>
+        <% @deadline = to_date_and_time(@event.start_date, @event.start_time) %>
         <div class="event-box__info box-wrap">
           <div class="event-box__payed">
             <% if to_bool(@future) %>
@@ -55,9 +56,9 @@
                 <td><%= @event.content %></td>
               </tr>
             </table>
-            <div class="event-box__img">
+            <div class="event-box__img event-box__img-confirm">
               <% @event.imgs.each do |img| %>
-                <%= image_tag img, class:"event-img wide-img-hover event-box__img-confirm" %>
+                <%= image_tag img, class:"event-img wide-img-hover" %>
               <% end %>
               <% if @event.imgs.size == 0 %>
                 <%= image_tag "NoImage.png", class:"event-img" %>
@@ -84,9 +85,11 @@
                   <td><%= @event.venue_pass %></td>
                 </tr>
               </table>
+              <% if @deadline >= Time.zone.now %>
               <div class="event-box__participate-btn">
                 <p><%= button_to "キャンセルする", reserf_path(reserve.id), method: :delete, data: {confirm: "本当にキャンセルしてよろしいですか？", cancel: "やめる", commit: "確定"}, title: "予約のキャンセル", class:"submit-btn blue-btn btn-hover" %></p>
               </div>
+              <% end %>
             </div>
             <% end %>
           </div>
@@ -100,3 +103,21 @@
 </div>
 
 
+<script>
+$(function(){
+  var screenWidth = window.parent.screen.width;
+  console.log(screenWidth);
+  
+  if(screenWidth < 575 ){
+    $(".event-box__img-confirm").slick({
+      dots: true
+    });
+  }else{
+    $(".event-box__img-confirm").slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3
+    });
+  } 
+});
+</script>

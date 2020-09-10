@@ -70,6 +70,6 @@ RSpec.configure do |config|
   # Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
   # config.include RequestSpecHelper, type: :request
 
-  # # for capybara
-  # config.include Capybara::DSL
+  # for capybara
+  config.include Capybara::DSL
 end
