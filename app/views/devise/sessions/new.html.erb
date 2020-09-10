@@ -17,7 +17,7 @@
       <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード" %>
     </div>
     <div class="user-form__notice">
-      <p>パスワードをお忘れの方は<%= link_to "こちら" %></p>
+      <p>パスワードをお忘れの方は<%= link_to "こちら", new_user_password_path %></p>
     </div>
     <div class="user-form__submit-box">
       <%= f.submit "ログイン", class:"wide-submit-btn btn-hover blue-btn" %>
