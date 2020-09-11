@@ -319,13 +319,17 @@ class PaysController < ApplicationController
           @tenant = Tenant.find_by(user_id: current_user.id)
           if @tenant.present?
             token = ENV["PAYJP_PRIVATE_KEY"]
-            uri = URI.parse("https://api.pay.jp/v1/tenants/#{@tenant.tenant_id}/transfers?limit=999")
+            uri = URI.parse("https://api.pay.jp/v1/tenant_transfers")
             http = Net::HTTP.new(uri.host, uri.port)
             http.use_ssl = true
             http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             
             req = Net::HTTP::Get.new(uri)
             req.basic_auth("#{token}", "")
+            req.set_form_data({
+              "tenant" => @tenant.tenant_id,
+              "limit" => 100
+            })
             res = http.request(req)
             
             puts res.body
@@ -363,7 +367,7 @@ class PaysController < ApplicationController
             flash.now[:notice] = 'カード情報の取得ができませんでした。'
             render :new
           rescue StandardError
-            flash.now[:notice] = 'エラーが発生しました。もう��度��録してください。'
+            flash.now[:notice] = 'エラーが発生しました。もう一度登録してください。'
             render :new
           end
         end
