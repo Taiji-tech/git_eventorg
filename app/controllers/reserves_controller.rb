@@ -148,9 +148,7 @@ class ReservesController < ApplicationController
         @tenant = Tenant.find_by(user_id: @event.user_id)
         
         # 支払い情報を持っているユーザー
-        i
-        
-        f @card.present?
+        if @card.present?
           # 支払い
           begin 
             Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]

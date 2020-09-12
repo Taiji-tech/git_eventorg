@@ -1,0 +1,27 @@
+<%= @user.nickname %> 様
+
+この度はRealtime Socialをご利用いただきありがとうございます。
+下記イベントの作成が完了しました。
+
+イベント名：<%= @event.title %>
+開催日時　：<%= @event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(@event.start_date.strftime("%u")) %> <%= @event.start_time.strftime("%H:%M") %>
+参加費　　：<%= @event.price.to_s(:delimited) %> 円
+内容　　　：<%= @event.content %>
+
+
+当日の開始時刻になりましたら、Zoomを起動して、
+
+参加URL　　：<%= @event.venue %>
+パスワード：<%= @event.venue_pass %> 
+
+
+で参加してください。
+
+
+
+==============================
+Realtime Social 運営
+
+お問い合わせはこちらまで
+https://www.realtimesocial.jp
+==============================

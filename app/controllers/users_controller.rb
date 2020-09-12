@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     if @user.valid_password?(params[:user][:current_password])
       if @user.update(user_params)
         bypass_sign_in(@user)
-        flash[:notice] = "ユーザー情報の編集が完了しました！"
+        flash[:notice] = "パスワードの変更が完了しました！"
         redirect_to user_edit_path
       else
         render "shared/errorDetail"

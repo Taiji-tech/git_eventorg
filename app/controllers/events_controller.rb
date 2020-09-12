@@ -33,6 +33,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     if @event.save
+      EventMailer.mail_event_create(@event).deliver_now
       flash[:notice] = "イベントの登録が完了しました！"
       redirect_to events_confirm_path
     else
