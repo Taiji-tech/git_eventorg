@@ -1,0 +1,169 @@
+// views > layoutsフォルダ内
+
+// ヘッダー
+@media only screen and (max-width: 575px){
+  .header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    background: #1971c2;
+    color: #fff;
+    
+    a{
+      color: #fff;
+    }
+  }
+  .header-logo{
+    width: 70%;
+    padding: 1rem;
+    margin: auto 0;
+    
+    h2{
+      margin: 0;
+      font-size: 4rem;
+      font-weight: bold;
+      font-family: 'Caveat', cursive;
+      transition: .3s;
+    }
+    a:hover{
+      text-decoration: none;
+      color: #fff;
+      opacity: .8;
+    }
+    a{
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+  .header-link{
+    width: 30%;
+    margin: auto;
+    
+    ul{
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    li{
+      display: flex;
+      align-items: center;
+      height: 5rem;
+      margin: 0;
+      padding: .5rem;
+      list-style: none;
+      font-size: 2rem;
+      font-weight: bold;
+      border: solid .1rem transparent;
+      border-radius: .5rem;
+    }
+    a:hover{
+      text-decoration: none;
+      color: #fff;
+      opacity: .8;
+    }
+    a:focus{
+      text-decoration: none;
+      color: #fff;
+    }
+    span{
+      display: block;
+      position: relative;
+      width: 5rem;
+      border-bottom: solid .2rem #fff;
+    }
+    .ham{
+      display: block;
+      margin: 0 0 0 auto;
+    }
+    .ham:hover{
+      border: solid .1rem #fff;
+    }
+    .ham-top{
+      top: 0;
+    }
+    .ham-mid{
+      top: 1.5rem;
+    }
+    .ham-bot{
+      top: 3rem;
+    }
+    .not-login{
+      padding: 0;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .not-login-signin:before{
+      font-family: FontAwesome;
+      content: '\f090';
+    }
+    .not-login-signup:before{
+      font-family: FontAwesome;
+      content: '\f007';
+    }
+  }
+  .header-menu{
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    width: 30rem;
+    height: 100vh;
+    background: #1971c2;
+    color: #fff;
+    transform: translateX(30rem);
+    
+    a{
+      font-weight: bold;
+    }
+    li{
+      padding-left: 2rem;
+    }
+    p{
+      width: 100%;
+      padding: 2rem;
+      text-align: right;
+      font-size: 5rem;
+    }
+  }
+  
+  
+  
+  
+  
+  // footer
+  .footer{
+    width: 95%;
+    margin: 2rem auto;
+    border-top: solid .2rem #adb5bd;
+  
+    ul{
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+    li{
+      padding: 2rem;
+      list-style: none;
+      font-size: 2rem;
+    }
+    a{
+      color: #343a40;
+    }
+    a:hover{
+      text-decoration: none;
+      color: #343a40;
+      opacity: .8;
+    }
+  }
+  .footer-copyright{
+    width: 100%;
+    
+    p{
+      font-size: 1.6rem;
+      text-align: center;
+    }
+  }
+
+}

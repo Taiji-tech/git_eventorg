@@ -12,7 +12,11 @@
       <div class="page-title">
         <h1>登録したイベントの確認</h1>
       </div>  
-      
+      <% unless @events.present? %>
+      <div class="event-box__notice">
+        <p>主催するイベントはまだ登録されていません。イベントを主催する場合は<%= link_to "イベントの主催", new_event_path %>から登録してください。</p>
+      </div>
+      <% end %>
       <div class='event'>
         <% @events.each do |event| %>
         <div class="event-box box-wrap">
@@ -29,7 +33,7 @@
               </tr>
               <tr>
                 <th><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</th>
-                <td><%= event.start_date.strftime("%-m月%-d日(%a)") %>　<%= event.start_time.strftime("%H:%M") %>～</td>
+                <td><%= event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(event.start_date.strftime("%u")) %> 　<%= event.start_time.strftime("%H:%M") %>～</td>
               </tr>
               <tr>
                 <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>
@@ -49,9 +53,9 @@
               </tr>
             </table>
           </div>
-          <div class="event-box__img">
+          <div class="event-box__img event-box__img-confirm">
             <% event.imgs.each do |img| %>
-              <%= image_tag img, class:"event-img" %>
+              <%= image_tag img, class:"event-img wide-img-hover" %>
             <% end %>
             <% if event.imgs.size == 0 %>
               <%= image_tag "NoImage.png", class:"event-img" %>
@@ -67,6 +71,7 @@
           </div>
           </div>
           <% end %>
+          <%= paginate(@events) %>
       </div>
     </div>
 </div>
@@ -75,11 +80,20 @@
 
 <script>
 $(function(){
-  $(".event-box__img-confirm").slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  });
+  var screenWidth = window.parent.screen.width;
+  console.log(screenWidth);
+  
+  if(screenWidth < 575 ){
+    $(".event-box__img-confirm").slick({
+      dots: true
+    });
+  }else{
+    $(".event-box__img-confirm").slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3
+    });
+  } 
 });
 </script>
 

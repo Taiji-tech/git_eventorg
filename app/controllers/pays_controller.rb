@@ -1,4 +1,7 @@
 class PaysController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :confirmCard, :editCard, :updateCard, :profit, 
+                                            :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
+  
   
   # http通信実装のためのライブラリ
   require 'net/https'
@@ -7,7 +10,7 @@ class PaysController < ApplicationController
   # payjp API用
   require 'payjp'
   
-  # ユーザー登録なしで支払い表示
+  # カード登録なしで支払い表示
   def newWithoutResistration
     if params[:reserve_id].present?
       @reserve = Reserve.find(params[:reserve_id])
@@ -17,33 +20,26 @@ class PaysController < ApplicationController
     @pay = Pay.new
   end
   
-  # ユーザー登録なしで支払い登録
+  # カード登録なしで支払い登録
   def createWithoutResistration
+    @reserve = Reserve.find(params[:reserve_id])
+    @event = Event.find(@reserve.event_id)
+    @tenant = Tenant.find_by(user_id: @event.user_id)
+    
     if params["payjp-token"].present?
-      begin 
-        Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
-        # チャージ→cardデータベース内セーブ→render
-        # @customer = Payjp::Customer.charge(
-        #   card: params['payjp-token']
-        # )
-        # @card = Card.new(user_id: current_user.id, customer_id: @customer.id, card_id: @customer.default_card)
-        # @card.save
-        
-        render :createWithoutResistration
-        payjp_rescue
-      end
+      pay_action_createWithoutResistration
     else 
-      flash.now[:notice] = "お支払い情報が入力されていません"
-      render :newWithoutResistration
+      flash[:notice] = "お支払い情報が入力されていません"
+      redirect_to pays_new_withoutresistration_path(reserve_id: 6)
     end
   end
   
-  # カード情報の登録
+  # カード情報の新規登録
   def new
     @card = Card.find_by(user_id: current_user.id)
   end
   
-  # ユーザーからイベントホストへの支払い作成
+  # クレカ情報の登録
   def create
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     if params['payjp-token'].blank?
@@ -141,6 +137,7 @@ class PaysController < ApplicationController
         payjp_create_tenant
         @tenant = Tenant.new(user_id: current_user.id, tenant_id: @tenant_id)
         @tenant.save
+        flash[:notice] = "銀行口座登録が完了しました！"  
         redirect_to user_pays_hostinfo_path
       rescue 
         flash[:notice] = "入力した情報に不備があります。再度入力してください"    
@@ -169,9 +166,10 @@ class PaysController < ApplicationController
       begin
         # payjp通信
         payjp_update_tenant
+        flash[:notice] = "口座情報を更新しました！" 
         redirect_to user_pays_hostinfo_path
       rescue 
-        flash[:notice] = "入力した情報に不備があります。再度入力してください"    
+        flash[:notice] = "入力された情報に不備があります。再度入力してください"    
         render :hostNew
       end
     else
@@ -187,6 +185,65 @@ class PaysController < ApplicationController
       private
         def pays_params
           
+        end
+        
+        # 支払い情報の管理
+        def pay_db_resister
+          @pay = Pay.new(host_id: @event.user_id, price: @event.price, 
+                         card_id: @card.id, reserve_id: @reserve.id, charge_id: @charge.id)
+          @pay.user_id = current_user.id if user_signed_in?
+          @pay.save
+        end
+        
+        # カード情報の管理
+        def card_db_resister
+          @card = Card.new(customer_id: @customer.id, card_id: @customer.default_card)
+          @card.user_id = current_user.id if user_signed_in?
+          @card.save
+        end
+        
+        # payjpの支払いアクション
+        def pay_action_createWithoutResistration
+          begin 
+            Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
+            @customer = Payjp::Customer.create(
+              card: params['payjp-token'],
+              email: @reserve.email
+            )
+            card_db_resister
+            @charge = Payjp::Charge.create(
+              amount: @event.price.to_i,
+              customer: @customer.id,
+              currency: 'jpy',
+              tenant: @tenant.tenant_id
+            )
+            pay_db_resister
+            @reserve.update(payed: true)
+            PayMailer.mail_pay_complite(@reserve).deliver_now
+            render :createWithoutResistration
+          
+          rescue Payjp::CardError => e
+            redirect_to pays_new_withoutresistration_path(reserve_id: @reserve.id)
+            flash[:notice] = 'カード情報の取得ができませんでした。'
+          rescue Payjp::InvalidRequestError => e
+            redirect_to pays_new_withoutresistration_path(reserve_id: @reserve.id)
+            flash[:notice] = '不正なパラメータが入力されました。'
+          rescue Payjp::AuthenticationError => e
+            redirect_to pays_new_withoutresistration_path(reserve_id: @reserve.id)
+            flash[:notice] = 'カード情報の取得ができませんでした。'
+          rescue Payjp::APIConnectionError => e
+            redirect_to pays_new_withoutresistration_path(reserve_id: @reserve.id)
+            flash[:notice] = '通信エラーが発生しました。もう一度登録をしてください。'
+          rescue Payjp::APIError => e
+            redirect_to pays_new_withoutresistration_path(reserve_id: @reserve.id)
+            flash[:notice] = '通信エラーが発生しました。もう一度登録をしてください。'
+          rescue Payjp::PayjpError => e
+            redirect_to pays_new_withoutresistration_path(reserve_id: @reserve.id)
+            flash[:notice] = 'カード情報の取得ができませんでした。'
+          rescue StandardError
+            redirect_to pays_new_withoutresistration_path(reserve_id: @reserve.id)
+            flash[:notice] = 'エラーが発生しました。もう一度登録をしてください。'
+          end
         end
 
         # payjpへテナント情報送信
@@ -215,7 +272,7 @@ class PaysController < ApplicationController
           @tenant_id = data["id"]
         end
         
-        # payjpよりテント情報取得
+        # payjpからテナント情報取得
         def payjp_confirm_tenant
           @tenant = Tenant.find_by(user_id: current_user.id)
           if @tenant.present?
@@ -262,7 +319,7 @@ class PaysController < ApplicationController
           @tenant = Tenant.find_by(user_id: current_user.id)
           if @tenant.present?
             token = ENV["PAYJP_PRIVATE_KEY"]
-            uri = URI.parse("https://api.pay.jp/v1/tenant_transfers")
+            uri = URI.parse("https://api.pay.jp/v1/tenants/#{@tenant.tenant_id}/transfers?limit=999")
             http = Net::HTTP.new(uri.host, uri.port)
             http.use_ssl = true
             http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -306,7 +363,7 @@ class PaysController < ApplicationController
             flash.now[:notice] = 'カード情報の取得ができませんでした。'
             render :new
           rescue StandardError
-            flash.now[:notice] = 'エラーが発生しました。もう一度��録してください。'
+            flash.now[:notice] = 'エラーが発生しました。もう��度��録してください。'
             render :new
           end
         end

@@ -12,6 +12,7 @@ $(function(){
       </div>
       
       <% if user_signed_in? %>
+      <div id="error-notice"></div>
       <div class="event-attend__detail">
         <h4><i class="fa fa-user" aria-hidden="true"></i> 参加者情報</h4>
         <div class="event-attend__detail-info">
@@ -39,7 +40,7 @@ $(function(){
             </tr>
             <tr>
               <th>開催日時</th>
-              <td><%= @event.start_date.strftime("%-m月%-d日(%a)") %>　<%= @event.start_time.strftime("%H:%M") %>～</td>
+              <td><%= @event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(@event.start_date.strftime("%u")) %> <%= @event.start_time.strftime("%H:%M") %>～</td>
             </tr>
             <tr>
               <th>参加費</th>

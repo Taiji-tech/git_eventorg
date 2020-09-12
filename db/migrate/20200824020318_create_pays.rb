@@ -6,6 +6,7 @@ class CreatePays < ActiveRecord::Migration[5.2]
       t.integer :price
       t.integer :card_id
       t.integer :reserve_id
+      t.string :charge_id
       
       t.timestamps
     end

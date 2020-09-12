@@ -6,7 +6,7 @@
     <h1>ログイン</h1>
   </div>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= render "shared/error_notice", model: resource %>
   <div class="user-form">
     <div class="user-form__box">
       <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
@@ -17,7 +17,7 @@
       <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード" %>
     </div>
     <div class="user-form__notice">
-      <p>パスワードをお忘れの方は<%= link_to "こちら" %></p>
+      <p>パスワードをお忘れの方は<%= link_to "こちら", new_user_password_path %></p>
     </div>
     <div class="user-form__submit-box">
       <%= f.submit "ログイン", class:"wide-submit-btn btn-hover blue-btn" %>

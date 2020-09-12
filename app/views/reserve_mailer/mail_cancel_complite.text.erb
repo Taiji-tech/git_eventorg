@@ -1,0 +1,23 @@
+<%= @reserve.nickname %> 様
+
+この度はRealtime Socialをご利用いただきありがとうございます。
+下記イベントのキャンセルが完了しました。
+
+イベント名：<%= @event.title %>
+開催日時　：<%= @event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(event.start_date.strftime("%u")) %> <%= @event.start_time.strftime("%H:%M") %>
+参加費　　：<%= @event.price.to_s(:delimited) %> 円
+内容　　　：<%= @event.content %>
+
+お支払い済みの方は、決済もキャンセルとなっています。
+
+
+新しいイベントは「Realtime Social」でお探しください！
+https://www.realtimesocial.jp
+
+
+==============================
+Realtime Social 運営
+
+お問い合わせはこちらまで
+https://www.realtimesocial.jp
+==============================
