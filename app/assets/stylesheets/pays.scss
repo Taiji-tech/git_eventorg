@@ -122,6 +122,10 @@
 .payment{
   width: 50rem;
   margin: auto;
+  
+  @media only screen and (max-width: 575px){
+    width: 100%;
+  }
 }
 .payment-box{
   width: 100%;
@@ -141,6 +145,10 @@
     padding: .5rem 1rem;
     border: solid .1rem #495057;
     font-size: 1.8rem;
+    
+    @media only screen and (max-width: 575px){
+      font-size: 1.6rem;
+    }
   }
   th{
     width: 30%;

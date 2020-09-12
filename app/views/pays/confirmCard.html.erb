@@ -37,8 +37,9 @@
       </div>
     </div>
     <% else %>
-    <div class="">
-      <p>まだカードは登録されていません。</p>
+    <div class="pay-form__notice">
+      <p>まだカードは登録されていません。<%= link_to "カード登録", new_pay_path, data: {"turbolinks" => false}  %>よりクレジットカードを登録してください。</p>
+      <p>カードを登録することで、イベントの参加がよりスムーズになります！</p>
     </div>
     <% end %>
 

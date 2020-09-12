@@ -2,9 +2,9 @@
 
 class Users::UnlocksController < Devise::UnlocksController
   # GET /resource/unlock/new
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource/unlock
   # def create

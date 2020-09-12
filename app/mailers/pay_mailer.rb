@@ -6,7 +6,7 @@ class PayMailer < ApplicationMailer
     @reserve = reserve
     @event = Event.find(@reserve.event_id)
     mail(
-      subject: "お支払いが予約が完了しました。",
+      subject: "イベント参加費のお支払いが予約が完了しました。【" + @event.title + "】",
       to: @reserve.email
     ) do |format|
       format.text

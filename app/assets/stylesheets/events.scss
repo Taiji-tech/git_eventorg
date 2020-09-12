@@ -1,6 +1,6 @@
 // views > eventsフォルダ内のスタイル
 
-
+@media only screen and (min-width: 576px){
 // eventsフォルダ内共通設定
 .event{
   width: 100%;
@@ -151,15 +151,13 @@
     font-size: 2.5rem;
     font-weight: bold;
   }
-  p{
-    margin: 0;
+  th, td{
     padding: 0 1rem;
     font-size: 1.8rem;
   }
-  span{
-    display: inline-block;
-    width: 12rem;
-  }  
+  th{
+    width: 30%;
+  }
 }
 .event-top__btn{
   width: 100%;
@@ -180,14 +178,12 @@
 }
 
 
-
-
+  
 .event-box{
   display: flex;
   flex-wrap: wrap;
   width: 70rem;
   margin: 0 auto 2rem;
-  background: #f8f9fa;
 }
 .event-box__detail{
   width: 100%;
@@ -247,6 +243,24 @@
   p{
     display: inline;
     padding-right: 1rem;
+  }
+}
+.event-box__participate-info{
+  width: 100%;
+  padding: 1rem;
+  
+  p{
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  .event-box__participate-label{
+    margin: 0 0 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    font-weight: bold;
+  }
+  .event-box__participate-btn{
+    padding: 1rem 0;
   }
 }
 
@@ -340,6 +354,14 @@
 
 
 // confirm
+.event-box__notice{
+  padding: 1rem 0;
+  
+  p{
+    margin: 0;
+    font-size: 1.8rem;
+  }
+}
 .event-box__reserve{
   font-weight: bold;
   color: #fff;
@@ -529,3 +551,4 @@
 }
 
 
+}

@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_09_05_033825) do
     t.integer "price"
     t.integer "card_id"
     t.integer "reserve_id"
+    t.string "charge_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 2020_09_05_033825) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.boolean "payed", default: false
   end
 

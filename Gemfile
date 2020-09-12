@@ -60,6 +60,9 @@ gem 'dotenv-rails'
 # payjp
 gem 'payjp'
 
+# ボタンクリック時の確認画面
+gem 'data-confirm-modal'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -70,6 +73,7 @@ group :development, :test do
   # テスト
   gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails', '~> 4.10.0'
+  gem 'rails-controller-testing'
 end
 
 group :development do

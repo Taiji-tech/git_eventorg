@@ -8,6 +8,7 @@ $(function(){
         <p class="user-edit-remove btn-hover">&times;</p>
         <p>登録されている情報の編集を行ってください。すでに、登録されているニックネームやE-mailはご利用できません。</p>
       </div>
+      <div id="error-notice"></div>
       <div class="user-form">
         <%= form_with(model:@user, url: user_update_path) do |f| %>
           <div class="user-form__box">
@@ -17,6 +18,10 @@ $(function(){
           <div class="user-form__box">
             <p><i class="fa fa-lock" aria-hidden="true"></i></p>
             <%= f.email_field:email, placeholder: "E-mail" %>
+          </div>
+          <div class="user-form__box">
+            <p><i class="fa fa-unlock-alt" aria-hidden="true"></i></p>
+            <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "パスワード" %>
           </div>
           <div class="user-form__submit-box">
             <%= f.submit "登録", class:"wide-submit-btn blue-btn btn-hover" %>
@@ -33,6 +38,7 @@ $(function(){
         <p class="user-edit-remove btn-hover">&times;</p>
         <p>現在のパスワード、新しいパスワードを入力してください。</p>
       </div>
+      <div id="error-notice"></div>
       <div class="user-form">
         <%= form_with(model:@user, url: user_update_pass_path) do |f| %>
           <div class="user-form__box">

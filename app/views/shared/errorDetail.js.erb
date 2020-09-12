@@ -1,0 +1,5 @@
+$(function(){
+  <% if @user.present? %>
+  $("#error-notice").html("<%= j(render 'shared/error_notice', { model: @user }) %>");
+  <% end %>
+});

@@ -13,6 +13,16 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../config/environment', __dir__)
+require File.expand_path('spec/support/controller_macros.rb')
+require 'rspec/rails'
+require 'capybara/rails'
+require 'capybara/rspec'
+
+Capybara.ignore_hidden_elements = false
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

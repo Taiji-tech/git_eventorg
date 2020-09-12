@@ -1,9 +1,12 @@
 class EventsController < ApplicationController
-    before_action :user_info, only: [:new, :create, :confirm] 
-    before_action :tenant_resistration, only: [:new, :create]
-    # before_action :move_to_index, except: [:index,:show ]
-    # indexアクション以外が実行される前にindexが実行される。
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :confirm]
+  before_action :user_info, only: [:new, :create, :confirm] 
+  before_action :tenant_resistration, only: [:new, :create]
+  after_action :store_location
+  # before_action :move_to_index, except: [:index,:show ]
+  # indexアクション以外が実行される前にindexが実行される。
   
+    
   # トップ画面、イベント検索  
   def top
     @events = Event.includes(:user).order("start_date DESC").page(params[:page]).per(10)
@@ -30,7 +33,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     if @event.save
-      flash.now[:notice] = "イベントの登録が完了しました！"
+      flash[:notice] = "イベントの登録が完了しました！"
       redirect_to events_confirm_path
     else
       render "inputError.js.erb"
@@ -55,7 +58,7 @@ class EventsController < ApplicationController
   
   
   def confirm
-    @events = Event.where(user_id: @user.id)
+    @events = Event.where(user_id: @user.id).page(params[:page]).per(5)
   end
 
   # イベント詳細表示
@@ -67,6 +70,7 @@ class EventsController < ApplicationController
     @user = User.new
   end
   
+  # イベントの削除
   def destroy
     event = Event.find(params[:id])
     if event.user_id == current_user.id
@@ -91,4 +95,5 @@ class EventsController < ApplicationController
           redirect_to user_pays_hostnew_path
         end
       end
+      
 end

@@ -5,6 +5,9 @@
   width: 50rem;
   margin: 4rem auto 0;
   padding: 1rem 2rem;
+  @media only screen and (max-width: 575px){
+    width: 100%;
+  }
 }
 .user-form{
   padding: 2rem 0;
@@ -104,6 +107,11 @@
   z-index: 50;
   border-radius: 1rem;
   background: #fff;
+  
+  @media only screen and (max-width: 575px){
+    right: 1%;
+    width: 98%;
+  }
 }
 .user-edit__info{
   width: 100%;
@@ -156,6 +164,15 @@
   p{
     font-size: 2rem;
     margin: 0;
+  }
+  
+  @media only screen and (max-width: 575px){
+    width: 100%;
+    padding: 0 0 1.5rem;
+    
+    h3{
+      margin: 0;
+    }
   }
 }
 .user-edit__link{
