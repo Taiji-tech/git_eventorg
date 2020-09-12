@@ -1,0 +1,55 @@
+/*.header{*/
+/*	display: flex;*/
+/*	text-align: center;*/
+/*	background-color: #1E20BF;*/
+/*	height: 70px;*/
+/*	color: white;*/
+/*}*/
+/*.menu {*/
+/*	width: 50%;*/
+/*	letter-spacing: 1px;*/
+/*	font-size: 0.8rem;*/
+
+/*}*/
+/*.button {*/
+/*	width: 50%;*/
+/*  text-decoration: none;*/
+/*  color: white;*/
+/*	padding: 10px 10px;*/
+/*}*/
+
+/*.event{*/
+/*	height: calc(100vh - 50px);*/
+/*	text-align: center;*/
+/*}*/
+/*.event-area{*/
+/*	display: table;*/
+/*	width: 860px;*/
+/*	height: 200px;*/
+/*  margin: 60px auto 0;*/
+/*  border: 1px solid #333;*/
+/* 	border-radius: 10px;*/
+/*}*/
+/*.event-box{*/
+/* 	display: table-cell;*/
+/*	text-align: left;*/
+/*	vertical-align: top;*/
+/*	padding-left: 5px;*/
+/*}*/
+/*.event-image{*/
+/*	display: table-cell;*/
+/*	text-align: center;*/
+/*	width: 230px;*/
+/*	height: 200px;*/
+/*}*/
+/*.event-form{*/
+/*	text-align: left;*/
+/*	padding-left: 5px;*/
+/*}*/
+/*.event-button {*/
+/*	background-color: #1E20BF;*/
+/*  text-decoration: none;*/
+/*  color: white;*/
+/*  padding: 2px;*/
+/*  letter-spacing: 1px;*/
+/*}*/

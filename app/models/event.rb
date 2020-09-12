@@ -1,8 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :user
   has_many :reserves
-<<<<<<< HEAD
-=======
   
   # 入力フォームのバリデーション
   validates :title, presence: true
@@ -17,5 +15,4 @@ class Event < ApplicationRecord
   
   # active storage 使用
   has_many_attached :imgs
->>>>>>> dc21a8650bcc40630bd6fd1c0917b48181565942
 end

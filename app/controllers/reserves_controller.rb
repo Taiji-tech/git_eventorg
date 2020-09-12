@@ -5,22 +5,6 @@ class ReservesController < ApplicationController
   
   # ユーザー登録を行わない予約
   def create
-<<<<<<< HEAD
-    Reserve.create(nickname: reserve_params[:nickname], email: reserve_params[:email], event_id: reserve_params[:event_id])
-    redirect_to "/events/#{reserve_params[:event_id]}"
-  end
-  
-  def destroy
-     @reserve = Reserve.where(event_id: params[:event_id])
-     @reserve.each do |reserve|
-     if ( reserve.nickname == params[:nickname] && reserve.email == params[:email])
-       reserve.destroy
-     else
-       #ニックネームとEメールが存在しない時の処理が必要
-     end
-   end
-     redirect_to "/events/#{reserve_params[:event_id]}"
-=======
     @event = Event.find(params[:event_id])
     
     # ログイン後の予約
@@ -48,7 +32,6 @@ class ReservesController < ApplicationController
         render "inputError.js.erb"
       end
     end
->>>>>>> dc21a8650bcc40630bd6fd1c0917b48181565942
   end
   
   # キャンセル

@@ -68,6 +68,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {  host: 'localhost', port: 3000 }
   #送信方法を指定（この他に:sendmail/:file/:testなどがあります)
   config.action_mailer.delivery_method = :smtp
+
+  #mail送信設定される場合はコメントアウトを解除してください。
   #送信方法として:smtpを指定した場合は、このconfigを使って送信詳細の設定を行います
   config.action_mailer.smtp_settings = {
     #gmail利用時はaddress,domain,portは下記で固定
@@ -75,9 +77,9 @@ Rails.application.configure do
     domain: 'gmail.com',
     port:587,
     #gmailのユーザアカウント（xxxx@gmail.com)※念のため、credentials.yml.enc行き
-    user_name: Rails.application.credentials.gmail[:user_name],
+    user_name: Rails.application.credentials.gmail[:mail_address],
     #gmail２段階認証回避のためにアプリケーションでの利用パスワードを取得、必ずcredentials.yml.endに設定を！！
-    password: Rails.application.credentials.gmail[:password],
+    password: Rails.application.credentials.gmail[:app_password],
     #パスワードをBase64でエンコード
     authentication: :login
   }

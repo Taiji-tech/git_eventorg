@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -19,6 +20,12 @@
 @import "bootstrap";
 // font awsome
 @import "font-awesome";
+
+// 応急策です
+@import "layouts";
+
+
+
 
 // 共通設定
 .page-title{

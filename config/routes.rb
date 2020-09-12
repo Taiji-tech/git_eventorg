@@ -12,14 +12,6 @@ Rails.application.routes.draw do
     resources :reserves, only: [:create]
     post "/create_with_resistration", to: "reserves#createWithResistration" 
   end
-<<<<<<< HEAD
-  resources :users, only: [:show]
-  
-  delete '/events/:event_id/reserves' => 'reserves#destroy'
-  
-  post '/events/new' => 'events#create'
-
-=======
   resources :reserves, only: [:destroy]
   get "user/reserved",          to: "reserves#reserved"
   
@@ -43,5 +35,4 @@ Rails.application.routes.draw do
   get "pays/new_withoutresistration",     to: "pays#newWithoutResistration"
   post "pays/create_withoutresistration", to: "pays#createWithoutResistration"
   get "user/pays/profit",                 to: "pays#profit"
->>>>>>> dc21a8650bcc40630bd6fd1c0917b48181565942
 end
