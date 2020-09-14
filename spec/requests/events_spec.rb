@@ -95,6 +95,15 @@ RSpec.describe "Events", type: :request do
     end
   end
   
+  # イベントの削除
+  describe "delete event" do
+    before do
+      user = create(:user)
+      tenant = create(:tenant)
+      sign_in user  
+    end
+  
+  end
   
   
 end
