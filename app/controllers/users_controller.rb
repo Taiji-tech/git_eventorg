@@ -20,8 +20,10 @@ class UsersController < ApplicationController
   # ユーザー情報の更新
   def update
     @user = User.find(current_user.id)
+    @before_user = @user
     if @user.valid_password?(params[:user][:current_password])
       if @user.update(user_params)
+        UserMailer.mail_user_editinfo(@before_user, @user).deliver_now
         flash[:notice] = "ユーザー情報の編集が完了しました！"
         redirect_to user_edit_path
       else
@@ -38,6 +40,7 @@ class UsersController < ApplicationController
     if @user.valid_password?(params[:user][:current_password])
       if @user.update(user_params)
         bypass_sign_in(@user)
+        UserMailer.mail_user_editpass(@user).deliver_now
         flash[:notice] = "パスワードの変更が完了しました！"
         redirect_to user_edit_path
       else

@@ -73,10 +73,11 @@ class ReservesController < ApplicationController
     
     if @user.save
       # 予約処理も併せて行う
+      UserMailer.mail_user_registered(@user).deliver_now
       @reserve = Reserve.new(event_id: params[:event_id], nickname: @user.nickname, 
                              email: @user.email, user_id: @user.id)
       @reserve.save
-      pay_action_has_account 
+      pay_action_has_account
       respond_to do |format|
         format.js
       end
@@ -117,7 +118,7 @@ class ReservesController < ApplicationController
         if user_signed_in?
           @event = Event.find(params[:event_id])
           if @event.user_id == current_user.id
-            flash.now[:notice] = "イベント主催者が予約することはできません"
+            flash[:notice] = "イベント主催者が予約することはできません"
             redirect_to event_path(params[:event_id])
           end
         end

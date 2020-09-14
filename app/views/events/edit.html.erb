@@ -78,6 +78,7 @@ $(function(){
   
   $('#img-file').change(function(){
     var files = $('input[type="file"]').prop('files')[0];
+    
     $.each(this.files, function(i, file){
       var fileReader = new FileReader();
       dataBox.items.add(file);
