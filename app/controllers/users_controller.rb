@@ -23,7 +23,12 @@ class UsersController < ApplicationController
     @before_user = @user
     if @user.valid_password?(params[:user][:current_password])
       if @user.update(user_params)
-        UserMailer.mail_user_editinfo(@before_user, @user).deliver_now
+        if @before_user.email == @user.email
+          UserMailer.mail_user_editinfo_to_newuser(@before_user, @user).deliver_now
+        else
+          UserMailer.mail_user_editinfo_to_newuser(@before_user, @user).deliver_now
+          UserMailer.mail_user_editinfo_to_olduser(@before_user, @user).deliver_now
+        end
         flash[:notice] = "ユーザー情報の編集が完了しました！"
         redirect_to user_edit_path
       else

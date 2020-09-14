@@ -13,28 +13,27 @@ class UserMailer < ApplicationMailer
   end
   
 #   ユーザー情報変更時
-  def mail_user_editinfo(before_user, user)
+  def mail_user_editinfo_to_newuser(before_user, user)
     @before_user = before_user
     @user = user
-    
-    # e-mailの変更がされていない場合
-    if @before_user.email == @user.email
-      mail(
-        subject: "【Realtime Socail】ユーザー情報が変更されました！",
-        to: @user.email
-      ) do |format|
-        format.text
-      end
-    else
-      mail(
-        subject: "【Realtime Socail】ユーザー情報が変更されました！",
-        to: @user.email, 
-        cc: @before_user.email
-      ) do |format|
-        format.text
-      end
+    mail(
+      subject: "【Realtime Socail】ユーザー情報が変更されました！",
+      to: @user.email
+    ) do |format|
+      format.text
     end
   end
+  
+  def mail_user_editinfo_to_olduser(before_user, user)
+    @before_user = before_user
+    @user = user
+    mail(
+      subject: "【Realtime Socail】ユーザー情報が変更されました！",
+      to: @before_user.email
+    ) do |format|
+      format.text
+    end
+  end  
   
 #   パスワード変更時
   def mail_user_editpass(user)
