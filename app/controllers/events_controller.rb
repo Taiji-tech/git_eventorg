@@ -73,9 +73,11 @@ class EventsController < ApplicationController
   
   # イベントの削除
   def destroy
-    event = Event.find(params[:id])
-    if event.user_id == current_user.id
-      event.destroy
+    @event = Event.includes(:reserve).find(params[:id])
+    @reserves = @event.reserve
+    if @event.user_id == current_user.id
+      cancel_reserves
+      @event.destroy
     end
   end
   
@@ -95,6 +97,13 @@ class EventsController < ApplicationController
           flash[:notice] = "イベント登録前に銀行口座登録を行ってください"
           redirect_to user_pays_hostnew_path
         end
+      end
+      
+      # イベントの予約をすべてキャンセル
+      def cancel_reserves
+        
+        
+        
       end
       
 end

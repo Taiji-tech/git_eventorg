@@ -15,6 +15,7 @@ class ReservesController < ApplicationController
     if user_signed_in?
       @reserve = Reserve.new(nickname: current_user.nickname, email: current_user.email, 
                             event_id: params[:event_id], user_id: current_user.id)
+      @user = current_user
       if @reserve.save
         pay_action_has_account
         respond_to do |format|
@@ -73,11 +74,12 @@ class ReservesController < ApplicationController
     
     if @user.save
       # 予約処理も併せて行う
-      UserMailer.mail_user_registered(@user).deliver_now
+      @user = User.find_by(email: @user.email)
       @reserve = Reserve.new(event_id: params[:event_id], nickname: @user.nickname, 
                              email: @user.email, user_id: @user.id)
-      @reserve.save
       pay_action_has_account
+      @reserve.save
+      UserMailer.mail_user_registered(@user).deliver_now
       respond_to do |format|
         format.js
       end
@@ -145,7 +147,7 @@ class ReservesController < ApplicationController
       
       # アカウント持ちユーザーの支払いアクション
       def pay_action_has_account 
-        @card = Card.find_by(user_id: current_user.id)
+        @card = Card.find_by(user_id: @user.id)
         @tenant = Tenant.find_by(user_id: @event.user_id)
         
         # 支払い情報を持っているユーザー
@@ -188,8 +190,6 @@ class ReservesController < ApplicationController
           
         # 支払い情報を持っていない場合  
         else
-          # 予約完了メールの送信
-          # 支払いリンクの送信
           begin
             ReserveMailer.mail_reserve_complite(@reserve).deliver_now
           rescue StandardError
@@ -201,8 +201,6 @@ class ReservesController < ApplicationController
       
       # アカウントを持っていないユーザーの支払いアクション
       def pay_action_hasnt_account
-        # 予約完了メールの送信
-        # 支払いリンクの送信
         begin
           ReserveMailer.mail_reserve_complite(@reserve).deliver_now
         rescue StandardError
