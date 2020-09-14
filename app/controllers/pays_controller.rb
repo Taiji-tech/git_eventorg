@@ -1,7 +1,8 @@
 class PaysController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :confirmCard, :editCard, :updateCard, :profit, 
                                             :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
-  
+  before_action :user_info, only: [:new, :create, :confirmCard, :editCard, :updateCard, :profit, 
+                                   :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
   
   # http通信実装のためのライブラリ
   require 'net/https'
@@ -52,7 +53,7 @@ class PaysController < ApplicationController
         )
         @card = Card.new(user_id: current_user.id, customer_id: @customer.id, card_id: @customer.default_card)
         @card.save
-        
+        PayMailer.mail_credit_registered(@user).deliver_now
         redirect_to user_pays_confirm_card_path
         payjp_rescue
       end
@@ -85,7 +86,7 @@ class PaysController < ApplicationController
         puts @customer
         @card = Card.new(user_id: current_user.id, customer_id: @customer.id, card_id: @customer.default_card)
         @card.save
-        
+        PayMailer.mail_credit_updated(@user).deliver_now
         redirect_to user_pays_confirm_card_path
       rescue Payjp::CardError => e
         flash.now[:notice] = 'カード情報の取得ができませんでした。'
@@ -137,6 +138,7 @@ class PaysController < ApplicationController
         payjp_create_tenant
         @tenant = Tenant.new(user_id: current_user.id, tenant_id: @tenant_id)
         @tenant.save
+        PayMailer.mail_bank_registered(@user).deliver_now
         flash[:notice] = "銀行口座登録が完了しました！"  
         redirect_to user_pays_hostinfo_path
       rescue 
@@ -166,6 +168,7 @@ class PaysController < ApplicationController
       begin
         # payjp通信
         payjp_update_tenant
+        PayMailer.mail_bank_updated(@user).deliver_now
         flash[:notice] = "口座情報を更新しました！" 
         redirect_to user_pays_hostinfo_path
       rescue 
