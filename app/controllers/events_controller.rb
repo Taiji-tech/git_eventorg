@@ -88,7 +88,7 @@ class EventsController < ApplicationController
   
     private
       def event_params
-        params.require(:event).permit(:title, :start_date, :start_time, :venue, :venue_pass, :price, :content, :capacity, imgs: [])
+        params.require(:event).permit(:title, :start_date, :start_time, :venue_method, :venue, :venue_pass, :price, :content, :capacity, imgs: [])
       end
       
       def move_to_index

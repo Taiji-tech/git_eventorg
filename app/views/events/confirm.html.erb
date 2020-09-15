@@ -44,8 +44,13 @@
                 <td><%= event.capacity %> 名</td>
               </tr>
               <tr>
+                <% if @event.venue_method == "online" %>
                 <th><i class="fa fa-desktop" aria-hidden="true"></i> 開催URL</th>
                 <td><%= event.venue %></td>
+                <% elsif @event.venue_method == "offline" %>
+                <th><i class="fa fa-map-pin" aria-hidden="true"></i> 開催場所</th>
+                <td><%= @event.venue %></td>
+                <% end %>
               </tr>
               <tr>
                 <th><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</th>

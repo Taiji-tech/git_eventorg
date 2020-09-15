@@ -29,6 +29,7 @@
           </div>
           <div class="event-form" id="event-method">
             <label>開催形式<br><span class="pink-btn form-necessary">必須</span></label>
+            <%= f.hidden_field:venue_method, value: "online", id: "venue-method" %>
             <ul>
               <li class="blue-btn btn-hover" id="event-method-online">オンライン</li>
               <li class="unselect-btn btn-hover" id="event-method-offline">オフライン</li>
@@ -143,7 +144,7 @@ $(function(){
     <div class="event-form event-form-offline">
       <label for="event_venue">開催場所<br><span class="pink-btn form-necessary">必須</span></label>
       <input class="form-control form-control-lg" type="text" name="event[venue]" id="event_venue">
-      <input class="form-control form-control-lg" type="hidden" value=" " name="event[venue_pass]" id="event_venue_pass">
+      <input class="form-control form-control-lg" type="hidden" value="none" name="event[venue_pass]" id="event_venue_pass">
     </div>`
     
   $("#event-method-online").on("click", function(){
@@ -155,6 +156,7 @@ $(function(){
       $("#event-method-offline").removeClass("blue-btn");
       $(".event-form-offline").remove();
       $("#event-method").after(online);
+      $("#venue-method").val("online");
     } 
   });
   
@@ -167,6 +169,7 @@ $(function(){
       $("#event-method-online").removeClass("blue-btn");
       $(".event-form-online").remove();
       $("#event-method").after(offline);
+      $("#venue-method").val("offline");
     }  
   });
   

@@ -27,6 +27,15 @@
           <td><%= @event.user.nickname %></td>
         </tr>
         <tr>
+          <% if @event.venue_method == "online" %>
+          <th><i class="fa fa-desktop" aria-hidden="true"></i> 開催形式</th>
+          <td>オンライン</td>
+          <% elsif @event.venue_method == "offline" %>
+          <th><i class="fa fa-map-pin" aria-hidden="true"></i> 開催場所</th>
+          <td><%= @event.venue %></td>
+          <% end %>
+        </tr>
+        <tr>
           <th><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</th>
           <td><%= @event.content %></td>
         </tr>
