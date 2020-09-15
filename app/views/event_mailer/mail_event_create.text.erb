@@ -8,14 +8,18 @@
 参加費　　：<%= @event.price.to_s(:delimited) %> 円
 内容　　　：<%= @event.content %>
 
+<% if @event.venue_method == "online" %>
+当日の開始時刻になったら、Zoomを起動して、
 
-当日の開始時刻になりましたら、Zoomを起動して、
-
-参加URL　　：<%= @event.venue %>
-パスワード：<%= @event.venue_pass %> 
-
+Zoom URL　　　　： <%= @event.venue %>
+Zoom パスワード ： <%= @event.venue_pass %> 
 
 で参加してください。
+<% elsif @event.venue_method == "offline" %>
+当日の開始時刻までに下記開催場所に集合してください。
+
+開催場所： <%= @event.venue %>
+<% end %>
 
 
 
