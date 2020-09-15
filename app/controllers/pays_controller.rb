@@ -3,6 +3,7 @@ class PaysController < ApplicationController
                                             :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
   before_action :user_info, only: [:new, :create, :confirmCard, :editCard, :updateCard, :profit, 
                                    :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
+  before_action :store_location, only: [:newWithoutResistration, :new, :confirmCard, :editCard ]
   
   # http通信実装のためのライブラリ
   require 'net/https'
@@ -11,17 +12,16 @@ class PaysController < ApplicationController
   # payjp API用
   require 'payjp'
   
-  # カード登録なしで支払い表示
+  # カード登録がない状態で支払いを行う表示
   def newWithoutResistration
     if params[:reserve_id].present?
       @reserve = Reserve.find(params[:reserve_id])
       @event = Event.find(@reserve.event_id)
     end
-    
     @pay = Pay.new
   end
   
-  # カード登録なしで支払い登録
+  # カード登録がない状態で支払い
   def createWithoutResistration
     @reserve = Reserve.find(params[:reserve_id])
     @event = Event.find(@reserve.event_id)
@@ -31,7 +31,7 @@ class PaysController < ApplicationController
       pay_action_createWithoutResistration
     else 
       flash[:notice] = "お支払い情報が入力されていません"
-      redirect_to pays_new_withoutresistration_path(reserve_id: 6)
+      redirect_to session[:privious_url]
     end
   end
   
@@ -120,11 +120,10 @@ class PaysController < ApplicationController
     
   end  
   
-  # 売り上げ
+  # 売り上げ確認
   def profit
     payjp_transfer_info
   end
-  
   
   # イベントホストのカード情報入力
   def hostNew
@@ -164,6 +163,7 @@ class PaysController < ApplicationController
     payjp_confirm_tenant
   end
   
+  # ホストが登録しているカード情報の更新
   def hostUpdate
     if params[:bank_code].present? && params[:bank_branch_code].present? && params[:bank_account_type].present? &&
       params[:bank_account_number].present? && params[:bank_account_holder_name].present?  
@@ -203,7 +203,9 @@ class PaysController < ApplicationController
         # カード情報の管理
         def card_db_resister
           @card = Card.new(customer_id: @customer.id, card_id: @customer.default_card)
-          @card.user_id = current_user.id if user_signed_in?
+          if @user.present?
+            @card.user_id = current_user.id
+          end
           @card.save
         end
         

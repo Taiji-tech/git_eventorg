@@ -76,8 +76,13 @@ class EventsController < ApplicationController
     @event = Event.includes(:reserve).find(params[:id])
     @reserves = @event.reserve
     if @event.user_id == current_user.id
-      cancel_reserves
+      reserves_cancel
       @event.destroy
+      flash[:notice] = "イベントをキャンセルしました。"
+      redirect_to events_confirm_path
+    else
+      flash[:notice] = "イベントをキャンセルできませんでした。"
+      redirect_to events_confirm_path
     end
   end
   
@@ -100,10 +105,52 @@ class EventsController < ApplicationController
       end
       
       # イベントの予約をすべてキャンセル
-      def cancel_reserves
-        
-        
-        
+      def reserves_cancel
+        @reserves.each do |resereve|
+          @reserve = reserve  
+          # 支払い済みの場合
+          if @reserve.payed
+            payjp_cancel_action
+          end
+          if @reserve.destroy
+            ReserveMailer.mail_cancel_complite(@reserve).deliver_now
+          else
+            flash[:notice] = "イベントのキャンセルに失敗しました。"
+            redirect_to session[:privious_url]
+          end
+        end
+      end
+      
+      # payjpキャンセルアクション
+      def payjp_cancel_action
+        begin
+          Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+          @pay = Pay.find_by(reserve_id: @reserve.id)
+          charge = Payjp::Charge.retrieve(@pay.charge_id)
+          charge.refund
+          @reserve.payed = false
+        rescue Payjp::CardError => e
+          flash[:notice] = 'カード情報の取得ができませんでした。'
+          render "payError.js"
+        rescue Payjp::InvalidRequestError => e
+          flash[:notice] = '不正なパラメータが入力されました。'
+          render "payError.js"
+        rescue Payjp::AuthenticationError => e
+          flash[:notice] = 'カード情報の取得ができませんでした。'
+          render "payError.js"
+        rescue Payjp::APIConnectionError => e
+          flash[:notice] = '通信エラーが発生しました。'
+          render "payError.js"
+        rescue Payjp::APIError => e
+          flash[:notice] = '通信エラーが発生しました。'
+          render "payError.js"
+        rescue Payjp::PayjpError => e
+          flash[:notice] = 'カード情報の取得ができませんでした。'
+          render "payError.js"
+        rescue StandardError
+          flash[:notice] = 'エラーが発生しました。'
+          render "payError.js"
+        end
       end
       
 end

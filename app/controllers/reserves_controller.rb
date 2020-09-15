@@ -18,9 +18,6 @@ class ReservesController < ApplicationController
       @user = current_user
       if @reserve.save
         pay_action_has_account
-        respond_to do |format|
-          format.js
-        end
       else
         render "inputError.js.erb"
       end
@@ -164,7 +161,7 @@ class ReservesController < ApplicationController
             pay_db_resister
             @reserve.update(payed: true)
             PayMailer.mail_pay_complite(@reserve).deliver_now
-          
+            render "payed.js.erb"
           rescue Payjp::CardError => e
             flash[:notice] = '支払い時に必要なカード情報の取得ができませんでした。'
             render "payError.js"
@@ -192,6 +189,9 @@ class ReservesController < ApplicationController
         else
           begin
             ReserveMailer.mail_reserve_complite(@reserve).deliver_now
+            respond_to do |format|
+              format.js
+            end
           rescue StandardError
             flash[:notice] = 'メール通信のエラーが発生しました。'
             render "payError.js"

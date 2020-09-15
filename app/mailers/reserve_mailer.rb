@@ -31,7 +31,7 @@ class ReserveMailer < ApplicationMailer
     @reserve = reserve
     @event = Event.find(@reserve.event_id)
     mail(
-      subject: "イベントをキャンセルしました。【" + @event.title + "】",
+      subject: "【Realtime Social】イベントをキャンセルしました。",
       to: @reserve.email
     ) do |format|
       format.text
