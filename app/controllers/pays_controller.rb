@@ -79,36 +79,38 @@ class PaysController < ApplicationController
       flash.now[:notice] = "カード情報が入力されていません。"
       render :editCard
     else
-      begin 
-        @customer = Payjp::Customer.create(
-          card: params['payjp-token']
+      begin
+        @card = Card.find_by(user_id: current_user.id)
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        @customer = customer.cards.create(
+          card: params['payjp-token'],
+          default: true
         )
-        puts @customer
-        @card = Card.new(user_id: current_user.id, customer_id: @customer.id, card_id: @customer.default_card)
-        @card.save
+        @card.update(card_id: @customer.id)
         PayMailer.mail_credit_updated(@user).deliver_now
+        flash[:notice] = 'クレジットカード情報が更新されました。'
         redirect_to user_pays_confirm_card_path
       rescue Payjp::CardError => e
-        flash.now[:notice] = 'カード情報の取得ができませんでした。'
-        render :new
+        flash[:notice] = 'カード情報の取得ができませんでした。'
+        redirect_to session[:previous_path]
       rescue Payjp::InvalidRequestError => e
-        flash.now[:notice] = '不正なパラメータが入力されました。'
-        render :new
+        flash[:notice] = '不正なパラメータが入力されました。'
+        redirect_to session[:previous_path]
       rescue Payjp::AuthenticationError => e
-        flash.now[:notice] = 'カード情報の取得ができませんでした。'
-        render :new
+        flash[:notice] = 'カード情報の取得ができませんでした。'
+        redirect_to session[:previous_path]
       rescue Payjp::APIConnectionError => e
-        flash.now[:notice] = '通信エラーが発生しました。もう一度登録をしてください。'
-        render :new
+        flash[:notice] = '通信エラーが発生しました。もう一度登録をしてください。'
+        redirect_to session[:previous_path]
       rescue Payjp::APIError => e
-        flash.now[:notice] = '通信エラーが発生しました。もう一度登録をしてください。'
-        render :new
+        flash[:notice] = '通信エラーが発生しました。もう一度登録をしてください。'
+        redirect_to session[:previous_path]
       rescue Payjp::PayjpError => e
-        flash.now[:notice] = 'カード情報の取得ができませんでした。'
-        render :new
+        flash[:notice] = 'カード情報の取得ができませんでした。'
+        redirect_to session[:previous_path]
       rescue StandardError
-        flash.now[:notice] = 'エラーが発生しました。もう一度登録してください。'
-        render :new
+        flash[:notice] = 'エラーが発生しました。もう一度登録してください。'
+        redirect_to session[:previous_path]
       end
     end
   end

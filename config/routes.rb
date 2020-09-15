@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :pays, only: [:new, :create]
   get "user/pays/confirm_card",           to: "pays#confirmCard"
   get "user/pays/edit_card",              to: "pays#editCard"
+  post "user/pays/update_card",           to: "pays#updateCard"
   get "user/pays/confirm",                to: "pays#confirm"
   get "user/pays/hostnew",                to: "pays#hostNew"
   post "user/pays/host"  ,                to: "pays#hostCreate"

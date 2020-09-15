@@ -37,14 +37,14 @@
       </div>
       <div class="pay-form__box-card box-wrap">
         <p>カード情報を入力し、登録してください。</p>
-        <%= form_with(url: pays_path, data: {remote: false}) do |f| %>
+        <%= form_with(url: user_pays_update_card_path, data: {remote: false}) do |f| %>
         <div>
         <script
           type="text/javascript"
           src="https://checkout.pay.jp/"
           class="payjp-button"
           data-key="<%= ENV['PAYJP_KEY'] %>"
-          data-submit-text="トークンを作成する"
+          data-submit-text="カード情報を登録する"
           data-partial="true">
         </script>
         </div>
