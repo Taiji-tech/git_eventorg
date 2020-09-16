@@ -4,6 +4,7 @@ class PaysController < ApplicationController
   before_action :user_info, only: [:new, :create, :confirmCard, :editCard, :updateCard, :profit, 
                                    :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
   before_action :store_location, only: [:newWithoutResistration, :new, :confirmCard, :editCard ]
+  before_action :register_bank_account, only: [:profit]
   
   # http通信実装のためのライブラリ
   require 'net/https'
@@ -190,6 +191,14 @@ class PaysController < ApplicationController
       private
         def pays_params
           
+        end
+        
+        def register_bank_account
+          @tenant = Tenant.find_by(user_id: current_user.id)
+          unless @tenant.present?
+            flash[:notice] = "銀行口座の登録を行ってください。"
+            redirect_to user_pays_hostnew_path
+          end
         end
         
         # 支払い情報の管理
