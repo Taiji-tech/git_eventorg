@@ -1,3 +1,5 @@
+<% provide(:title, "お支払い") %>
+
 <%= render "shared/flash" %>
 <div class="container">
 <div class="row">
@@ -11,7 +13,7 @@
     <% elsif to_date_and_time(@event.start_date, @event.start_time) <= Time.zone.now.to_date &&  %>
       <p class="wide-submit-btn pink-btn">イベント開催日時がすでに過ぎています。</p>
     <% else %>
-      <p>お支払いいただくことで、参加登録が完了します。表示された情報をご確認いただき、お支払いをお願いいたします。</p>
+      <p>お支払いいただくことで、参加登録が完了します。表示された情報に間違いがないことをご確認いただき、お支払いをお願いします。</p>
       <% unless @reserve.present? %>
       <p class="wide-submit-btn pink-btn">イベント情報の取得が正常にできておりません。誠に恐れ入りますが、再度ご予約いただくか運営までご連絡ください。</p>
       <% end %>
