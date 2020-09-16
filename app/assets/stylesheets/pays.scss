@@ -34,6 +34,9 @@
   width: 35rem;
   padding: 2rem 0;
   text-align: center;
+  @media only screen and (max-width: 575px){
+    width: 100%; 
+  }
 }
 
 
@@ -43,6 +46,10 @@
   width: 39rem;
   margin: 4rem auto;
   background: #f8f9fa;
+  @media only screen and (max-width: 575px){
+    width: 100%; 
+    margin: 1rem auto;
+  }
   
   table{
     width: 100%;
@@ -124,6 +131,7 @@
   
   @media only screen and (max-width: 575px){
     width: 100%;
+    padding: 1rem;
   }
 }
 .payment-box{
