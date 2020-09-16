@@ -1,0 +1,57 @@
+<script>
+// $(function(){
+  
+
+// // イベントキャンセル
+//   var cancelForm = `
+//     <div id="event-attend-form">
+//     <div class="event-attend-form">
+//       <div class="event-attend__content">
+//         <div class="event-attend__top">
+//           <h3><i class="fa fa-thumb-tack" aria-hidden="true"></i> イベントのキャンセル</h3>
+//           <p class="btn-hover" id="event-attend-form-close">&times;</p>
+//         </div>
+//         <div class="event-attend__detail">
+//           <h4><i class="fa fa-info-circle" aria-hidden="true"></i> イベント詳細</h4>
+//           <div class="event-attend__detail-info">
+//             <table>
+//               <tr>
+//                 <th>イベント名</th>
+//                 <td><%= event.title %></td>
+//               </tr>
+//             </table>
+//           </div>  
+//         </div>
+//         <div class="event-attend__detail">
+//           <h4><i class="fa fa-calendar-times-o" aria-hidden="true"></i> キャンセル理由</h4>
+//           <textarea></textarea>
+//         </div>
+//         <div class="event-attend__submit-box">
+//           <a class="wide-submit-btn blue-btn btn-hover" rel="nofollow" data-method="delete" href="/events/<%= event.id %>">削除する</a>
+//         </div>
+//       </div>
+//     </div>
+//     </div>`  
+    
+//     $(".event-cancel").on("click", function(){
+//       $.when(
+//         $("#display").animate({opacity: .8}, 300)
+//       ).done(function(){
+//         $(".event-cancel").after(cancelForm);
+//         $("#display").css("display", "");
+        
+//         // closeボタンを押したとき
+//         $("#event-attend-form-close").on("click", function(){
+//             console.log("done");
+//           // $.when(
+//           //   $("#display").animate({opacity: 0}, 300),
+//           //   $("#event-attend-form").animate({opacity: 0}, 300)
+//           // ).done(function(){
+//           //   $("#event-attend-form").remove();
+//           //   $("#display").css("display", "none");
+//           // }); 
+//         });
+//       });
+//     });
+// });
+</script>

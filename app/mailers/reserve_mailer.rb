@@ -37,4 +37,16 @@ class ReserveMailer < ApplicationMailer
       format.text
     end  
   end
+  
+  # イベント削除時
+  def mail_event_destroy_for_user(reserve) 
+    @reserve = reserve
+    @event = Event.find(@reserve.event_id)
+    mail(
+      subject: "【Realtime Socail】イベントが中止となりました。",
+      to: @reserve.email
+    ) do |format|
+      format.text
+    end 
+  end
 end

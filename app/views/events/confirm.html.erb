@@ -1,5 +1,4 @@
-<% provide(:title, '') %>
-<% provide(:content, '') %>
+<% provide(:title, '登録したイベントの確認') %>
 
 <%= render "shared/flash" %>
 <div class="container">
@@ -22,7 +21,7 @@
         <div class="event-box box-wrap">
           <div class="event-box__btn">
             <p><%= link_to "編集する", "/events/#{event.id}/edit", method: :get, class:"grey-btn" %></p>
-            <p><%= link_to "削除する", "/events/#{event.id}", method: :delete, class:"grey-btn" %></p>
+            <p><%= link_to "中止する", "/events/#{event.id}", method: :delete, title: "イベントの中止", data: {confirm: "中止しますか？", cancel: "やめる", commit: "確定"}, class:"grey-btn" %></p>
           </div>
           <div class='event-box__detail'>
             <h2><%= event.title %></h2>
@@ -85,6 +84,7 @@
 
 <script>
 $(function(){
+  // 画像表示のメディアクエリ対応
   var screenWidth = window.parent.screen.width;
   console.log(screenWidth);
   
@@ -98,7 +98,8 @@ $(function(){
       slidesToShow: 3,
       slidesToScroll: 3
     });
-  } 
+  }
+  
 });
 </script>
 

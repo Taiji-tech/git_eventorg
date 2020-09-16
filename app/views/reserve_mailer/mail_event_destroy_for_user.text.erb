@@ -1,14 +1,18 @@
 <%= @reserve.nickname %> 様
 
 この度はRealtime Socialをご利用いただきありがとうございます。
-下記イベントのキャンセルが完了しました。
+イベント主催者側の事情により下記イベントの開催が中止となりました。
 
 イベント名：<%= @event.title %>
 開催日時　：<%= @event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(@event.start_date.strftime("%u")) %> <%= @event.start_time.strftime("%H:%M") %>
 参加費　　：<%= @event.price.to_s(:delimited) %> 円
 内容　　　：<%= @event.content %>
 
-お支払い済みの方は、決済もキャンセルとなっています。
+予約いただいたイベントは自動キャンセルとなります。
+自動キャンセル完了後に、別のメールが送信されます。
+
+この度は、イベントが中止となってしまい、大変申し訳ございません。
+何卒宜しくお願い致します。
 
 
 新しいイベントは「Realtime Social」でお探しください！

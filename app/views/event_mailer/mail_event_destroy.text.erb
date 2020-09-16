@@ -1,18 +1,22 @@
-<%= @reserve.nickname %> 様
+<%= @user.nickname %> 様
 
 この度はRealtime Socialをご利用いただきありがとうございます。
-下記イベントのキャンセルが完了しました。
+下記イベントの開催を中止としました。
 
 イベント名：<%= @event.title %>
 開催日時　：<%= @event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(@event.start_date.strftime("%u")) %> <%= @event.start_time.strftime("%H:%M") %>
 参加費　　：<%= @event.price.to_s(:delimited) %> 円
 内容　　　：<%= @event.content %>
+<% if @event.venue_method == "online" %>
+Zoom URL　　　　： <%= @event.venue %>
+Zoom パスワード ： <%= @event.venue_pass %> 
+<% elsif @event.venue_method == "offline" %>
+開催場所： <%= @event.venue %>
+<% end %>
 
-お支払い済みの方は、決済もキャンセルとなっています。
 
+イベントの予約を行っていた方は自動キャンセルとなり、払い戻し処理も実行されております。
 
-新しいイベントは「Realtime Social」でお探しください！
-https://www.realtimesocial.jp
 
 
 ※本メールに身に覚えのない方は、お手数ですが削除してください。

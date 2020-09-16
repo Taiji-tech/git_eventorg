@@ -73,11 +73,12 @@ class EventsController < ApplicationController
   
   # イベントの削除
   def destroy
-    @event = Event.includes(:reserve).find(params[:id])
-    @reserves = @event.reserve
+    @event = Event.find(params[:id])
+    @reserves = Reserve.where(event_id: @event.id) 
     if @event.user_id == current_user.id
       reserves_cancel
       @event.destroy
+      EventMailer.mail_event_destroy(@event).deliver_now
       flash[:notice] = "イベントをキャンセルしました。"
       redirect_to events_confirm_path
     else
@@ -106,19 +107,28 @@ class EventsController < ApplicationController
       
       # イベントの予約をすべてキャンセル
       def reserves_cancel
-        @reserves.each do |resereve|
+        @reserves.each do |reserve|
           @reserve = reserve  
           # 支払い済みの場合
           if @reserve.payed
             payjp_cancel_action
           end
           if @reserve.destroy
+            ReserveMailer.mail_event_destroy_for_user(@reserve).deliver_now
             ReserveMailer.mail_cancel_complite(@reserve).deliver_now
           else
             flash[:notice] = "イベントのキャンセルに失敗しました。"
             redirect_to session[:privious_url]
           end
         end
+      end
+      
+      # 支払い情報の保存
+      def pay_db_resister
+        @pay_new = Pay.new(host_id: @event.user_id, price: - @event.price, 
+                       card_id: @pay.id, reserve_id: @reserve.id, charge_id: @pay.charge_id)
+        @pay_new.user_id = current_user.id if user_signed_in?
+        @pay_new.save
       end
       
       # payjpキャンセルアクション
@@ -128,7 +138,8 @@ class EventsController < ApplicationController
           @pay = Pay.find_by(reserve_id: @reserve.id)
           charge = Payjp::Charge.retrieve(@pay.charge_id)
           charge.refund
-          @reserve.payed = false
+          pay_db_resister
+          @reserve.update(payed: false)
         rescue Payjp::CardError => e
           flash[:notice] = 'カード情報の取得ができませんでした。'
           render "payError.js"
