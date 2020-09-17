@@ -66,26 +66,13 @@ Rails.application.configure do
   # mailer
   config.action_mailer.default_url_options = {  host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
-<<<<<<< HEAD
 
-  #mail送信設定される場合はコメントアウトを解除してください。
-  #送信方法として:smtpを指定した場合は、このconfigを使って送信詳細の設定を行います
-=======
->>>>>>> 0292d88bf2fb372a1aaecfcea6394abb3ea20e20
   config.action_mailer.smtp_settings = {
     address:"smtp.gmail.com",
     domain: 'gmail.com',
     port:587,
-<<<<<<< HEAD
-    #gmailのユーザアカウント（xxxx@gmail.com)※念のため、credentials.yml.enc行き
     user_name: Rails.application.credentials.gmail[:mail_address],
-    #gmail２段階認証回避のためにアプリケーションでの利用パスワードを取得、必ずcredentials.yml.endに設定を！！
     password: Rails.application.credentials.gmail[:app_password],
-    #パスワードをBase64でエンコード
-=======
-    user_name: Rails.application.credentials.gmail[:address],
-    password: Rails.application.credentials.gmail[:password],
->>>>>>> 0292d88bf2fb372a1aaecfcea6394abb3ea20e20
     authentication: :login
   }
 end
