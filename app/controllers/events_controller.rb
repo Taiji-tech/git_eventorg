@@ -33,6 +33,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     if @event.save
+      EventMailer.mail_event_create(@event).deliver_now
       flash[:notice] = "イベントの登録が完了しました！"
       redirect_to events_confirm_path
     else
@@ -72,15 +73,23 @@ class EventsController < ApplicationController
   
   # イベントの削除
   def destroy
-    event = Event.find(params[:id])
-    if event.user_id == current_user.id
-      event.destroy
+    @event = Event.find(params[:id])
+    @reserves = Reserve.where(event_id: @event.id) 
+    if @event.user_id == current_user.id
+      reserves_cancel
+      @event.destroy
+      EventMailer.mail_event_destroy(@event).deliver_now
+      flash[:notice] = "イベントをキャンセルしました。"
+      redirect_to events_confirm_path
+    else
+      flash[:notice] = "イベントをキャンセルできませんでした。"
+      redirect_to events_confirm_path
     end
   end
   
     private
       def event_params
-        params.require(:event).permit(:title, :start_date, :start_time, :venue, :venue_pass, :price, :content, :capacity, imgs: [])
+        params.require(:event).permit(:title, :start_date, :start_time, :venue_method, :venue, :venue_pass, :price, :content, :capacity, imgs: [])
       end
       
       def move_to_index
@@ -93,6 +102,65 @@ class EventsController < ApplicationController
         unless @tenant.present?
           flash[:notice] = "イベント登録前に銀行口座登録を行ってください"
           redirect_to user_pays_hostnew_path
+        end
+      end
+      
+      # イベントの予約をすべてキャンセル
+      def reserves_cancel
+        @reserves.each do |reserve|
+          @reserve = reserve  
+          # 支払い済みの場合
+          if @reserve.payed
+            payjp_cancel_action
+          end
+          if @reserve.destroy
+            ReserveMailer.mail_event_destroy_for_user(@reserve).deliver_now
+            ReserveMailer.mail_cancel_complite(@reserve).deliver_now
+          else
+            flash[:notice] = "イベントのキャンセルに失敗しました。"
+            redirect_to session[:privious_url]
+          end
+        end
+      end
+      
+      # 支払い情報の保存
+      def pay_db_resister
+        @pay_new = Pay.new(host_id: @event.user_id, price: - @event.price, 
+                       card_id: @pay.id, reserve_id: @reserve.id, charge_id: @pay.charge_id)
+        @pay_new.user_id = current_user.id if user_signed_in?
+        @pay_new.save
+      end
+      
+      # payjpキャンセルアクション
+      def payjp_cancel_action
+        begin
+          Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+          @pay = Pay.find_by(reserve_id: @reserve.id)
+          charge = Payjp::Charge.retrieve(@pay.charge_id)
+          charge.refund
+          pay_db_resister
+          @reserve.update(payed: false)
+        rescue Payjp::CardError => e
+          flash[:notice] = 'カード情報の取得ができませんでした。'
+          render "payError.js"
+        rescue Payjp::InvalidRequestError => e
+          flash[:notice] = '不正なパラメータが入力されました。'
+          render "payError.js"
+        rescue Payjp::AuthenticationError => e
+          flash[:notice] = 'カード情報の取得ができませんでした。'
+          render "payError.js"
+        rescue Payjp::APIConnectionError => e
+          flash[:notice] = '通信エラーが発生しました。'
+          render "payError.js"
+        rescue Payjp::APIError => e
+          flash[:notice] = '通信エラーが発生しました。'
+          render "payError.js"
+        rescue Payjp::PayjpError => e
+          flash[:notice] = 'カード情報の取得ができませんでした。'
+          render "payError.js"
+        rescue StandardError
+          flash[:notice] = 'エラーが発生しました。'
+          render "payError.js"
         end
       end
       

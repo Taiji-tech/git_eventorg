@@ -1,3 +1,5 @@
+<% provide(:title, "予約したイベント") %>
+
 <div class="container">
   <div class="row">
     <div class="col-12 col-sm-3">
@@ -74,6 +76,7 @@
             <% if reserve.payed %>
             <div class="event-box__participate-info">
               <p class="event-box__participate-label dark-grey-btn">イベント参加</p>
+              <% if @event.venue_method == "online" %>
               <p>開催時間になったら、以下URLよりイベントへご参加ください。</p>
               <table>
                 <tr>
@@ -85,6 +88,15 @@
                   <td><%= @event.venue_pass %></td>
                 </tr>
               </table>
+              <% elsif @event.venue_method == "offline" %>
+              <p>開催時間までに下記開催場所へ集合してください。</p>
+              <table>
+                <tr>
+                  <th>開催場所</th>
+                  <td><%= @event.venue %></td>
+                </tr>
+              </table>
+              <% end %>
               <% if @deadline >= Time.zone.now %>
               <div class="event-box__participate-btn">
                 <p><%= button_to "キャンセルする", reserf_path(reserve.id), method: :delete, data: {confirm: "本当にキャンセルしてよろしいですか？", cancel: "やめる", commit: "確定"}, title: "予約のキャンセル", class:"submit-btn blue-btn btn-hover" %></p>

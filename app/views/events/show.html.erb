@@ -23,8 +23,21 @@
           <td><%= @event.capacity %> 名</td>
         </tr>
         <tr>
+          <th><i class="fa fa-group" aria-hidden="true"></i> 参加者</th>
+          <td><span class="event-box__reserve"><%= @reserves.size %> 名</span></td>
+        </tr>
+        <tr>
           <th><i class="fa fa-user-secret" aria-hidden="true"></i> 主催者</th>
           <td><%= @event.user.nickname %></td>
+        </tr>
+        <tr>
+          <% if @event.venue_method == "online" %>
+          <th><i class="fa fa-desktop" aria-hidden="true"></i> 開催形式</th>
+          <td>オンライン</td>
+          <% elsif @event.venue_method == "offline" %>
+          <th><i class="fa fa-map-pin" aria-hidden="true"></i> 開催場所</th>
+          <td><%= @event.venue %></td>
+          <% end %>
         </tr>
         <tr>
           <th><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</th>
@@ -57,6 +70,7 @@
       </div>
     </div>
     
+    <% if user_signed_in? && current_user.id == @event.user_id && params[:list] %>
     <div class="event-box__participate">
       <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i> 参加者一覧（<%= @reserves.size %> 名）</h3>
       <ul>
@@ -65,6 +79,7 @@
         <% end %>
       </ul>
     </div>
+    <% end %>
   
   </div>
 </div>

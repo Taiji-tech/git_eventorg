@@ -1,3 +1,5 @@
+<% provide(:title, "お支払いカードの変更") %>
+
 <%= render "shared/flash" %>
 <div class="container">
 <div class="row">
@@ -12,7 +14,7 @@
     
     <div class="pay-form">
       <div class="pay-form__notice">
-        <p>現在登録中のカードから新しいカードへ変更ができます。</p>
+        <p>現在登録中のカードから新しいカードへ変更できます。</p>
         <p>「カード情報を入力する」ボタンが表示されない場合は、更新ボタンを押してください。</p>
       </div>
       <div class="pay-form__box-card box-wrap">
@@ -37,14 +39,14 @@
       </div>
       <div class="pay-form__box-card box-wrap">
         <p>カード情報を入力し、登録してください。</p>
-        <%= form_with(url: pays_path, data: {remote: false}) do |f| %>
+        <%= form_with(url: user_pays_update_card_path, data: {remote: false}) do |f| %>
         <div>
         <script
           type="text/javascript"
           src="https://checkout.pay.jp/"
           class="payjp-button"
           data-key="<%= ENV['PAYJP_KEY'] %>"
-          data-submit-text="トークンを作成する"
+          data-submit-text="カード情報を登録する"
           data-partial="true">
         </script>
         </div>

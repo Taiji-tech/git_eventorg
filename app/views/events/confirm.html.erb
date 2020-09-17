@@ -1,5 +1,4 @@
-<% provide(:title, '') %>
-<% provide(:content, '') %>
+<% provide(:title, '登録したイベントの確認') %>
 
 <%= render "shared/flash" %>
 <div class="container">
@@ -22,14 +21,14 @@
         <div class="event-box box-wrap">
           <div class="event-box__btn">
             <p><%= link_to "編集する", "/events/#{event.id}/edit", method: :get, class:"grey-btn" %></p>
-            <p><%= link_to "削除する", "/events/#{event.id}", method: :delete, class:"grey-btn" %></p>
+            <p><%= link_to "中止する", "/events/#{event.id}", method: :delete, title: "イベントの中止", data: {confirm: "中止しますか？", cancel: "やめる", commit: "確定"}, class:"grey-btn" %></p>
           </div>
           <div class='event-box__detail'>
             <h2><%= event.title %></h2>
             <table>
               <tr>
                 <th><i class="fa fa-group" aria-hidden="true"></i> 参加者</th>
-                <td><span class="event-box__reserve"><%= Reserve.where(event_id: event.id).size %>人</span> <%= link_to "予約者を確認する", event_path(event.id) %></td>
+                <td><span class="event-box__reserve"><%= Reserve.where(event_id: event.id).size %>人</span> <%= link_to "予約者を確認する", event_path(event.id, list:true) %></td>
               </tr>
               <tr>
                 <th><i class="fa fa-clock-o" aria-hidden="true"></i> 日時</th>
@@ -44,8 +43,13 @@
                 <td><%= event.capacity %> 名</td>
               </tr>
               <tr>
+                <% if event.venue_method == "online" %>
                 <th><i class="fa fa-desktop" aria-hidden="true"></i> 開催URL</th>
                 <td><%= event.venue %></td>
+                <% elsif event.venue_method == "offline" %>
+                <th><i class="fa fa-map-pin" aria-hidden="true"></i> 開催場所</th>
+                <td><%= event.venue %></td>
+                <% end %>
               </tr>
               <tr>
                 <th><i class="fa fa-info-circle" aria-hidden="true"></i> 内容</th>
@@ -80,6 +84,7 @@
 
 <script>
 $(function(){
+  // 画像表示のメディアクエリ対応
   var screenWidth = window.parent.screen.width;
   console.log(screenWidth);
   
@@ -93,7 +98,8 @@ $(function(){
       slidesToShow: 3,
       slidesToScroll: 3
     });
-  } 
+  }
+  
 });
 </script>
 
