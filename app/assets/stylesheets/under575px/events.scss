@@ -198,8 +198,8 @@
     width: 100%;
   }
   th,td{
-    padding: .5rem;
-    font-size: 1.8rem;
+    padding: .2rem 0;
+    font-size: 1.6rem;
     font-weight: normal;
   }
   th{
@@ -302,6 +302,20 @@
       width: 100%;
       margin: 0 0 2rem;
     }
+  }
+  ul{
+    width: 100%;
+    display: flex;
+    margin: 0 0 auto;
+    padding: 0;
+  }
+  li{
+    width: 50%;
+    list-style: none;
+    display: inline-block;
+    padding: .5rem 1rem;
+    font-size: 2rem;
+    text-align: center;
   }
 }
 .event-form-date{

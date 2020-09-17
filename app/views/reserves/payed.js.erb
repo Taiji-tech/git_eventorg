@@ -1,0 +1,16 @@
+$(function(){
+  var resistered = `
+    <div>
+      <div>
+        <p>予約およびお支払いが完了しました。イベント開催時間になりましたら、オンラインの場合はお支払い完了メールに記載のリンクより、オフラインイベントの場合は
+        参加場所へお集りください。</p>
+      </div>
+    </div>`
+  
+  $(".event-attend__top h3").text("イベント予約・支払い完了");
+  $("#error-notice").remove();
+  $(".event-attend__select").remove();
+  $(".event-attend__form").remove();
+  $(".event-attend__submit-box").remove();
+  $(".event-attend-form").append(resistered);
+});

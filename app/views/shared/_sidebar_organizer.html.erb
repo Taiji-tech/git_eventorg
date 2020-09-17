@@ -10,7 +10,7 @@
   <div class="sidebar-box">
     <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i> イベント参加管理</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>
     <ul style="display:none;">
-      <li><%= link_to "参加するイベントの確認", user_reserved_path(future:true, past:true) %></li>
+      <li><%= link_to "予約したイベントの確認", user_reserved_path(future:true, past:true) %></li>
     </ul>
   </div>
   
@@ -43,7 +43,7 @@
     <h4 class="sidebar-subtitle btn-hover"><span class="sidebar-icon"><i class="fa fa-user" aria-hidden="true"></i> 登録情報管理</span><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></h4>    
     <ul style="display:none;">
       <li><%= link_to "ユーザー情報", user_edit_path %></li>
-      <li><%= link_to "ログアウト", destroy_user_session_path %></li>
+      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
     </ul>
   </div>  
 

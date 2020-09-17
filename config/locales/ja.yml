@@ -44,7 +44,7 @@ ja:
         title: "タイトル"
         start_date: "開催日時"
         content: "イベント内容"
-        venue: "Zoom ID"
+        venue: "開催場所（オンライン開催時はZoom URL）"
         venue_pass: "Zoom Password"
         capacity: "定員"
         price: "参加費"

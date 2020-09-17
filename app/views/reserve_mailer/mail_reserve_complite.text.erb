@@ -4,7 +4,7 @@
 下記イベントの予約が完了しました。
 
 イベント名：<%= @event.title %>
-開催日時　：<%= @event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(event.start_date.strftime("%u")) %> <%= @event.start_time.strftime("%H:%M") %>
+開催日時　：<%= @event.start_date.strftime("%-m月%-d日") %><%= day_of_the_week(@event.start_date.strftime("%u")) %> <%= @event.start_time.strftime("%H:%M") %>
 参加費　　：<%= @event.price.to_s(:delimited) %> 円
 内容　　　：<%= @event.content %>
 
@@ -21,7 +21,7 @@ https://f3fd64e2c3144aa0bd5657db4ef1c960.vfs.cloud9.us-east-1.amazonaws.com/pays
 https://f3fd64e2c3144aa0bd5657db4ef1c960.vfs.cloud9.us-east-1.amazonaws.com/reserves/<%= @reserve.id %>/cancel
 
 
-
+※本メールに身に覚えのない方は、お手数ですが削除してください。
 ==============================
 Realtime Social 運営
 

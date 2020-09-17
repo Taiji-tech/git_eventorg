@@ -8,6 +8,7 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :venue, presence: true
   validates :venue_pass, presence: true
+  validates :venue_method, presence: true
   validates :content, presence: true
   validates :price, presence: true
   validates :capacity, presence: true
