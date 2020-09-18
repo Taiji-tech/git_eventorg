@@ -73,14 +73,6 @@ class EventsController < ApplicationController
   
   # イベントの削除
   def destroy
-<<<<<<< HEAD
-    event = Event.find(params[:id])
-    if event.user_id == current_user.id
-      event.destroy
-      if event.image != "noimage.jpg"
-        File.delete("app/assets/images/#{event.title}-#{current_user.id}.jpg")
-      end
-=======
     @event = Event.find(params[:id])
     @reserves = Reserve.where(event_id: @event.id) 
     if @event.user_id == current_user.id
@@ -92,7 +84,6 @@ class EventsController < ApplicationController
     else
       flash[:notice] = "イベントをキャンセルできませんでした。"
       redirect_to events_confirm_path
->>>>>>> 069c69b70ec55bba68b6b1d57f9428107ec3273e
     end
   end
   

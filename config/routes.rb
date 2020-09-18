@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root "events#top"
   
-  devise_for :users
+  devise_for :users, :controllers => {
+    :registrations => 'users/registrations'
+  }
 #   ユーザー管理関連
   resources :users, only: [:show]
   
