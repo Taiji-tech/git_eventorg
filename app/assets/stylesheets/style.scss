@@ -62,6 +62,11 @@
 	background: #FF6D14;
 	color: #fff;
 }
+.orange-btn:hover{
+	background: #FF6D14;
+	color: #fff;
+	text-decoration: none;
+}
 .pink-btn{
 	background: #fa5252;
   color: #fff;
@@ -69,6 +74,10 @@
 .dark-grey-btn{
 	background: #343a40;
   color: #fff;
+}
+.green-btn{
+	background: #20c997;
+	color: #fff;
 }
 .grey-btn{
 	background: #e9ecef;
@@ -94,7 +103,7 @@
 	padding: 1rem 0;
 	text-align: center;
 	font-size: 1.8rem;
-	background: #ff8787;
+	background: #1c7ed6;
 	color: #fff;
 	
 	p{
