@@ -84,7 +84,7 @@ $(function(){
       var num = $('.item-image').length + 1 + i
       fileReader.readAsDataURL(file);
 
-      if (num == 10){
+      if (num == 7){
         $('#image-box__container').css('display', 'none');   
       }
   
@@ -127,7 +127,7 @@ $(function(){
     var num = $('.item-image').length
     $('#image-box__container').show()
     $('#image-box__container').attr('class', `item-num-${num}`)
-  })
+  });
   
   // オンライン・オフラインスイッチング
   var online = `

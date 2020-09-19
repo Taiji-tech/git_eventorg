@@ -58,8 +58,9 @@
             <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display:none" %>
           </div>
           <div id="event-form__img">
-            <% @event.imgs.each do |img| %>
-            <div class="event-form__img-wrap item-image" data-image="<%= img.filename %>">
+            <%= f.hidden_field:deleteImg, name:"event[deleteImg][]", id:"delete-img" %>
+            <% @event.imgs.each_with_index do |img, i| %>
+            <div class="event-form__img-wrap item-image" data-image="<%= img.filename %>" data-number="<%= i.to_i %>">
               <div class="event-form__img-box"> 
                 <%= image_tag img, class:"event-form__img" %>
               </div>
@@ -88,22 +89,22 @@ $(function(){
   
   $('#img-file').change(function(){
     var files = $('input[type="file"]').prop('files')[0];
-    
     $.each(this.files, function(i, file){
       var fileReader = new FileReader();
       dataBox.items.add(file);
+      console.log(dataBox.items);
       
       file_field.files = dataBox.files
       var num = $('.item-image').length + 1 + i
       fileReader.readAsDataURL(file);
-
-      if (num == 10){
+      
+      if (num == 7){
         $('#image-box__container').css('display', 'none');   
       }
   
       fileReader.onloadend = function() {
         var src = fileReader.result
-        var imgBox= 
+        var imgBox = 
           `<div class="event-form__img-wrap item-image" data-image="${file.name}">
             <div class="event-form__img-box">
               <img src=${src} class="event-form__img">
@@ -119,16 +120,21 @@ $(function(){
     });
   });
   
-  //削除関連
+  
+
+  var deleteNumberBox = [];
   $(document).on("click", '.event-form__img-remove', function(){
-    console.log("test");
     var target_image = $(this).parent();
-    var target_name = $(target_image).data('image');
+    var target_name = $(target_image).data('image')
+    
+    var index = $(this).parent().data('number');
+    deleteNumberBox.push(index);
+    console.log(deleteNumberBox);
+    $("#delete-img").val(deleteNumberBox);
     
     if(file_field.files.length == 1){
-      // ("input[type=file]").val(null);
+      $("input[type=file]").val(null);
       dataBox.clearData();
-      console.log(dataBox);
     }else{
       
       $.each(file_field.files, function(i,input){
