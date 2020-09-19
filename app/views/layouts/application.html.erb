@@ -24,6 +24,9 @@
     <%= render "shared/flash" %>
     <%= yield %>
     <div id="display" style="display:none; opacity:0;"></div>
+    <div id="loading" style="display:none; opacity:0;">
+      <%= image_tag "loading.gif" %>
+    </div>
     <%= render "layouts/footer" %>
   </body>
 </html>

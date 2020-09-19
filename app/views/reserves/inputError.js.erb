@@ -1,4 +1,5 @@
 $(function(){
+  doneLoading();
   <% if @reserve.present? %>
   $("#error-notice").html("<%= j(render 'shared/error_notice', { model: @reserve }) %>");
   <% elsif @user.present? %>

@@ -7,7 +7,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 1rem;
-    background: #1971c2;
+    background: #FF6D14;
     color: #fff;
     
     a{
@@ -110,7 +110,7 @@
     right: 0;
     width: 30rem;
     height: 100vh;
-    background: #1971c2;
+    background: #FF6D14;
     color: #fff;
     transform: translateX(30rem);
     
@@ -134,9 +134,10 @@
   
   // footer
   .footer{
-    width: 95%;
+    width: 100%;
     margin: 2rem auto;
-    border-top: solid .2rem #adb5bd;
+    padding: 1rem 0;
+    background: #FF6D14;
   
     ul{
       display: flex;
@@ -149,11 +150,11 @@
       font-size: 2rem;
     }
     a{
-      color: #343a40;
+      color: #fff;
     }
     a:hover{
       text-decoration: none;
-      color: #343a40;
+      color: #fff;
       opacity: .8;
     }
   }
@@ -161,8 +162,9 @@
     width: 100%;
     
     p{
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       text-align: center;
+      color: #fff;
     }
   }
 

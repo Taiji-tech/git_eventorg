@@ -62,7 +62,7 @@
       </div>
       <div class="event-box__attend">
         <% if @event.capacity > @reserves.size %>  
-        <p class="event-box__attend-btn blue-btn btn-hover" id="event-attend">このイベントに参加する</p>
+        <p class="event-box__attend-btn orange-btn btn-hover" id="event-attend">このイベントに参加する</p>
         <%= render "events/resistration", collection: @event %>
         <% else %>
         <p class="event-box__attend-btn pink-btn">こちらのイベントは満席です</p>
