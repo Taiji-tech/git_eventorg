@@ -32,7 +32,7 @@
             <label>開催形式<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.hidden_field:venue_method, value: "online", id: "venue-method" %>
             <ul>
-              <li class="blue-btn btn-hover" id="event-method-online">オンライン</li>
+              <li class="orange-btn btn-hover" id="event-method-online">オンライン</li>
               <li class="unselect-btn btn-hover" id="event-method-offline">オフライン</li>
             </ul>
           </div>
@@ -54,12 +54,12 @@
           </div>
           <div class="event-form">
             <label for="event_imgs">画像<br><span class="pink-btn form-necessary">必須</span></label>
-            <label class="event-form__img-field" for="img-file"><span class="submit-btn blue-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
+            <label class="event-form__img-field" for="img-file"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
             <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display:none" %>
           </div>
           <div id="event-form__img"></div>
           <div class="event-submit">
-            <%= f.submit "イベント作成", class:"submit-btn blue-btn btn-hover" %>
+            <%= f.submit "イベント作成", class:"submit-btn orange-btn btn-hover" %>
           </div>
         <% end %>
       </div>
@@ -84,7 +84,7 @@ $(function(){
       var num = $('.item-image').length + 1 + i
       fileReader.readAsDataURL(file);
 
-      if (num == 10){
+      if (num == 7){
         $('#image-box__container').css('display', 'none');   
       }
   
@@ -127,7 +127,7 @@ $(function(){
     var num = $('.item-image').length
     $('#image-box__container').show()
     $('#image-box__container').attr('class', `item-num-${num}`)
-  })
+  });
   
   // オンライン・オフラインスイッチング
   var online = `
@@ -151,9 +151,9 @@ $(function(){
     var count = $(".event-form-online").length;
     if(count == 0){
       $(this).removeClass("unselect-btn");  
-      $(this).addClass("blue-btn");
+      $(this).addClass("orange-btn");
       $("#event-method-offline").addClass("unselect-btn");
-      $("#event-method-offline").removeClass("blue-btn");
+      $("#event-method-offline").removeClass("orange-btn");
       $(".event-form-offline").remove();
       $("#event-method").after(online);
       $("#venue-method").val("online");
@@ -164,9 +164,9 @@ $(function(){
     var count = $(".event-form-offline").length;
     if(count == 0){
       $(this).removeClass("unselect-btn");  
-      $(this).addClass("blue-btn");
+      $(this).addClass("orange-btn");
       $("#event-method-online").addClass("unselect-btn");
-      $("#event-method-online").removeClass("blue-btn");
+      $("#event-method-online").removeClass("orange-btn");
       $(".event-form-online").remove();
       $("#event-method").after(offline);
       $("#venue-method").val("offline");

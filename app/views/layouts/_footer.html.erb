@@ -2,11 +2,14 @@
   <nav>
     <ul>
       <li><%= link_to "ホーム", root_path %></li>
+      <% unless user_signed_in? %>
+      <li><%= link_to "新規ユーザー登録", new_user_registration_path %></li>
       <li><%= link_to "ログイン", new_user_session_path %></li>
+      <% end %>
       <li><%= link_to "ヘルプ" %></li>
     </ul>
   </nav>  
   <div class="footer-copyright">
-    <p>Copyright ©2020 All Right Reserved.</p>
+    <p>Copyright ©2020 Realtime Social All Right Reserved. </p>
   </div>
 </div>

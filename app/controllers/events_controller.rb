@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   after_action :store_location
   # before_action :move_to_index, except: [:index,:show ]
   # indexアクション以外が実行される前にindexが実行される。
-  
+  require 'base64'
     
   # トップ画面、イベント検索  
   def top
@@ -49,11 +49,24 @@ class EventsController < ApplicationController
   # イベント情報の更新
   def update
     @event = Event.find(params[:id])
-    if @event.update(event_params)
-      flash.now[:notice] = "イベントの情報が更新されました！"
-      redirect_to events_confirm_path  
+    @deleteImgs = params[:event][:deleteImg]
+    @imgs = @deleteImgs[0].split(',')
+    
+    if @imgs.size == @event.imgs.size
+      flash[:notice] = "画像は必ず登録してください。"
+      redirect_to session[:privious_url]
     else
-      render "inputError.js.erb"
+
+      if @event.update(event_params)
+        @imgs.each do |i|
+          @index = i.to_i
+          @event.imgs[@index].purge
+        end
+        flash[:notice] = "イベントの情報が更新されました！"
+        redirect_to events_confirm_path  
+      else
+        render "inputError.js.erb"
+      end
     end
   end
   

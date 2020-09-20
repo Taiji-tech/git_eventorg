@@ -87,6 +87,22 @@ body{
   }
 }
 
+// loading中の表示
+#loading{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  text-align: center;
+  
+  img{
+    position: relative;
+    top: 50%;
+    width: 5rem;
+  }
+  
+}
+
 
 // 画像拡大
 .wide-img{
@@ -153,4 +169,17 @@ body{
 }
 .modal-footer{
   border: none;
+}
+
+
+// payjp card入力時の表示
+#payjp_checkout_box input[type=button]{
+  background-image: none!important;
+  background: #ff922b!important;
+  border: 1px solid #ff922b!important;
+}
+#payjp_checkout_box input[type=button].has-token{
+  background-image: none!important;
+  background: #ff6b6b!important;
+  border: 1px solid #ff6b6b!important;
 }

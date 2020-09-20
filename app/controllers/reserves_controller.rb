@@ -90,7 +90,7 @@ class ReservesController < ApplicationController
     @future = params[:future].to_s
     @past = params[:past].to_s
     
-    @reserves_current_user = Reserve.includes(:event).where(email: current_user.email)
+    @reserves_current_user = Reserve.includes(:event).where(user_id: current_user.id)
     if to_bool(@future) && to_bool(@past)
       @reserves = @reserves_current_user.page(params[:page]).per(5)
     elsif to_bool(@future)

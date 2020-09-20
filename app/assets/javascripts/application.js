@@ -64,3 +64,23 @@ $(document).on('turbolinks:load', function(){
   wideImg.close();
  
 });
+
+
+// 通信中の表示
+function stateLoading(){
+  $(function(){
+    $("#display").css('opacity','.3');
+    $("#display").css('display','block');
+    $("#loading").css('opacity','1');
+    $("#loading").css('display','block');
+  }); 
+}
+
+function doneLoading(){
+  $(function(){
+    $("#display").css('opacity','0');
+    $("#display").css('display','none');
+    $("#loading").css('opacity','0');
+    $("#loading").css('display','none');
+  });
+}
