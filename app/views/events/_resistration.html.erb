@@ -59,11 +59,11 @@ $(function(){
         </div>
         <% if user_signed_in? %>
         <div class="event-attend__submit-box">
-          <%= button_to "予約する", event_reserves_path(@event.id), remote: true, class:"submit-btn blue-btn btn-hover" %>
+          <%= button_to "予約する", event_reserves_path(@event.id), remote: true, class:"submit-btn orange-btn btn-hover" %>
         </div>
         <% else %>
         <div class="event-attend__select">
-          <li class="blue-btn btn-hover" id="with-resistration">ユーザー登録もする</li>
+          <li class="orange-btn btn-hover" id="with-resistration">ユーザー登録もする</li>
           <li class="unselect-btn btn-hover" id="without-resistration">今はしない</li>
           <p>アカウントをお持ちの方 <%= link_to "ログイン", user_session_path %></p>
         </div>
@@ -86,7 +86,7 @@ $(function(){
             <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）" %>
           </div>
           <div class="event-attend__submit-box">
-            <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover" %>
+            <%= f.submit "予約する", class:"submit-btn orange-btn btn-hover" %>
           </div>
         <% end %>
         </div>
@@ -117,7 +117,7 @@ $(function(){
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）" %>
       </div>
       <div class="event-attend__submit-box">
-        <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover"  %>
+        <%= f.submit "予約する", class:"submit-btn orange-btn btn-hover"  %>
       </div>
     <% end %>
     </div>`  
@@ -135,7 +135,7 @@ $(function(){
         <%= f.email_field:email, placeholder: "E-mail" %>
       </div>
       <div class="event-attend__submit-box">
-        <%= f.submit "予約する", class:"submit-btn blue-btn btn-hover" %>
+        <%= f.submit "予約する", class:"submit-btn orange-btn btn-hover" %>
       </div>
     <% end %>
     </div>`
@@ -167,8 +167,8 @@ $(function(){
         var className = $(this).attr("class");
         if(className.indexOf("unselect-btn") > -1){
           $(this).removeClass("unselect-btn");
-          $(this).addClass("blue-btn");
-          $("#without-resistration").removeClass("blue-btn");
+          $(this).addClass("orange-btn");
+          $("#without-resistration").removeClass("orange-btn");
           $("#without-resistration").addClass("unselect-btn");
           $("#event-attend__form-without").remove();
           $(".event-attend__detail").append(formWithResistration);
@@ -180,8 +180,8 @@ $(function(){
         var className = $(this).attr("class");
         if(className.indexOf("unselect-btn") > -1){
           $(this).removeClass("unselect-btn");
-          $(this).addClass("blue-btn");
-          $("#with-resistration").removeClass("blue-btn");
+          $(this).addClass("orange-btn");
+          $("#with-resistration").removeClass("orange-btn");
           $("#with-resistration").addClass("unselect-btn");
           $("#event-attend__form-with").remove();
           $(".event-attend__detail").append(formWithoutResistration);

@@ -9,7 +9,8 @@ class UsersController < ApplicationController
   # ユーザーのプロフィール設定
   def profile
     @events = current_user.events.page(params[:page]).per(5).order("start_date DESC")
-    @reserves = Reserve.where(email: current_user.email)
+    @reserves_current_user = Reserve.includes(:event).where(user_id: current_user.id)
+    @reserves = @reserves_current_user.where(events: {start_date: Time.zone.now..Float::INFINITY})
   end
   
   # ユーザー情報の表示

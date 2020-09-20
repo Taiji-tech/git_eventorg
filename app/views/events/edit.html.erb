@@ -32,7 +32,7 @@
             <label>開催形式<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.hidden_field:venue_method, value: "online", id: "venue-method" %>
             <ul>
-              <li class="blue-btn btn-hover" id="event-method-online">オンライン</li>
+              <li class="orange-btn btn-hover" id="event-method-online">オンライン</li>
               <li class="unselect-btn btn-hover" id="event-method-offline">オフライン</li>
             </ul>
           </div>
@@ -54,12 +54,13 @@
           </div>
           <div class="event-form">
             <label for="event_imgs">画像<br><span class="pink-btn form-necessary">必須</span></label>
-            <label class="event-form__img-field" for="img-file"><span class="submit-btn blue-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
+            <label class="event-form__img-field" for="img-file"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
             <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display:none" %>
           </div>
           <div id="event-form__img">
-            <% @event.imgs.each do |img| %>
-            <div class="event-form__img-wrap item-image" data-image="<%= img.filename %>">
+            <%= f.hidden_field:deleteImg, name:"event[deleteImg][]", id:"delete-img" %>
+            <% @event.imgs.each_with_index do |img, i| %>
+            <div class="event-form__img-wrap item-image" data-image="<%= img.filename %>" data-number="<%= i.to_i %>">
               <div class="event-form__img-box"> 
                 <%= image_tag img, class:"event-form__img" %>
               </div>
@@ -70,7 +71,7 @@
             <% end %>
           </div>
           <div class="event-submit">
-            <%= f.submit "編集完了", class:"submit-btn blue-btn btn-hover" %>
+            <%= f.submit "編集完了", class:"submit-btn orange-btn btn-hover" %>
           </div>
         <% end %>
         
@@ -88,22 +89,22 @@ $(function(){
   
   $('#img-file').change(function(){
     var files = $('input[type="file"]').prop('files')[0];
-    
     $.each(this.files, function(i, file){
       var fileReader = new FileReader();
       dataBox.items.add(file);
+      console.log(dataBox.items);
       
       file_field.files = dataBox.files
       var num = $('.item-image').length + 1 + i
       fileReader.readAsDataURL(file);
-
-      if (num == 10){
+      
+      if (num == 7){
         $('#image-box__container').css('display', 'none');   
       }
   
       fileReader.onloadend = function() {
         var src = fileReader.result
-        var imgBox= 
+        var imgBox = 
           `<div class="event-form__img-wrap item-image" data-image="${file.name}">
             <div class="event-form__img-box">
               <img src=${src} class="event-form__img">
@@ -119,16 +120,21 @@ $(function(){
     });
   });
   
-  //削除関連
+  
+
+  var deleteNumberBox = [];
   $(document).on("click", '.event-form__img-remove', function(){
-    console.log("test");
     var target_image = $(this).parent();
-    var target_name = $(target_image).data('image');
+    var target_name = $(target_image).data('image')
+    
+    var index = $(this).parent().data('number');
+    deleteNumberBox.push(index);
+    console.log(deleteNumberBox);
+    $("#delete-img").val(deleteNumberBox);
     
     if(file_field.files.length == 1){
-      // ("input[type=file]").val(null);
+      $("input[type=file]").val(null);
       dataBox.clearData();
-      console.log(dataBox);
     }else{
       
       $.each(file_field.files, function(i,input){
@@ -167,9 +173,9 @@ $(function(){
     var count = $(".event-form-online").length;
     if(count == 0){
       $("#event-method-online").removeClass("unselect-btn");  
-      $("#event-method-online").addClass("blue-btn");
+      $("#event-method-online").addClass("orange-btn");
       $("#event-method-offline").addClass("unselect-btn");
-      $("#event-method-offline").removeClass("blue-btn");
+      $("#event-method-offline").removeClass("orange-btn");
       $(".event-form-offline").remove();
       $("#event-method").after(online);
       $("#venue-method").val("online");
@@ -179,9 +185,9 @@ $(function(){
     var count = $(".event-form-offline").length;
     if(count == 0){
       $("#event-method-offline").removeClass("unselect-btn");  
-      $("#event-method-offline").addClass("blue-btn");
+      $("#event-method-offline").addClass("orange-btn");
       $("#event-method-online").addClass("unselect-btn");
-      $("#event-method-online").removeClass("blue-btn");
+      $("#event-method-online").removeClass("orange-btn");
       $(".event-form-online").remove();
       $("#event-method").after(offline);
       $("#venue-method").val("offline");
