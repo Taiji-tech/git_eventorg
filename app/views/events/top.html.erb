@@ -11,17 +11,20 @@
 
 
 <div class="container">
-  <div class="page-title">
-    <h1>お探しのイベントは？</h1>
-  </div>
-
   <div class="">
     <!--各イベント表示-->
     <div class="event-top">
+      <div class="page-title">
+        <h1>お探しのイベントは？</h1>
+      </div>
+      
       <% @events.each do |event| %>
       <div class="event-top__box box-wrap">
         <div class="event-top__header" style="width: 100%;">
           <p class="pink-btn">募集中</p>
+          <% if event.venue_method == "online" %>
+          <p class="orange-btn">オンライン</p>
+          <% end %>
         </div>
         <div class="event-top__img">
           <% event.imgs.each do |img| %>

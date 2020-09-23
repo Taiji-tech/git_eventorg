@@ -1,0 +1,23 @@
+<p><%= @contact.name %> 様よりお問い合わせがありました。</p>
+
+<div class="mail">
+  <h3>１．お問い合わせユーザー情報</h3>
+  <p>名前　： <%= @contact.name %><br>
+  E-mail： <%= @contact.email %></p>
+</div>
+
+<div class="mail">
+  <h3>２．お問い合わせ内容</h3>
+  <p>件名： <%= @contact.title %></p>
+  <p>内容：<br>
+  <%= simple_format(@contact.content) %></p>
+</div>
+
+
+<p>※本メールに身に覚えのない方は、お手数ですが削除してください。</p>
+<p>==============================</p>
+<p>Realtime Social 運営<br></p>
+
+<p>お問い合わせはこちらまで</p>
+<p>https://www.realtimesocial.jp</p>
+<p>==============================</p>

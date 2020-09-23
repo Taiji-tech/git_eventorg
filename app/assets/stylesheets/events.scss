@@ -23,8 +23,9 @@
 .top-search{
   width: 80%;
   margin: auto;
-  position: relative;
-  top: -10rem;
+  position: absolute;
+  top: 15rem;
+  left: 10%;
   background: #f8f9fa;
   box-shadow: 0 0 1rem #343a40!important;
 }
@@ -44,10 +45,11 @@
   form{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
   }
 }
 .top-search__box{
-  width: 44%;
+  width: 22.5%;
   margin: auto;
   
   p{
@@ -74,6 +76,9 @@
     border: solid .2rem #1c7ed6;
     box-shadow: 0 0 0 .2rem #1c7ed6;
   }
+  input[type=checkbox]{
+    height: 2rem;
+  }
 }
 .top-search__price-box{
   width: 100%;
@@ -99,6 +104,17 @@
     outline: none !important;
     border: solid .2rem #1c7ed6;
     box-shadow: 0 0 0 .2rem #1c7ed6;
+  }
+}
+.top-search__venue-method-wrap{
+  display: flex;
+}
+.top-search__venue-method{
+  width: 50%;
+  text-align: center;
+  
+  label{
+    width: 100%;
   }
 }
 .top-search__submit-box{
@@ -152,11 +168,11 @@
     font-weight: bold;
   }
   th, td{
-    padding: 0 1rem;
+    padding: 0 .5rem;
     font-size: 1.8rem;
   }
   th{
-    width: 30%;
+    width: 37%;
   }
 }
 .event-top__btn{

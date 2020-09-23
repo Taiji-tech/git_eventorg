@@ -9,9 +9,9 @@ class EventsController < ApplicationController
     
   # トップ画面、イベント検索  
   def top
-    @events = Event.includes(:user).order("start_date DESC").page(params[:page]).per(10)
+    @events = Event.includes(:user).order("start_date ASC").page(params[:page]).per(10)
     not_expired_event
-    @events = @events.order("start_date DESC").page(params[:page]).per(10)
+    @events = @events.order("start_date ASC").page(params[:page]).per(10)
     if params[:date].present?
       @events = @events.where(start_date: params[:date].in_time_zone.all_day).page(params[:page]).per(10)
     elsif params[:max].present? && params[:min].present?

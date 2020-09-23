@@ -51,7 +51,7 @@ $(function(){
               <td><%= @event.capacity %> 名</td>
             </tr>
             <tr>
-              <th>主催者</th>
+              <th>ホスト</th>
               <td><%= @event.user.nickname %></td>
             </tr>
           </table>
@@ -62,6 +62,10 @@ $(function(){
           <%= button_to "予約する", event_reserves_path(@event.id), remote: true, class:"submit-btn orange-btn btn-hover" %>
         </div>
         <% else %>
+        <div class="">
+          <input type="checkbox" id="select-registration"></input>
+          <label for="select-registration">ユーザー登録する</label>
+        </div>
         <div class="event-attend__select">
           <li class="orange-btn btn-hover" id="with-resistration">ユーザー登録もする</li>
           <li class="unselect-btn btn-hover" id="without-resistration">今はしない</li>
