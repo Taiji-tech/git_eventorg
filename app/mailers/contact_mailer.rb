@@ -5,7 +5,7 @@ class ContactMailer < ApplicationMailer
     @contact = contact
     mail(
       subject: "【Realtime Socail】お問い合わせがありました。",
-      to: "nakonakoshi@gmail.com"
+      to: "info@realtimesocial.jp"
     ) do |format|
       format.html
     end 

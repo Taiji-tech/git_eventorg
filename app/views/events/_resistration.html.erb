@@ -59,35 +59,27 @@ $(function(){
         </div>
         <% if user_signed_in? %>
         <div class="event-attend__submit-box">
-          <%= button_to "予約する", event_reserves_path(@event.id), remote: true, class:"submit-btn orange-btn btn-hover" %>
+          <% if @card.present? %>
+          <%= button_to "予約する", event_reserves_path(@event.id), remote: true, class:"submit-btn orange-btn btn-hover", title: "イベント予約・支払い", data: {confirm: "イベントの予約、登録されたクレジットカードによる支払いを行ってよろしいでしょうか？", cancel: "やめる", commit: "確定"} %>
+          <% else %>
+          <%= button_to "予約する", event_reserves_path(@event.id), remote: true, class:"submit-btn orange-btn btn-hover", title: "イベント予約", data: {confirm: "イベントの予約を行ってよろしいでしょうか？", cancel: "やめる", commit: "確定"} %>
+          <% end %>
         </div>
         <% else %>
-        <div class="">
-          <input type="checkbox" id="select-registration"></input>
-          <label for="select-registration">ユーザー登録する</label>
-        </div>
         <div class="event-attend__select">
-          <li class="orange-btn btn-hover" id="with-resistration">ユーザー登録もする</li>
-          <li class="unselect-btn btn-hover" id="without-resistration">今はしない</li>
-          <p>アカウントをお持ちの方 <%= link_to "ログイン", user_session_path %></p>
+          <input type="checkbox" id="select-registration"></input>
+          <label for="select-registration">ユーザー登録も一緒に行う</label>
+          <p>（アカウントをお持ちの方 <%= link_to "ログイン", user_session_path %>）</p>
         </div>
-        <div class="event-attend__form" id="event-attend__form-with">
-        <%= form_with(model: @user, url: event_create_with_resistration_path(@event.id)) do |f| %>
+        <div class="event-attend__form" id="event-attend__form-without">
+        <%= form_with(model: @reserve, url: event_reserves_path(@event.id)) do |f| %>
           <div class="event-attend__form-box">
             <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
             <%= f.text_field:nickname, placeholder: "ニックネーム" %>
           </div>
           <div class="event-attend__form-box">
             <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
-            <%= f.text_field:email, placeholder: "E-mail" %>
-          </div>
-          <div class="event-attend__form-box">
-            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
-            <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（6文字以上）"  %>
-          </div>
-          <div class="event-attend__form-box">
-            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）" %>
+            <%= f.email_field:email, placeholder: "E-mail" %>
           </div>
           <div class="event-attend__submit-box">
             <%= f.submit "予約する", class:"submit-btn orange-btn btn-hover" %>
@@ -121,7 +113,7 @@ $(function(){
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）" %>
       </div>
       <div class="event-attend__submit-box">
-        <%= f.submit "予約する", class:"submit-btn orange-btn btn-hover"  %>
+        <%= f.submit "予約・ユーザー登録する", class:"submit-btn orange-btn btn-hover", title: "イベント予約・ユーザー登録", data: {confirm: "イベントの予約およびユーザー登録を行ってよろしいでしょうか？", cancel: "やめる", commit: "確定"}  %>
       </div>
     <% end %>
     </div>`  
@@ -143,10 +135,7 @@ $(function(){
       </div>
     <% end %>
     </div>`
-  
-  
-  
-  
+
   $("#event-attend").on("click", function(){
     $.when(
       $("#display").animate({opacity: .8}, 300)
@@ -165,32 +154,25 @@ $(function(){
         }); 
       });
       
-      
-      // ユーザー登録も行うボタンを押したとき
-      $("#with-resistration").on("click", function(){
-        var className = $(this).attr("class");
-        if(className.indexOf("unselect-btn") > -1){
-          $(this).removeClass("unselect-btn");
-          $(this).addClass("orange-btn");
-          $("#without-resistration").removeClass("orange-btn");
-          $("#without-resistration").addClass("unselect-btn");
-          $("#event-attend__form-without").remove();
-          $(".event-attend__detail").append(formWithResistration);
+      // チェックボックスのクリックをしたとき
+      $("#select-registration").on("change", function(){
+        var flag = $("#select-registration").prop("checked");
+
+        if (flag){
+          var countWithRegistration = $("#event-attend__form-with").length;
+          if(countWithRegistration == 0){
+            $("#event-attend__form-without").remove();
+            $(".event-attend__detail").append(formWithResistration);
+          }
+        }else{
+          var countWithoutRegistration = $("#event-attend__form-without").length;
+          if(countWithoutRegistration == 0){
+            $("#event-attend__form-with").remove();
+            $(".event-attend__detail").append(formWithoutResistration);
+          }
         }
       });
       
-      // ユーザー登録は行わないボタンを押したとき
-      $("#without-resistration").on("click", function(){
-        var className = $(this).attr("class");
-        if(className.indexOf("unselect-btn") > -1){
-          $(this).removeClass("unselect-btn");
-          $(this).addClass("orange-btn");
-          $("#with-resistration").removeClass("orange-btn");
-          $("#with-resistration").addClass("unselect-btn");
-          $("#event-attend__form-with").remove();
-          $(".event-attend__detail").append(formWithoutResistration);
-        }
-      });
     });
   });
 });  

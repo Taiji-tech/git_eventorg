@@ -67,14 +67,13 @@
     height: 5rem;
     padding: 1rem;
     font-size: 2rem;
-    border-radius: .5rem;
-    border: solid .2rem #adb5bd;
+    border: solid .1rem #adb5bd;
     transition: .3s;
   }
   input:focus{
     outline: none !important;
-    border: solid .2rem #1c7ed6;
-    box-shadow: 0 0 0 .2rem #1c7ed6;
+    border: solid .1rem #1c7ed6;
+    box-shadow: 0 0 0 .1rem #1c7ed6;
   }
   input[type=checkbox]{
     height: 2rem;
@@ -96,14 +95,13 @@
     height: 5rem;
     padding: 1rem;
     font-size: 2rem;
-    border-radius: .5rem;
-    border: solid .2rem #adb5bd;
+    border: solid .1rem #adb5bd;
     transition: .3s;
   }
   input:focus{
     outline: none !important;
-    border: solid .2rem #1c7ed6;
-    box-shadow: 0 0 0 .2rem #1c7ed6;
+    border: solid .1rem #1c7ed6;
+    box-shadow: 0 0 0 .1rem #1c7ed6;
   }
 }
 .top-search__venue-method-wrap{
@@ -115,6 +113,11 @@
   
   label{
     width: 100%;
+  }
+  input:focus{
+    outline: none !important;
+    border: none;
+    box-shadow: none;
   }
 }
 .top-search__submit-box{
@@ -144,6 +147,24 @@
     border-radius: 2rem;
     font-size: 2rem;
   }
+}
+.event-top__result{
+  width: 100%;
+  margin: 2rem 0;
+  padding: 2rem 1rem;
+  
+  p{
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+    color: #343a40;
+  }
+}
+.event-top__result-zero{
+  background: #f1f3f5;
+}
+.event-top__result-not-zero{
+  background: #ffe3e3;
 }
 .event-top__box{
   width: 43rem;
@@ -214,6 +235,7 @@
   }
   th,td{
     padding: .2rem 1rem;
+    vertical-align: top;
     font-size: 2rem;
     font-weight: normal;
   }
@@ -223,6 +245,10 @@
   i{
     width: 2rem;
     text-align: center;
+  }
+  p{
+    margin: 0 0 1rem;
+    line-height: 1.2em;
   }
 }
 .event-box__img{
@@ -474,18 +500,21 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  padding: 2rem 0 0;
+  padding: 1rem 0;
   
-  li{
-    width: 50%;
-    padding: .5rem 0;
-    list-style: none;
-    text-align: center;
-    font-size: 1.8rem;
+  label{
+    margin: 0;
+    font-size: 1.6rem;
+  }
+  input{
+    height: 2rem;
+    margin: 0 1rem 0 0!important;
+  }
+  label:hover, input:hover{
+    cursor: pointer; 
   }
   p{
     margin: 0;
-    padding: .5rem 0;
     font-size: 1.6rem;
   }
 }

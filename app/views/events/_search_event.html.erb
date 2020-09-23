@@ -22,19 +22,20 @@
   <div class="top-search__box">
     <p><i class="fa fa-lightbulb-o" aria-hidden="true"></i> キーワード</p>
     <div class="top-search__form-box">
-      <%= f.text_field:keyword, value: params[:keyword] %>
+      <%= f.text_field:keyword, value: params[:keyword], placeholder: "検索ワードを入力" %>
     </div>
   </div>
   <div class="top-search__box">
     <p><i class="fa fa-map-pin" aria-hidden="true"></i> 開催形式</p>
     <div class="top-search__form-box top-search__venue-method-wrap">
+      <%= f.hidden_field:venue_method, value: params[:venue_method], id:"venue_method" %>
       <div class="top-search__venue-method">
-        <%= f.label:online, "オンライン" %>
-        <%= f.check_box :online, value: params[:online] %>
+        <%= f.label:online, "オンラインのみ" %>
+        <%= f.check_box :online, id:"method-online" %>
       </div>
       <div class="top-search__venue-method">
-        <%= f.label:online, "オフライン" %>
-        <%= f.check_box :offline, value: params[:offline] %>
+        <%= f.label:offline, "オフラインのみ" %>
+        <%= f.check_box :offline, id:"method-offline" %>
       </div>
     </div>
   </div>
@@ -44,3 +45,38 @@
   <% end %>
   </div>
 </div>
+
+
+
+<script>
+$(function(){
+  <% if params[:venue_method] == "online" %>
+  $("#method-online").prop("checked", true);
+  <% elsif params[:venue_method] == "offline" %>
+  $("#method-offline").prop("checked", true);
+  <% end %>
+  
+  $("#method-online").on("change", function(){
+    var online = $('#method-online').prop('checked');
+    if (online){
+      $("#venue_method").val("online");
+      $("#method-offline").prop("checked", false);
+    }
+  });
+  $("#method-offline").on("change", function(){
+    var offline = $('#method-offline').prop('checked');
+    if(offline){
+      $("#venue_method").val("offline");
+      $("#method-online").prop("checked", false);
+    }
+  });
+  $("input[type=checkbox]").on("change", function(){
+    var online = $('#method-online').prop('checked');
+    var offline = $('#method-offline').prop('checked');
+    if(offline || online){
+    }else{
+      $("#venue_method").val("");
+    }
+  });
+});  
+</script>
