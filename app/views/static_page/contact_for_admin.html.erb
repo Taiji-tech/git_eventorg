@@ -1,0 +1,25 @@
+<% provide(:title, "お問い合わせ完了") %>
+
+<div class="container">
+<div class="row">
+  <div class="contact">
+    <div class="page-title">
+      <h1>お問い合わせ完了</h1>
+    </div>
+    <p>お問い合わせが完了しました。運営にて内容を確認を行い、送信いただいたE-mailアドレスへご連絡させていただきます。</p>
+    <ul>
+      <li><%= link_to "新しくイベントを探す", root_path %></li>
+      <li><%= link_to "ホーム画面へ戻る", root_path %></li>
+      <% if user_signed_in? %>
+      <li><%= link_to "新しくイベントのホストになる", new_event_path %></li>
+      <li><%= link_to "参加予定のイベントをみる", events_confirm_path %></li>
+      <% else %>
+      <li><%= link_to "新規ユーザー登録を行う", new_user_registration_path %></li>
+      <li><%= link_to "ログインする", new_user_session_path %></li>
+      <% end %>
+    </ul>
+    
+  </div>  
+</div>  
+</div>  
+    

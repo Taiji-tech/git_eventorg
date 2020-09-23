@@ -49,5 +49,10 @@ ja:
         capacity: "定員"
         price: "参加費"
         imgs: "画像"
+      contact:
+        name: "名前"
+        email: "E-mail"
+        title: "件名"
+        content: "内容"
 
   

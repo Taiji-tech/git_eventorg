@@ -9,12 +9,18 @@
 内容　　　：<%= @event.content %>
 
 
+<% if @event.venue_method == "online" %>
 下記にイベントへのご招待IDをお送りさせていただきます。
-参加UR　　：<%= @event.venue %>
-パスワード：<%= @event.venue_pass %> 
-
+参加URL　　 ： <%= @event.venue %>
+パスワード　： <%= @event.venue_pass %> 
 
 イベント開催時間となりましたら、URLにログインください。
+<% elsif @event.venue_method == "offline" %>
+下記に開催場所を示します。
+開催場所 ： <%= @event.venue %>
+
+イベント開催時間までに、開催場所へ集合してください。
+<% end %>
 
 
 

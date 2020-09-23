@@ -11,17 +11,42 @@
 
 
 <div class="container">
-  <div class="page-title">
-    <h1>お探しのイベントは？</h1>
-  </div>
-
   <div class="">
     <!--各イベント表示-->
     <div class="event-top">
+      <div class="page-title">
+        <h1>お探しのイベントは？</h1>
+      </div>
+      
+      <% if @events.size == 0 %>
+      <% if params[:commit].present? %>
+      <div class="event-top__result event-top__result-zero">
+        <p>検索条件にマッチするイベントは、現在のところ予定されておりません。</p>
+      </div>
+      <% else %>
+      <div class="event-top__result event-top__result-zero">
+        <p>現在登録されているイベントはありません。</p>
+      </div>
+      <% end %>
+      <% else %>
+      <% if params[:commit].present? %>
+      <div class="event-top__result event-top__result-not-zero">
+        <p>条件にマッチしたイベントが見つかりました！</p>
+      </div>
+      <% end %>
+      <% end %>
+      
+      
+      
       <% @events.each do |event| %>
       <div class="event-top__box box-wrap">
         <div class="event-top__header" style="width: 100%;">
           <p class="pink-btn">募集中</p>
+          <% if event.venue_method == "online" %>
+          <p class="orange-btn">オンライン</p>
+          <% elsif event.venue_method == "offline" %>
+          <p class="blue-btn">オフライン</p>
+          <% end %>
         </div>
         <div class="event-top__img">
           <% event.imgs.each do |img| %>
