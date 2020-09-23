@@ -1,23 +1,38 @@
-<p><%= @contact.name %> 様よりお問い合わせがありました。</p>
+<p style="font-size:1rem; margin: 0 0 1rem;"><%= @contact.name %> 様よりお問い合わせがありました。</p>
 
-<div class="mail">
+<div style="padding:1rem 0;">
   <h3>１．お問い合わせユーザー情報</h3>
-  <p>名前　： <%= @contact.name %><br>
-  E-mail： <%= @contact.email %></p>
+  <table style="width: 100%;text-align:left;vertical-align:top;">
+    <tr>
+      <th style="width: 4rem">名前　：</th>
+      <td><%= @contact.name %></td>
+    </tr>
+    <tr>
+      <th>E-mail： </th>
+      <td><%= @contact.email %></td>
+    </tr>
+  </table>
 </div>
 
-<div class="mail">
+<div style="padding:1rem 0;">
   <h3>２．お問い合わせ内容</h3>
-  <p>件名： <%= @contact.title %></p>
-  <p>内容：<br>
-  <%= simple_format(@contact.content) %></p>
+  <table style="width: 100%;text-align:left;vertical-align:top;">
+    <tr>
+      <th>件名：</th>
+      <td><%= @contact.title %></td>
+    </tr>
+    <tr>
+      <th>内容：</th>
+      <td><%= simple_format(@contact.content) %></td>
+    </tr>
+  </table>
 </div>
 
 
-<p>※本メールに身に覚えのない方は、お手数ですが削除してください。</p>
-<p>==============================</p>
-<p>Realtime Social 運営<br></p>
+<p>※本メールに身に覚えのない方は、お手数ですが削除してください。<br>
+==============================<br>
+Realtime Social 運営<br></p>
 
-<p>お問い合わせはこちらまで</p>
-<p>https://www.realtimesocial.jp</p>
-<p>==============================</p>
+<p>お問い合わせはこちらまで<br>
+https://www.realtimesocial.jp<br>
+==============================</p>
