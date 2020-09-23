@@ -4,10 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {
     :registrations => 'users/registrations'
   }
-<<<<<<< HEAD
-=======
   
->>>>>>> e051c0b8062d646ef7c2d613417639b578d9f1eb
 #   ユーザー管理関連
   resources :users, only: [:show]
 
