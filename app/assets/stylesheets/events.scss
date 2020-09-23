@@ -14,18 +14,19 @@
 }
 .top-img{
   width: 100%;
+  position: absolute;
+  z-index: -1;
   
   img{
     width: 100%;
-    filter: grayscale(1);
+    // filter: grayscale(1);
   }
 }
 .top-search{
   width: 80%;
   margin: auto;
-  position: absolute;
-  top: 15rem;
-  left: 10%;
+  position: relative;
+  top: 5rem;
   background: #f8f9fa;
   box-shadow: 0 0 1rem #343a40!important;
 }
@@ -135,7 +136,13 @@
   width: 90rem;
   display: flex;
   flex-wrap: wrap;
-  margin: auto;
+  margin: 7rem auto;
+}
+.event-top{
+  h1{
+    color: #fff!important;
+    padding: 2rem 0!important;
+  }
 }
 .event-top__header{
   width: 100%;
@@ -169,6 +176,7 @@
 .event-top__box{
   width: 43rem;
   margin: 0 auto 4rem;
+  background: #fff;
 }
 .event-top__img{
   
