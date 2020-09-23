@@ -1,5 +1,12 @@
 $(function(){
-  <% if @event.present? %>
-  $("#error-notice").html("<%= j(render 'shared/error_notice', { model: @event }) %>");
-  <% end %>
+  $.when(
+    <% if @event.present? %>
+    $("#error-notice").html("<%= j(render 'shared/error_notice', { model: @event }) %>");
+    console.log("dibe");
+    <% end %>
+  ).done(function(){
+    $("#display").css("display", "");
+    $("#display").css("opacity", ".8");
+    console.log("dibe");
+  });
 });

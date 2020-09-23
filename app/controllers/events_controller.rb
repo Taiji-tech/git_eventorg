@@ -9,18 +9,26 @@ class EventsController < ApplicationController
     
   # トップ画面、イベント検索  
   def top
-    @events = Event.includes(:user).order("start_date DESC").page(params[:page]).per(10)
+    @events = Event.includes(:user).order("start_date ASC")
     not_expired_event
-    @events = @events.order("start_date DESC").page(params[:page]).per(10)
-    if params[:date].present?
-      @events = @events.where(start_date: params[:date].in_time_zone.all_day).page(params[:page]).per(10)
-    elsif params[:max].present? && params[:min].present?
-      @events = @events.where(price: params[:min] .. params[:max]).page(params[:page]).per(10)
-    elsif params[:max].present?
-      @events = @events.where(price: Float::MIN .. params[:max].to_i).page(params[:page]).per(10)
-    elsif params[:min].present?
-      @events = @events.where(price: params[:min].to_i .. Float::INFINITY).page(params[:page]).per(10)
+    @events = @events.order("start_date ASC")
+    if params[:venue_method].present?
+      @events = @events.where(venue_method: params[:venue_method])
     end
+    if params[:date].present?
+      @events = @events.where(start_date: params[:date].in_time_zone.all_day)
+    end
+    if params[:max].present? && params[:min].present?
+      @events = @events.where(price: params[:min] .. params[:max])
+    elsif params[:max].present?
+      @events = @events.where(price: Float::MIN .. params[:max].to_i)
+    elsif params[:min].present?
+      @events = @events.where(price: params[:min].to_i .. Float::INFINITY)
+    end
+    if params[:keyword].present?
+      @events = @events.where("title LIKE ?", "%#{params[:keyword]}%")
+    end
+    @events = @events.page(params[:page]).per(10)
   end
 
   # イベントの新規登録画面
@@ -73,6 +81,9 @@ class EventsController < ApplicationController
   
   def confirm
     @events = Event.where(user_id: @user.id).page(params[:page]).per(5)
+    if user_signed_in?
+      @card = Card.find_by(user_id: current_user.id)
+    end
   end
 
   # イベント詳細表示

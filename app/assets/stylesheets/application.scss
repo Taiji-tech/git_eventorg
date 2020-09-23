@@ -22,10 +22,17 @@
 
 html{
   overflow-x: hidden;
+  min-height: 100%;
 }
 body{
-  overflow-x: hidden
+  overflow-x: hidden;
+  font-family:'メイリオ', 'Meiryo','ＭＳ ゴシック','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3',sans-serif!important;
+  min-height: 100%;
 }
+.main{
+  min-height: calc(100vh - 245px);  
+}
+
 
 // 共通設定
 @media screen and (max-width: 575px) {

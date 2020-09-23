@@ -5,4 +5,6 @@ $(function(){
   <% elsif @user.present? %>
   $("#error-notice").html("<%= j(render 'shared/error_notice', { model: @user }) %>");
   <% end %>
+  $("#display").css("display", "");
+  $("#display").css("opacity", ".8");
 });

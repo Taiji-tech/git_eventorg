@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "events#top"
+  get "/contact",   to: "static_page#contact"
+  post "/contact",  to: "static_page#contact_for_admin"
   
   devise_for :users, :controllers => {
     :registrations => 'users/registrations'
@@ -10,14 +12,14 @@ Rails.application.routes.draw do
 
   
 # イベント管理関連  
-  get "events/confirm",  to: "events#confirm"
+  get "events/confirm", to: "events#confirm"
   resources :events do
-    resources :reserves, only: [:create]
+    resources :reserves,     only: [:create]
     post "/create_with_resistration", to: "reserves#createWithResistration" 
   end
-  resources :reserves, only: [:destroy]
-  get "reserves/:id/cancel",    to: "reserves#cancel"
-  get "user/reserved",          to: "reserves#reserved"
+  resources :reserves,       only: [:destroy]
+  get "reserves/:id/cancel", to: "reserves#cancel"
+  get "user/reserved",       to: "reserves#reserved"
   
   
 # ユーザー情報関連
