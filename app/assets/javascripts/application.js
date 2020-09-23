@@ -95,3 +95,22 @@ $(function() {
     $(this).height(lineHeight * lines);
   });
 });
+
+
+// flexble font-size
+$(function() {
+  var maxCount = 0;
+  $("#flex-font > p").each(function(index, element){
+    console.log(index + ':' + $(element).text());
+    var count = $(element).text().length;
+    if (maxCount < count){
+      maxCount = count;
+    }
+  });
+  console.log(maxCount);
+  if(maxCount >= 30){
+    $("#flex-font > p").css("font-size", "1.4rem");
+  }else if(maxCount >= 24){
+    $("#flex-font > p").css("font-size", "1.6rem");
+  } 
+});
