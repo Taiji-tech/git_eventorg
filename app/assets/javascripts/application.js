@@ -41,15 +41,13 @@ $(document).on('turbolinks:load', function(){
   $(".wide-img-hover").on("click", function(){
     var srcImg = $(this).attr("src");
     
-    var wideImgBox =  `<div class="wide-img">
+    var wideImgBox = `<div class="wide-img">
                         <img src="${srcImg}">  
                         <div class="wide-img-close">
                           <p class="btn-hover"><i class="fa fa-remove" aria-hidden="true"></i></p>
                         </div>
                       </div>`
-    
-    
-    
+
     $.when(
       $("#display").css("display", "")
     ).done(function(){
