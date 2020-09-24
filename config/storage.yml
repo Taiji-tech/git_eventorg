@@ -14,7 +14,7 @@ local:
 #   region: us-east-1
 #   bucket: your_own_bucket
 
- amazon:
+amazon:
   service: S3
   access_key_id: ENV["AWS_S3_ACCESS_KEY_ID"]
   secret_access_key_id: ENV["AWS_S3_SECRET_ACCESS_KEY_ID"]
