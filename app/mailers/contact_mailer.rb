@@ -1,4 +1,5 @@
 class ContactMailer < ApplicationMailer
+  default from: "info@realtimesocial.jp"
   
   # administratorへ送信
   def mail_for_admin(contact) 
