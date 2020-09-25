@@ -67,6 +67,10 @@ gem 'data-confirm-modal'
 #gon
 gem 'gon'
 
+#aws s3設定
+gem "aws-sdk-s3", require: false
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
