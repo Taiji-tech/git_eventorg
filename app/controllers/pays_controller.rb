@@ -116,17 +116,12 @@ class PaysController < ApplicationController
     end
   end
   
-  # 支払い情報の確認
-  def confirm
-    
-  end  
-  
   # 売り上げ確認
   def profit
     payjp_transfer_info
   end
   
-  # イベントホストのカード情報入力
+  # イベントホストの銀行口座情報入力
   def hostNew
     @tenant = Tenant.find_by(user_id: current_user.id)
   end
