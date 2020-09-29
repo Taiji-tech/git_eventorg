@@ -14,15 +14,15 @@
   <div class="top-search__box">
     <p><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</p>
     <div class="top-search__price-box">
-      <%= f.number_field:min, value: params[:min], placeholder: "min" %>
+      <%= f.number_field:min, value: params[:min], placeholder: "min", class:"form-control form-control-lg" %>
       <p>～</p>
-      <%= f.number_field:max, value: params[:max], placeholder: "max" %>
+      <%= f.number_field:max, value: params[:max], placeholder: "max", class:"form-control form-control-lg" %>
     </div>
   </div>
   <div class="top-search__box">
     <p><i class="fa fa-lightbulb-o" aria-hidden="true"></i> キーワード</p>
     <div class="top-search__form-box">
-      <%= f.text_field:keyword, value: params[:keyword], placeholder: "検索ワードを入力" %>
+      <%= f.text_field:keyword, value: params[:keyword], placeholder: "検索ワードを入力", class:"form-control form-control-lg" %>
     </div>
   </div>
   <div class="top-search__box">
@@ -31,11 +31,11 @@
       <%= f.hidden_field:venue_method, value: params[:venue_method], id:"venue_method" %>
       <div class="top-search__venue-method">
         <%= f.label:online, "オンラインのみ" %>
-        <%= f.check_box :online, id:"method-online" %>
+        <%= f.check_box :online, id:"method-online", class:"form-control form-control-lg" %>
       </div>
       <div class="top-search__venue-method">
         <%= f.label:offline, "オフラインのみ" %>
-        <%= f.check_box :offline, id:"method-offline" %>
+        <%= f.check_box :offline, id:"method-offline", class:"form-control form-control-lg" %>
       </div>
     </div>
   </div>

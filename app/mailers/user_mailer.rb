@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: "noreply@example.com"
+  default from: "noreply@realtimesocial.jp"
   
 #   ユーザー登録完了時
   def mail_user_registered(user)

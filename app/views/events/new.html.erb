@@ -32,8 +32,8 @@
             <label>開催形式<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.hidden_field:venue_method, value: "online", id: "venue-method" %>
             <ul>
-              <li class="orange-btn btn-hover" id="event-method-online">オンライン</li>
-              <li class="unselect-btn btn-hover" id="event-method-offline">オフライン</li>
+              <li class="orange-btn btn-hover" id="event-method-online" onclick="">オンライン</li>
+              <li class="unselect-btn btn-hover" id="event-method-offline" onclick="">オフライン</li>
             </ul>
           </div>
           <div class="event-form event-form-online">
@@ -74,13 +74,13 @@
 <script>
 $(function(){
   var dataBox = new DataTransfer();
-  var file_field = document.querySelector('input[type=file]');
+  var file_field = $('input[type=file]');
   $('#img-file').change(function(){
     var files = $('input[type="file"]').prop('files')[0];
     $.each(this.files, function(i, file){
       var fileReader = new FileReader();
       dataBox.items.add(file);
-      file_field.files = dataBox.files
+      file_field.files = dataBox.files;
       var num = $('.item-image').length + 1 + i
       fileReader.readAsDataURL(file);
 
@@ -89,13 +89,13 @@ $(function(){
       }
   
       fileReader.onloadend = function() {
-        var src = fileReader.result
+        var src = fileReader.result;
         var imgBox= 
           `<div class="event-form__img-wrap item-image" data-image="${file.name}">
             <div class="event-form__img-box">
               <img src=${src} class="event-form__img">
             </div>
-            <div class="event-form__img-remove">
+            <div class="event-form__img-remove" onclick="">
               <p><i class="fa fa-remove btn-hover" aria-hidden="true"></i></p>
             </div>
           </div>`
@@ -121,10 +121,10 @@ $(function(){
           dataBox.items.remove(i);
         }
       });
-      file_field.files = dataBox.files
+      file_field.files = dataBox.files;
     }
     target_image.remove();
-    var num = $('.item-image').length
+    var num = $('.item-image').length;
     $('#image-box__container').show()
     $('#image-box__container').attr('class', `item-num-${num}`)
   });
