@@ -128,21 +128,21 @@ $(function(){
   var file_field = $('input[type=file]');
   $('#img-file').on("change", function(){
     var files = $('input[type="file"]').prop('files')[0];
-    $.each(this.files, function(i, file){
+    // $.each(this.files, function(i, file){
       var fileReader = new FileReader();
-      dataBox.items.add(file);
-      file_field.files = dataBox.files;
-      var num = $('.item-image').length + 1 + i;
-      fileReader.readAsDataURL(file);
+    //   dataBox.items.add(file);
+    //   file_field.files = dataBox.files;
+    //   var num = $('.item-image').length + 1 + i;
+      fileReader.readAsDataURL(files);
 
-      if (num == 7){
-        $('#image-box__container').css('display', 'none');   
-      }
+    //   if (num == 7){
+    //     $('#image-box__container').css('display', 'none');   
+    //   }
   
       fileReader.onloadend = function() {
         var src = fileReader.result;
         var imgBox= 
-          `<div class="event-form__img-wrap item-image" data-image="${file.name}">
+          `<div class="event-form__img-wrap item-image" data-image="${files.name}">
             <div class="event-form__img-box">
               <img src=${src} class="event-form__img">
             </div>
@@ -153,32 +153,32 @@ $(function(){
           
         $('#event-form__img').append(imgBox);
       }
-      $('#image-box__container').attr('class', `item-num-${num}`);
-    })
+      // $('#image-box__container').attr('class', `item-num-${num}`);
+    // })
   });
   
   // //削除関連
-  // $(document).on("click", '.event-form__img-remove', function(){
-  //   var target_image = $(this).parent();
-  //   var target_name = $(target_image).data('image');
+  $(document).on("click", '.event-form__img-remove', function(){
+    var target_image = $(this).parent();
+    var target_name = $(target_image).data('image');
     
-  //   if(file_field.files.length == 1){
-  //     $("input[type=file]").val(null);
-  //     dataBox.clearData();
-  //   }else{
+    if(file_field.files.length == 1){
+      $("input[type=file]").val(null);
+      dataBox.clearData();
+    }else{
       
-  //     $.each(file_field.files, function(i,input){
-  //       if(input.name == target_name){
-  //         dataBox.items.remove(i);
-  //       }
-  //     });
-  //     file_field.files = dataBox.files;
-  //   }
-  //   target_image.remove();
-  //   var num = $('.item-image').length;
-  //   $('#image-box__container').show();
-  //   $('#image-box__container').attr('class', `item-num-${num}`);
-  // });
+      $.each(file_field.files, function(i,input){
+        if(input.name == target_name){
+          dataBox.items.remove(i);
+        }
+      });
+      file_field.files = dataBox.files;
+    }
+    target_image.remove();
+    var num = $('.item-image').length;
+    $('#image-box__container').show();
+    $('#image-box__container').attr('class', `item-num-${num}`);
+  });
 
 });
 </script>
