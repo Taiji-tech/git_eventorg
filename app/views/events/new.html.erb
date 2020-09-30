@@ -61,7 +61,7 @@
           <div class="event-form">
             <label for="event_imgs">画像<br><span class="pink-btn form-necessary">必須</span></label>
             <label class="event-form__img-field" for="img-file"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
-            <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display:none" %>
+            <%= f.file_field:imgs, multiple: true, class:"", id:"img-file" %>
           </div>
           <div id="event-form__img"></div>
           <div class="event-submit">
@@ -152,7 +152,7 @@ $(function(){
           </div>`
           
         $('#event-form__img').append(imgBox);
-      };
+      }
       $('#image-box__container').attr('class', `item-num-${num}`);
     })
   });
