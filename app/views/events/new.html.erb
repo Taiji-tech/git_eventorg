@@ -153,7 +153,7 @@ $(function(){
       <input class="form-control form-control-lg" type="hidden" value="none" name="event[venue_pass]" id="event_venue_pass">
     </div>`
     
-  $("#event-method-online").on("click", function(){
+  $("#event-method-online").on("change", function(){
     var count = $(".event-form-online").length;
     if(count == 0){
       $("#event-method-offline").prop('checked', false);
@@ -165,7 +165,7 @@ $(function(){
     }
   });
   
-  $("#event-method-offline").on("click", function(){
+  $("#event-method-offline").on("change", function(){
     var count = $(".event-form-offline").length;
     if(count == 0){
       $("#event-method-online").prop('checked', false);

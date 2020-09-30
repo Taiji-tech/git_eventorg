@@ -204,7 +204,7 @@ $(function(){
   $("#event_venue").val("<%= @event.venue %>");
   <% end %>
   
-  $("#event-method-online").on("click", function(){
+  $("#event-method-online").on("change", function(){
     onlineAction();
     <% if @event.venue_method == "online" %>
     $("#event_venue").val("<%= @event.venue %>");
@@ -212,7 +212,7 @@ $(function(){
     <% end %>
   });
   
-  $("#event-method-offline").on("click", function(){
+  $("#event-method-offline").on("change", function(){
     offlineAction();
     <% if @event.venue_method == "offline" %>
     $("#event_venue").val("<%= @event.venue %>");
