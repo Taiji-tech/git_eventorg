@@ -32,14 +32,16 @@
             <label>開催形式<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.hidden_field:venue_method, value: "online", id: "venue-method" %>
             <ul>
-              <li>
-                <label for="event-method-online" style="width:100%">オンライン</label>
-                <input id="event-method-online" type="checkbox" checked=""></input>
-              </li>
-              <li>
-                <label for="event-method-offline" style="width:100%">オフライン</label>
-                <input id="event-method-offline" type="checkbox"></input>
-              </li>
+              <li class="orange-btn btn-hover" id="event-method-online" onclick="">オンライン</li>
+              <li class="unselect-btn btn-hover" id="event-method-offline" onclick="">オフライン</li>
+              <!--<li>-->
+              <!--  <label for="event-method-online" style="width:100%">オンライン</label>-->
+              <!--  <input id="event-method-online" type="checkbox" checked=""></input>-->
+              <!--</li>-->
+              <!--<li>-->
+              <!--  <label for="event-method-offline" style="width:100%">オフライン</label>-->
+              <!--  <input id="event-method-offline" type="checkbox"></input>-->
+              <!--</li>-->
             </ul>
           </div>
           <div class="event-form event-form-online">
@@ -60,8 +62,8 @@
           </div>
           <div class="event-form">
             <label for="event_imgs">画像<br><span class="pink-btn form-necessary">必須</span></label>
-            <label class="event-form__img-field" for="img-file"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
-            <%= f.file_field:imgs, multiple: true, class:"", id:"img-file" %>
+            <label class="event-form__img-field" for="img-file" id="event-form__img-label"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
+            <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display: none;" %>
           </div>
           <div id="event-form__img"></div>
           <div class="event-submit">
@@ -97,28 +99,48 @@ $(function(){
       <input class="form-control form-control-lg" type="hidden" value="none" name="event[venue_pass]" id="event_venue_pass">
     </div>`
     
-  $("#event-method-online").on("change", function(){
+  $("#event-method-online").on("click", function(){
     var count = $(".event-form-online").length;
     if(count == 0){
-      $("#event-method-offline").prop('checked', false);
+      $(this).removeClass("unselect-btn");  
+      $(this).addClass("orange-btn");
+      $("#event-method-offline").addClass("unselect-btn");
+      $("#event-method-offline").removeClass("orange-btn");
+      // $("#event-method-offline").prop('checked', false);
       $(".event-form-offline").remove();
       $("#event-method").after(online);
       $("#venue-method").val("online");
-    } else {
-      $("#event-method-online").prop('checked', true);
-    }
+      
+      // $("#event-method-offline").prop('checked', false);
+      // $(".event-form-offline").remove();
+      // $("#event-method").after(online);
+      // $("#venue-method").val("online");
+    } 
+    // else {
+    //   $("#event-method-online").prop('checked', true);
+    // }
   });
   
-  $("#event-method-offline").on("change", function(){
+  $("#event-method-offline").on("click", function(){
     var count = $(".event-form-offline").length;
     if(count == 0){
-      $("#event-method-online").prop('checked', false);
+      $(this).removeClass("unselect-btn");  
+      $(this).addClass("orange-btn");
+      $("#event-method-online").addClass("unselect-btn");
+      $("#event-method-online").removeClass("orange-btn");
+      // $("#event-method-online").prop('checked', false);
       $(".event-form-online").remove();
       $("#event-method").after(offline);
       $("#venue-method").val("offline");
-    } else {
-      $("#event-method-offline").prop('checked', true);
-    }
+      
+      // $("#event-method-online").prop('checked', false);
+      // $(".event-form-online").remove();
+      // $("#event-method").after(offline);
+      // $("#venue-method").val("offline");
+    } 
+    // else {
+    //   $("#event-method-offline").prop('checked', true);
+    // }
   });
 });  
 </script>
@@ -128,21 +150,21 @@ $(function(){
   var file_field = $('input[type=file]');
   $('#img-file').on("change", function(){
     var files = $('input[type="file"]').prop('files')[0];
-    // $.each(this.files, function(i, file){
+    $.each(this.files, function(i, file){
       var fileReader = new FileReader();
-    //   dataBox.items.add(file);
-    //   file_field.files = dataBox.files;
-    //   var num = $('.item-image').length + 1 + i;
-      fileReader.readAsDataURL(files);
+      dataBox.items.add(file);
+      file_field.files = dataBox.files;
+      var num = $('.item-image').length + 1 + i;
+      fileReader.readAsDataURL(file);
 
-    //   if (num == 7){
-    //     $('#image-box__container').css('display', 'none');   
-    //   }
+      if (num == 7){
+        $('#image-box__container').css('display', 'none');   
+      }
   
       fileReader.onloadend = function() {
         var src = fileReader.result;
         var imgBox= 
-          `<div class="event-form__img-wrap item-image" data-image="${files.name}">
+          `<div class="event-form__img-wrap item-image" data-image="${file.name}">
             <div class="event-form__img-box">
               <img src=${src} class="event-form__img">
             </div>
@@ -153,8 +175,8 @@ $(function(){
           
         $('#event-form__img').append(imgBox);
       }
-      // $('#image-box__container').attr('class', `item-num-${num}`);
-    // })
+      $('#image-box__container').attr('class', `item-num-${num}`);
+    })
   });
   
   // //削除関連
@@ -179,6 +201,15 @@ $(function(){
     $('#image-box__container').show();
     $('#image-box__container').attr('class', `item-num-${num}`);
   });
+  
+  
+  // ios向け対応
+  var osVer;
+  osVer = "iPhone";
+  if (navigator.userAgent.indexOf(osVer)>0){
+    $("#event-form__img-label").css("display", "none");
+    $("#img-file").css("display", "");
+  }
 
 });
 </script>
