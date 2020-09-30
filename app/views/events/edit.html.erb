@@ -32,8 +32,14 @@
             <label>開催形式<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.hidden_field:venue_method, value: "online", id: "venue-method" %>
             <ul>
-              <li class="orange-btn btn-hover" id="event-method-online" onclick="">オンライン</li>
-              <li class="unselect-btn btn-hover" id="event-method-offline"  onclick="">オフライン</li>
+              <li>
+                <label for="event-method-online" style="width:100%">オンライン</label>
+                <input id="event-method-online" type="checkbox" checked=""></input>
+              </li>
+              <li>
+                <label for="event-method-online" style="width:100%">オフライン</label>
+                <input id="event-method-offline" type="checkbox"></input>
+              </li>
             </ul>
           </div>
           <div class="event-form event-form-online">
@@ -172,30 +178,29 @@ $(function(){
   function onlineAction() {
     var count = $(".event-form-online").length;
     if(count == 0){
-      $("#event-method-online").removeClass("unselect-btn");  
-      $("#event-method-online").addClass("orange-btn");
-      $("#event-method-offline").addClass("unselect-btn");
-      $("#event-method-offline").removeClass("orange-btn");
+      $("#event-method-offline").prop('checked', false);
       $(".event-form-offline").remove();
       $("#event-method").after(online);
       $("#venue-method").val("online");
-    } 
+    } else {
+      $("#event-method-online").prop('checked', true);
+    }
   }
   function offlineAction() {
     var count = $(".event-form-offline").length;
     if(count == 0){
-      $("#event-method-offline").removeClass("unselect-btn");  
-      $("#event-method-offline").addClass("orange-btn");
-      $("#event-method-online").addClass("unselect-btn");
-      $("#event-method-online").removeClass("orange-btn");
+      $("#event-method-online").prop('checked', false);
       $(".event-form-online").remove();
       $("#event-method").after(offline);
       $("#venue-method").val("offline");
+    }else {
+      $("#event-method-offline").prop('checked', true);
     }
   }
   
   <% if @event.venue_method == "offline" %>
   offlineAction();
+  $("#event-method-offline").prop('checked', true);
   $("#event_venue").val("<%= @event.venue %>");
   <% end %>
   
