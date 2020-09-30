@@ -14,8 +14,14 @@
         <li id="ham"></li>
         
       <% else %>
-        <li class="not-login not-login-signin"><%= link_to "ログイン", new_user_session_path %></li>
-        <li class="not-login not-login-signup"><%= link_to "新規登録", new_user_registration_path %></li>
+        <li class="ham btn-hover mobile-menu">
+          <span class="ham-top"></span>
+          <span class="ham-mid"></span>
+          <span class="ham-bot"></span>
+        </li>
+        <li id="ham" class="mobile-menu"></li>
+        <li class="pc-menu"><%= link_to "ログイン", new_user_session_path %></li>
+        <li class="pc-menu"><%= link_to "新規登録", new_user_registration_path %></li>
       <% end %>
       </ul>
     </nav>
@@ -24,16 +30,21 @@
 
 
 
-<% if user_signed_in? %>
+
 <script>
 $(function(){
   var menu = `
     <div class="header-menu" id="header-menu">
       <p class="btn-hover" id="menu-close">&times;</p>
+      <% if user_signed_in? %>
       <li><i class="fa fa-home" aria-hidden="true"></i> <%= link_to "ホーム", root_path %></li>
       <li><i class="fa fa-user" aria-hidden="true"></i> <%= link_to "マイページ", user_profile_path %></li>
       <li><i class="fa fa-thumb-tack" aria-hidden="true"></i> <%= link_to "イベント作成", new_event_path %></li>
       <li><i class="fa fa-sign-out" aria-hidden="true"></i> <%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+      <li class=""><%= link_to "ログイン", new_user_session_path %></li>
+      <li class=""><%= link_to "新規登録", new_user_registration_path %></li>
+      <% end %>
     </div>`
   
   function menuClose(){
@@ -72,4 +83,3 @@ $(function(){
   });  
 });
 </script>
-<% end %>

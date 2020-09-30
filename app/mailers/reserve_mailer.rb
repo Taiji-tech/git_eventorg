@@ -1,5 +1,5 @@
 class ReserveMailer < ApplicationMailer
-  default from: "info@realtimesocial.jp"
+  default from: "noreply@realtimesocial.jp"
   
   
   # 予約完了メール

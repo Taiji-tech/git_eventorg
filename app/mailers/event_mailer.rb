@@ -1,5 +1,5 @@
 class EventMailer < ApplicationMailer
-  default from: "info@realtimesocial.jp"
+  default from: "noreply@realtimesocial.jp"
   
   # イベント作成時
   def mail_event_create(event)
