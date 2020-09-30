@@ -131,8 +131,8 @@ $(function(){
     }
     target_image.remove();
     var num = $('.item-image').length;
-    $('#image-box__container').show()
-    $('#image-box__container').attr('class', `item-num-${num}`)
+    $('#image-box__container').show();
+    $('#image-box__container').attr('class', `item-num-${num}`);
   });
   
   // オンライン・オフラインスイッチング
@@ -178,4 +178,19 @@ $(function(){
   });
   
 });
+</script>
+<script>
+$(function(){
+  $("#event-method-offline").on("change", function(){
+    var count = $(".event-form-offline").length;
+    if(count == 0){
+      $("#event-method-online").prop('checked', false);
+      $(".event-form-online").remove();
+      $("#event-method").after(offline);
+      $("#venue-method").val("offline");
+    } else {
+      $("#event-method-offline").prop('checked', true);
+    }
+  });
+});  
 </script>
