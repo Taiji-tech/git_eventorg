@@ -80,8 +80,17 @@
 
 <script>
 $(function(){
+  // ios向け対応
+  window.onload = function () {
+    var ua        = navigator.userAgent,
+        bodyClass = document.body.classList;
+    if (ua.indexOf('iPhone') > 0){
+      $("#event-form__img-label").css("display", "none");
+      $("#img-file").css("display", "");
+    }
+  }
   
-// オンライン・オフラインスイッチング
+  // オンライン・オフラインスイッチング
   var online = `
     <div class="event-form event-form-online">
       <label for="event_venue">Zoom ID<br><span class="pink-btn form-necessary">必須</span></label>
@@ -106,19 +115,11 @@ $(function(){
       $(this).addClass("orange-btn");
       $("#event-method-offline").addClass("unselect-btn");
       $("#event-method-offline").removeClass("orange-btn");
-      // $("#event-method-offline").prop('checked', false);
       $(".event-form-offline").remove();
       $("#event-method").after(online);
       $("#venue-method").val("online");
-      
-      // $("#event-method-offline").prop('checked', false);
-      // $(".event-form-offline").remove();
-      // $("#event-method").after(online);
-      // $("#venue-method").val("online");
     } 
-    // else {
-    //   $("#event-method-online").prop('checked', true);
-    // }
+
   });
   
   $("#event-method-offline").on("click", function(){
@@ -128,19 +129,11 @@ $(function(){
       $(this).addClass("orange-btn");
       $("#event-method-online").addClass("unselect-btn");
       $("#event-method-online").removeClass("orange-btn");
-      // $("#event-method-online").prop('checked', false);
       $(".event-form-online").remove();
       $("#event-method").after(offline);
       $("#venue-method").val("offline");
-      
-      // $("#event-method-online").prop('checked', false);
-      // $(".event-form-online").remove();
-      // $("#event-method").after(offline);
-      // $("#venue-method").val("offline");
     } 
-    // else {
-    //   $("#event-method-offline").prop('checked', true);
-    // }
+
   });
 });  
 </script>
@@ -202,14 +195,5 @@ $(function(){
     $('#image-box__container').attr('class', `item-num-${num}`);
   });
   
-  
-  // ios向け対応
-  var osVer;
-  osVer = "iPhone";
-  if (navigator.userAgent.indexOf(osVer)>0){
-    $("#event-form__img-label").css("display", "none");
-    $("#img-file").css("display", "");
-  }
-
 });
 </script>
