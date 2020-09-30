@@ -88,19 +88,8 @@
     .ham-bot{
       top: 3rem;
     }
-    .not-login{
-      padding: 0;
-      text-indent: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-    .not-login-signin:before{
-      font-family: FontAwesome;
-      content: '\f090';
-    }
-    .not-login-signup:before{
-      font-family: FontAwesome;
-      content: '\f007';
+    .pc-menu{
+      display: none;
     }
   }
   .header-menu{

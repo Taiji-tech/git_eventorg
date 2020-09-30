@@ -1,5 +1,5 @@
 class PayMailer < ApplicationMailer
-  default from: "noreply@example.com"
+  default from: "noreply@realtimesocial.jp"
   
   # 支払い完了メール
   def mail_pay_complite(reserve)

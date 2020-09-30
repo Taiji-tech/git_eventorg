@@ -24,9 +24,7 @@
 }
 .top-search{
   width: 90%;
-  margin: auto;
-  position: absolute;
-  top: 15rem;
+  margin: 2rem auto 0;
   left: 5%;
   background: #f8f9fa;
   box-shadow: 0 0 1rem #343a40!important;
@@ -141,7 +139,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  padding: 23rem 0 0;
+  padding: 2rem 0 0;
 }
 .event-top__result{
   width: 100%;

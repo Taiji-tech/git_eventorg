@@ -4,14 +4,17 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    unless user_signed_in?
+      flash.now[:notice] = "入力に誤りがあります。"
+    end  
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

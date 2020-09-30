@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   post "/contact",  to: "static_page#contact_for_admin"
   
   devise_for :users, :controllers => {
-    :registrations => 'users/registrations'
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions'
   }
   
 #   ユーザー管理関連
