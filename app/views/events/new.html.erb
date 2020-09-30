@@ -77,82 +77,9 @@
 
 
 
+
 <script>
 $(function(){
-  var dataBox = new DataTransfer();
-  var file_field = $('input[type=file]');
-  $('#img-file').change(function(){
-    var files = $('input[type="file"]').prop('files')[0];
-    $.each(this.files, function(i, file){
-      var fileReader = new FileReader();
-      dataBox.items.add(file);
-      file_field.files = dataBox.files;
-      var num = $('.item-image').length + 1 + i
-      fileReader.readAsDataURL(file);
-
-      if (num == 7){
-        $('#image-box__container').css('display', 'none');   
-      }
-  
-      fileReader.onloadend = function() {
-        var src = fileReader.result;
-        var imgBox= 
-          `<div class="event-form__img-wrap item-image" data-image="${file.name}">
-            <div class="event-form__img-box">
-              <img src=${src} class="event-form__img">
-            </div>
-            <div class="event-form__img-remove" onclick="">
-              <p><i class="fa fa-remove btn-hover" aria-hidden="true"></i></p>
-            </div>
-          </div>`
-          
-        $('#event-form__img').append(imgBox);
-      };
-      $('#image-box__container').attr('class', `item-num-${num}`);
-    });
-  });
-  
-  //削除関連
-  $(document).on("click", '.event-form__img-remove', function(){
-    var target_image = $(this).parent();
-    var target_name = $(target_image).data('image')
-    
-    if(file_field.files.length == 1){
-      $("input[type=file]").val(null);
-      dataBox.clearData();
-    }else{
-      
-      $.each(file_field.files, function(i,input){
-        if(input.name == target_name){
-          dataBox.items.remove(i);
-        }
-      });
-      file_field.files = dataBox.files;
-    }
-    target_image.remove();
-    var num = $('.item-image').length;
-    $('#image-box__container').show();
-    $('#image-box__container').attr('class', `item-num-${num}`);
-  });
-  
-  // オンライン・オフラインスイッチング
-  var online = `
-    <div class="event-form event-form-online">
-      <label for="event_venue">Zoom ID<br><span class="pink-btn form-necessary">必須</span></label>
-      <input class="form-control form-control-lg" type="text" name="event[venue]" id="event_venue">
-    </div>
-    <div class="event-form event-form-online">
-      <label for="event_venue_pass">Zoom Password<br><span class="pink-btn form-necessary">必須</span></label>
-      <input class="form-control form-control-lg" type="text" name="event[venue_pass]" id="event_venue_pass">
-    </div>`
-    
-  var offline = `
-    <div class="event-form event-form-offline">
-      <label for="event_venue">開催場所<br><span class="pink-btn form-necessary">必須</span></label>
-      <input class="form-control form-control-lg" type="text" name="event[venue]" id="event_venue">
-      <input class="form-control form-control-lg" type="hidden" value="none" name="event[venue_pass]" id="event_venue_pass">
-    </div>`
-    
   $("#event-method-online").on("change", function(){
     var count = $(".event-form-online").length;
     if(count == 0){
@@ -165,22 +92,6 @@ $(function(){
     }
   });
   
-  $("#event-method-offline").on("change", function(){
-    var count = $(".event-form-offline").length;
-    if(count == 0){
-      $("#event-method-online").prop('checked', false);
-      $(".event-form-online").remove();
-      $("#event-method").after(offline);
-      $("#venue-method").val("offline");
-    } else {
-      $("#event-method-offline").prop('checked', true);
-    }
-  });
-  
-});
-</script>
-<script>
-$(function(){
   $("#event-method-offline").on("change", function(){
     var count = $(".event-form-offline").length;
     if(count == 0){
