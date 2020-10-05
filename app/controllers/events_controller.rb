@@ -40,12 +40,18 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user_id = current_user.id
-    if @event.save
-      EventMailer.mail_event_create(@event).deliver_now
-      flash[:notice] = "イベントの登録が完了しました！"
-      redirect_to events_confirm_path
-    else
-      render "inputError.js.erb"
+    @event_datetime = to_date_and_time(@event.start_date, @event.start_time)
+    
+    if @event_datetime < Time.zone.now
+      render "inputTimeError.js.erb"
+    else  
+      if @event.save
+        EventMailer.mail_event_create(@event).deliver_now
+        flash[:notice] = "イベントの登録が完了しました！"
+        redirect_to events_confirm_path
+      else
+        render "inputError.js.erb"
+      end
     end
   end
   
@@ -61,19 +67,24 @@ class EventsController < ApplicationController
     @imgs = @deleteImgs[0].split(',')
     
     if @imgs.size == @event.imgs.size
-      flash[:notice] = "画像は必ず登録してください。"
-      redirect_to session[:privious_url]
+        flash[:notice] = "画像は必ず登録してください。"
+        redirect_to session[:privious_url]
     else
-
-      if @event.update(event_params)
-        @imgs.each do |i|
-          @index = i.to_i
-          @event.imgs[@index].purge
+      @newDate = params[:event][:start_date]
+      @event_datetime = to_date_and_time_three(@newDate.to_datetime, params[:event][:"start_time(4i)"], params[:event][:"start_time(5i)"])
+      if @event_datetime < Time.zone.now
+        render "inputTimeError.js.erb"
+      else  
+        if @event.update(event_params)
+          @imgs.each do |i|
+            @index = i.to_i
+            @event.imgs[@index].purge
+          end
+          flash[:notice] = "イベントの情報が更新されました！"
+          redirect_to events_confirm_path  
+        else
+          render "inputError.js.erb"
         end
-        flash[:notice] = "イベントの情報が更新されました！"
-        redirect_to events_confirm_path  
-      else
-        render "inputError.js.erb"
       end
     end
   end

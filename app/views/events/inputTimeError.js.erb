@@ -1,0 +1,8 @@
+$(function(){
+  console.log("how");
+  var noticeCount = $(".start_datetime_error").length;
+  if(noticeCount == 0){
+    console.log(noticeCount);
+    $("#error-notice").html('<div class="pink-btn error-notice"><ul><li>登録されたイベントの開催日時が過去の時間に設定されています。</li></ul></div>');  
+  }
+});

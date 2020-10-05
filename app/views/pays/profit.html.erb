@@ -16,7 +16,8 @@
         <p>入金済、入金予定の売上はまだありません。基本的には、月末を売上の締め日とし、翌月末にお振り込みいたします。 入金額は締め日後に反映されます。</p>
       </div>
         <% else %>
-        <p>これまでの入金履歴です。（最大100件表示）</p>
+        <p>これまでの入金履歴および入金予定の情報が表示されております。（最大100件表示）</p>
+        <p>入金日が土日祝の場合は翌営業日の振込になります。</p>
       </div>
       <div class="pay-profit__content">
         <table>
@@ -28,8 +29,8 @@
           <% while i < @data["count"].to_i %>
           <% @month_data = @data["data"][i] %>  
           <tr>
-            <td><%= @month_data["scheduled_date"] %></td>
-            <td><%= @month_data["amount"].to_s(:delimited) %></td>
+            <td><%= @month_data["scheduled_date"].to_datetime.strftime("%Y/%m/%d") %></td>
+            <td>&yen; <%= @month_data["amount"].to_s(:delimited) %></td>
           </tr>
           <% i += 1 %>
           <% end %>
