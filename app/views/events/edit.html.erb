@@ -64,7 +64,7 @@
               <div class="event-form__img-box"> 
                 <%= image_tag img, class:"event-form__img" %>
               </div>
-              <div class="event-form__img-remove">
+              <div class="event-form__img-remove" onclick="">
                 <p><i class="fa fa-remove btn-hover" aria-hidden="true"></i></p>
               </div>
             </div>
@@ -128,7 +128,6 @@ $(function(){
     if(count == 0){
       $("#event-method-offline").removeClass("unselect-btn");  
       $("#event-method-offline").addClass("orange-btn");
-      console.log("off");
       $("#event-method-online").addClass("unselect-btn");
       $("#event-method-online").removeClass("orange-btn");
       $(".event-form-online").remove();
@@ -163,11 +162,11 @@ $(function(){
   var deleteNumberBox = [];
   $('.event-form__img-remove').on("click", function(){
     var target_image = $(this).parent();
+    target_image.remove();
     var target_name = $(target_image).data('image');
     
     var index = $(this).parent().data('number');
     deleteNumberBox.push(index);
-    console.log(deleteNumberBox);
     $("#delete-img").val(deleteNumberBox);
     
     if(file_field.files.length == 1){
@@ -182,12 +181,14 @@ $(function(){
       });
       file_field.files = dataBox.files
     }
-    target_image.remove();
     var num = $('.item-image').length
     $('#image-box__container').show();
     $('#image-box__container').attr('class', `item-num-${num}`);
   });
-  
+});
+</script>
+<script>
+$(function(){
   // データ追加関連
   var dataBox = new DataTransfer();
   var file_field = document.querySelector('input[type=file]');
