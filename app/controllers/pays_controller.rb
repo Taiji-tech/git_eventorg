@@ -3,7 +3,7 @@ class PaysController < ApplicationController
                                             :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
   before_action :user_info, only: [:new, :create, :confirmCard, :editCard, :updateCard, :profit, 
                                    :hostNew, :hostCreate, :hostInfo, :hostEdit, :hostUpdate]
-  before_action :store_location, only: [:newWithoutResistration, :new, :confirmCard, :editCard ]
+  before_action :store_location, only: [:newWithoutResistration, :new, :confirmCard, :editCard, :profit, :hostNew, :hostEdit, :hostInfo]
   before_action :register_bank_account, only: [:profit]
   
   # http通信実装のためのライブラリ
@@ -133,11 +133,16 @@ class PaysController < ApplicationController
       begin
         # payjp通信
         payjp_create_tenant
-        @tenant = Tenant.new(user_id: current_user.id, tenant_id: @tenant_id)
-        @tenant.save
-        PayMailer.mail_bank_registered(@user).deliver_now
-        flash[:notice] = "銀行口座登録が完了しました！"  
-        redirect_to user_pays_hostinfo_path
+        if @tenant_id.present?
+          @tenant = Tenant.new(user_id: current_user.id, tenant_id: @tenant_id)
+          @tenant.save
+          PayMailer.mail_bank_registered(@user).deliver_now
+          flash[:notice] = "銀行口座登録が完了しました！"  
+          redirect_to user_pays_hostinfo_path
+        else
+          flash[:notice] = "入力された銀行口座情報に誤りがあります。お手数ですがもう一度入力してください。"
+          redirect_to session[:previous_path]
+        end
       rescue 
         flash[:notice] = "入力した情報に不備があります。再度入力してください"    
         render :hostNew

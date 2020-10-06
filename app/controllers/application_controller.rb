@@ -50,4 +50,12 @@ class ApplicationController < ActionController::Base
                             @datetime.min, 0, "+09:00")
         return @start_datetime
       end
+      
+      # 開催日時を返す
+      def to_date_and_time_three(date, hour, min)
+        @date = date
+        @start_datetime = Time.new(@date.year, @date.month, @date.day, hour, 
+                            min, 0, "+09:00")
+        return @start_datetime
+      end
 end
