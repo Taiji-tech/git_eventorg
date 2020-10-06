@@ -397,6 +397,7 @@
     position: relative;
     top: -15rem;
     right: 0;
+    cursor:pointer;
   
   i{
     display: inline-block;
@@ -411,6 +412,9 @@
     color: #fff;
     box-shadow: 0 0 .3rem #343a40;
   }
+}
+.event-form__img-remove:hover{
+  cursor: pointer;
 }
 
 
