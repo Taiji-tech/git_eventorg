@@ -72,16 +72,6 @@
 
 <script>
 $(function(){
-  // ios向け対応
-  window.onload = function () {
-    var ua        = navigator.userAgent,
-        bodyClass = document.body.classList;
-    if (ua.indexOf('iPhone') > 0){
-      $("#event-form__img-label").css("display", "none");
-      $("#img-file").css("display", "");
-    }
-  }
-  
   // オンライン・オフラインスイッチング
   var online = `
     <div class="event-form event-form-online">
