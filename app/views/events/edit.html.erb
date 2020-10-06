@@ -32,19 +32,8 @@
             <label>開催形式<br><span class="pink-btn form-necessary">必須</span></label>
             <%= f.hidden_field:venue_method, value: "online", id: "venue-method" %>
             <ul>
-<<<<<<< HEAD
-              <li>
-                <label for="event-method-online" style="width:100%">オンライン</label>
-                <input id="event-method-online" type="checkbox" checked=""></input>
-              </li>
-              <li>
-                <label for="event-method-offline" style="width:100%">オフライン</label>
-                <input id="event-method-offline" type="checkbox"></input>
-              </li>
-=======
               <li class="orange-btn btn-hover" id="event-method-online" onclick="">オンライン</li>
               <li class="unselect-btn btn-hover" id="event-method-offline" onclick="">オフライン</li>
->>>>>>> d010ad72be6fa74d84fe0efb5204956af11361ce
             </ul>
           </div>
           <div class="event-form event-form-online">
@@ -65,7 +54,7 @@
           </div>
           <div class="event-form">
             <label for="event_imgs">画像<br><span class="pink-btn form-necessary">必須</span></label>
-            <label class="event-form__img-field" for="img-file"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
+            <label class="event-form__img-field" for="img-file"  id="event-form__img-label"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
             <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display:none" %>
           </div>
           <div id="event-form__img">
@@ -195,8 +184,8 @@ $(function(){
     }
     target_image.remove();
     var num = $('.item-image').length
-    $('#image-box__container').show()
-    $('#image-box__container').attr('class', `item-num-${num}`)
+    $('#image-box__container').show();
+    $('#image-box__container').attr('class', `item-num-${num}`);
   });
   
   // データ追加関連
