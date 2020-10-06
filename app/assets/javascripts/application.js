@@ -109,15 +109,3 @@ $(function() {
     $("#flex-font > p").css("font-size", "1.6rem");
   } 
 });
-
-// ios向け対応
-$(function(){
-  window.onload = function () {
-    var ua        = navigator.userAgent,
-        bodyClass = document.body.classList;
-    if (ua.indexOf('iPhone') > 0){
-      $("#event-form__img-label").css("display", "none");
-      $("#img-file").css("display", "");
-    }
-  }
-});
