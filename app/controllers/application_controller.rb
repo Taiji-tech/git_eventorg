@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
   end
   
+  # ユーザー登録後
+  def after_sign_up_path_for(resource)
+    if session[:privious_url] != root_path
+      session[:privious_url]
+    else
+      user_profile_path
+    end
+  end
+  
   # ログイン後のページ
   def after_sign_in_path_for(resource) 
     if session[:privious_url] != root_path
