@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
   def mail_user_registered(user)
     @user = user
     mail(
-      subject: "【Realtime Socail】ユーザー登録が完了しました！",
+      subject: "【Realtime Social】ユーザー登録が完了しました！",
       to: @user.email
     ) do |format|
       format.text
@@ -17,7 +17,7 @@ class UserMailer < ApplicationMailer
     @before_user = before_user
     @user = user
     mail(
-      subject: "【Realtime Socail】ユーザー情報が変更されました！",
+      subject: "【Realtime Social】ユーザー情報が変更されました！",
       to: @user.email
     ) do |format|
       format.text
@@ -28,7 +28,7 @@ class UserMailer < ApplicationMailer
     @before_user = before_user
     @user = user
     mail(
-      subject: "【Realtime Socail】ユーザー情報が変更されました！",
+      subject: "【Realtime Social】ユーザー情報が変更されました！",
       to: @before_user.email
     ) do |format|
       format.text
@@ -39,7 +39,7 @@ class UserMailer < ApplicationMailer
   def mail_user_editpass(user)
     @user = user
     mail(
-      subject: "【Realtime Socail】パスワードが変更されました！",
+      subject: "【Realtime Social】パスワードが変更されました！",
       to: @user.email
     ) do |format|
       format.text

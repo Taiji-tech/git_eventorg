@@ -6,7 +6,7 @@ class EventMailer < ApplicationMailer
     @event = event
     @user = User.find(@event.user_id)
     mail(
-      subject: "【Realtime Socail】イベントを作成しました！",
+      subject: "【Realtime Social】イベントを作成しました！",
       to: @user.email
     ) do |format|
       format.text
@@ -18,7 +18,7 @@ class EventMailer < ApplicationMailer
     @event = event
     @user = User.find(@event.user_id)
     mail(
-      subject: "【Realtime Socail】イベントを中止にしました。",
+      subject: "【Realtime Social】イベントを中止にしました。",
       to: @user.email
     ) do |format|
       format.text
