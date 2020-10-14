@@ -13,11 +13,7 @@ class ApplicationController < ActionController::Base
   
   # ログイン後のページ
   def after_sign_in_path_for(resource) 
-    if session[:privious_url] != root_path
-      session[:privious_url]
-    else
-      user_profile_path
-    end
+    user_profile_path
   end
   
     private 
