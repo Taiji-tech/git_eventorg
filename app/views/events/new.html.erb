@@ -69,7 +69,6 @@
 </div>
 
 
-
 <script>
 $(function(){
   // ios向け対応
@@ -77,10 +76,14 @@ $(function(){
     var ua        = navigator.userAgent,
         bodyClass = document.body.classList;
     if (ua.indexOf('iPhone') > 0){
-      $("#event-form__img-label-new").css("display", "none");
+      $(".event-form__img-field").css("display", "none");
       $(".event-form__img-file").css("display", "");
     }
   }
+});  
+</script>
+<script>
+$(function(){
   // オンライン・オフラインスイッチング
   var online = `
     <div class="event-form event-form-online">
