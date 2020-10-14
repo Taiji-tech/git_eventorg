@@ -54,7 +54,7 @@
           </div>
           <div class="event-form">
             <label for="event_imgs">画像<br><span class="pink-btn form-necessary">必須</span></label>
-            <label class="event-form__img-field" for="img-file"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
+            <label class="event-form__img-field" for="img-file"  id="event-form__img-label"><span class="submit-btn orange-border-btn"><i class="fa fa-image" aria-hidden="true"></i> 画像をアップロード</span></label>
             <%= f.file_field:imgs, multiple: true, class:"", id:"img-file", style:"display:none" %>
           </div>
           <div id="event-form__img">
@@ -64,7 +64,7 @@
               <div class="event-form__img-box"> 
                 <%= image_tag img, class:"event-form__img" %>
               </div>
-              <div class="event-form__img-remove" style="cursor:pointer;">
+              <div class="event-form__img-remove" onclick="">
                 <p><i class="fa fa-remove btn-hover" aria-hidden="true"></i></p>
               </div>
             </div>
@@ -128,7 +128,6 @@ $(function(){
     if(count == 0){
       $("#event-method-offline").removeClass("unselect-btn");  
       $("#event-method-offline").addClass("orange-btn");
-      console.log("off");
       $("#event-method-online").addClass("unselect-btn");
       $("#event-method-online").removeClass("orange-btn");
       $(".event-form-online").remove();
@@ -142,7 +141,7 @@ $(function(){
   $("#event_venue").val("<%= @event.venue %>");
   <% end %>
   
-  $("#event-method-online").on("click", function(){
+  $("#event-method-online").on("change", function(){
     onlineAction();
     <% if @event.venue_method == "online" %>
     $("#event_venue").val("<%= @event.venue %>");
@@ -150,7 +149,7 @@ $(function(){
     <% end %>
   });
   
-  $("#event-method-offline").on("click", function(){
+  $("#event-method-offline").on("change", function(){
     offlineAction();
     <% if @event.venue_method == "offline" %>
     $("#event_venue").val("<%= @event.venue %>");
@@ -163,11 +162,11 @@ $(function(){
   var deleteNumberBox = [];
   $('.event-form__img-remove').on("click", function(){
     var target_image = $(this).parent();
+    target_image.remove();
     var target_name = $(target_image).data('image');
     
     var index = $(this).parent().data('number');
     deleteNumberBox.push(index);
-    console.log(deleteNumberBox);
     $("#delete-img").val(deleteNumberBox);
     
     if(file_field.files.length == 1){
@@ -182,12 +181,14 @@ $(function(){
       });
       file_field.files = dataBox.files
     }
-    target_image.remove();
     var num = $('.item-image').length
-    $('#image-box__container').show()
-    $('#image-box__container').attr('class', `item-num-${num}`)
+    $('#image-box__container').show();
+    $('#image-box__container').attr('class', `item-num-${num}`);
   });
-  
+});
+</script>
+<script>
+$(function(){
   // データ追加関連
   var dataBox = new DataTransfer();
   var file_field = document.querySelector('input[type=file]');
