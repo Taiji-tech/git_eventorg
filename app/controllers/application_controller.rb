@@ -8,11 +8,7 @@ class ApplicationController < ActionController::Base
   
   # ユーザー登録後
   def after_sign_up_path_for(resource)
-    if session[:privious_url] != root_path
-      session[:privious_url]
-    else
-      user_profile_path
-    end
+    user_profile_path
   end
   
   # ログイン後のページ

@@ -73,11 +73,21 @@
     <% if user_signed_in? && current_user.id == @event.user_id && params[:list] %>
     <div class="event-box__participate">
       <h3><i class="fa fa-user-circle-o" aria-hidden="true"></i> 参加者一覧（<%= @reserves.size %> 名）</h3>
-      <ul>
+      <table>
+        <tr>
+          <th>支払い状況</th>
+          <th>ニックネーム</th>
+        </tr>
         <% @reserves.each do |reserve| %>
-        <li><%= reserve.nickname %></li>
+        <tr>
+          <td class="event-box__payornot"><% if reserve.payed %><span class="pink-btn">支払い済</span><% else %><span class="blue-btn">支払い未</span><% end %></td>
+          <td><%= reserve.nickname %></td>
+        </tr>
         <% end %>
-      </ul>
+      </table>
+      <% if @reserves.empty? %>
+        <p>予約はまだありません。</p>
+      <% end %>
     </div>
     <% end %>
   

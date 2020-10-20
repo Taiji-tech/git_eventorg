@@ -301,7 +301,29 @@
     padding: 1rem 0;
   }
 }
-
+.event-box__participate{
+  h3{
+    padding: 0 0 2rem;
+  }
+  table{
+    width: 100%;
+  }
+  th{
+    padding: 0 0 1rem;
+    font-size: 1.5rem;
+  }
+  .event-box__payornot{
+    width: 10rem;
+    
+    span{
+      padding: 0 1rem;
+      border-radius: 2rem;
+    }
+  }
+  td{
+    font-size: 1.4rem;
+  }
+}
 
 // new
 // イベント新規登録
