@@ -614,11 +614,23 @@
   
   h3{
     margin: 0;
+    padding: 0 0 2rem;
     font-size: 2.4rem;
   }
-  li{
-    padding: 1rem 0;
-    font-size: 2rem;
+  th{
+    padding: 0 0 1rem;  
+  }
+  table{
+    width: 100%;
+    font-size: 1.8rem;
+    
+    span{
+      padding: 0 1rem;
+      border-radius: 2rem;
+    }
+  }
+  .event-box__payornot{
+    width: 12rem;  
   }
   
 }
