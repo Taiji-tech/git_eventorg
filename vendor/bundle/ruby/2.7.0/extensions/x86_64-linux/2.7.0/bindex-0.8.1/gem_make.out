@@ -1,0 +1,15 @@
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+/home/ec2-user/.rvm/rubies/ruby-2.7.1/bin/ruby -I /home/ec2-user/.rvm/rubies/ruby-2.7.1/lib/ruby/2.7.0 -r ./siteconf20201221-2849-p54qmm.rb extconf.rb
+creating Makefile
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20201221-2849-4hewal/skiptrace/internal

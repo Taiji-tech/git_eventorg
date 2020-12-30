@@ -347,6 +347,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-s3
@@ -396,7 +397,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.7.1p83
 
 BUNDLED WITH
-   1.17.3
+   2.2.2

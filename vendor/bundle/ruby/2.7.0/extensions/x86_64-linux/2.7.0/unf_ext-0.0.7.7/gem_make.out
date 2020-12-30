@@ -1,0 +1,16 @@
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.7.7/ext/unf_ext
+/home/ec2-user/.rvm/rubies/ruby-2.7.1/bin/ruby -I /home/ec2-user/.rvm/rubies/ruby-2.7.1/lib/ruby/2.7.0 -r ./siteconf20201221-2849-sux8e4.rb extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.7.7/ext/unf_ext
+make "DESTDIR=" clean
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.7.7/ext/unf_ext
+make "DESTDIR="
+compiling unf.cc
+linking shared-object unf_ext.so
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.7.7/ext/unf_ext
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20201221-2849-1mbn063

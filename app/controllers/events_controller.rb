@@ -41,9 +41,12 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     @event_datetime = to_date_and_time(@event.start_date, @event.start_time)
+    @event_price = @event.price
     
     if @event_datetime < Time.zone.now
       render "inputTimeError.js.erb"
+    elsif  @event_price < 100
+      render "inputPriceError.js.erb"  
     else  
       if @event.save
         EventMailer.mail_event_create(@event).deliver_now
@@ -72,8 +75,12 @@ class EventsController < ApplicationController
     else
       @newDate = params[:event][:start_date]
       @event_datetime = to_date_and_time_three(@newDate.to_datetime, params[:event][:"start_time(4i)"], params[:event][:"start_time(5i)"])
+      @event_price = params[:event][:price].to_i
+      
       if @event_datetime < Time.zone.now
         render "inputTimeError.js.erb"
+      elsif @event_price < 100
+        render "inputPriceError.js.erb"  
       else  
         if @event.update(event_params)
           @imgs.each do |i|

@@ -1,0 +1,19 @@
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.15/ext/mri
+/home/ec2-user/.rvm/rubies/ruby-2.7.1/bin/ruby -I /home/ec2-user/.rvm/rubies/ruby-2.7.1/lib/ruby/2.7.0 -r ./siteconf20201221-2849-7qumr.rb extconf.rb
+creating Makefile
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.15/ext/mri
+make "DESTDIR=" clean
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.15/ext/mri
+make "DESTDIR="
+compiling bcrypt_ext.c
+compiling crypt_blowfish.c
+gcc -std=gnu99  -D__SKIP_GNU     -c -o x86.o x86.S
+compiling crypt_gensalt.c
+compiling wrapper.c
+linking shared-object bcrypt_ext.so
+
+current directory: /home/ec2-user/environment/eventorg/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.15/ext/mri
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20201221-2849-y0pj5i

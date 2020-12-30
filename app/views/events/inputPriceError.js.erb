@@ -1,0 +1,7 @@
+$(function(){
+  var noticeCount = $(".start_datetime_error").length;
+  if(noticeCount == 0){
+    console.log(noticeCount);
+    $("#error-notice").html('<div class="pink-btn error-notice"><ul><li>参加費は１００円以上に設定してください</li></ul></div>');  
+  }
+});
