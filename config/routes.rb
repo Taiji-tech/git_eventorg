@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   post "/contact",  to: "static_page#contact_for_admin"
   
   #特定商取引法に基づく表記
-  #get "/tokushohyo",   to: "static_page#tokushohyo"
+  get "/tokushohyo",  to: "static_page#tokushohyo"
+  get "/term",        to: "static_page#term"
+  get "/privacy",     to: "static_page#privacy"
   
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',

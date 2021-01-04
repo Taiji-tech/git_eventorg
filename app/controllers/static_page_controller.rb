@@ -17,9 +17,14 @@ class StaticPageController < ApplicationController
     end
   end
   
-  #def tokushohyo
-  #  @tokushohyo = Tokushohyo.new
-  #end
+  def tokushohyo
+  end
+  
+  def privacy
+  end
+  
+  def term
+  end
   
       private 
         def contact_params

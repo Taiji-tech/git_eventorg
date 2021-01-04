@@ -80,7 +80,7 @@
         </tr>
         <% @reserves.each do |reserve| %>
         <tr>
-          <td class="event-box__payornot"><% if reserve.payed %><span class="pink-btn">支払い済</span><% else %><span class="blue-btn">支払い未</span><% end %></td>
+          <td class="event-box__payornot"><% if reserve.payed %><span class="blue-btn">支払い済</span><% else %><span class="pink-btn">支払い未</span><% end %></td>
           <td><%= reserve.nickname %></td>
         </tr>
         <% end %>
