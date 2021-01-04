@@ -26,6 +26,7 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）", class: "" %>
     </div>
     <div class="user-form__submit-box">
+      <p style="text-align: left;"><%= link_to "利用規約", term_path %>、<%= link_to "プライバシーポリシー", privacy_path %>に同意して</p>
       <%= f.submit "ユーザー登録", class:"wide-submit-btn btn-hover orange-btn" %>
     </div>
     <% end %>
