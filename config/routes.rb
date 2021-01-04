@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get "/contact",   to: "static_page#contact"
   post "/contact",  to: "static_page#contact_for_admin"
   
+  #特定商取引法に基づく表記
+  #get "/tokushohyo",   to: "static_page#tokushohyo"
+  
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions'

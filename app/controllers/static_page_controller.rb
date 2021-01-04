@@ -17,9 +17,15 @@ class StaticPageController < ApplicationController
     end
   end
   
+  #def tokushohyo
+  #  @tokushohyo = Tokushohyo.new
+  #end
   
       private 
         def contact_params
           params.require(:contact).permit(:name, :email, :title, :content)
         end
+        
+
+  
 end

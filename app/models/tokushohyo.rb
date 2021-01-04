@@ -1,0 +1,3 @@
+class Tokushohyo < ApplicationRecord
+
+end
