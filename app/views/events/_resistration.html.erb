@@ -134,6 +134,7 @@ $(function(){
         <%= f.email_field:email, placeholder: "E-mail" %>
       </div>
       <div class="event-attend__submit-box">
+        <p><%= link_to "利用規約", term_path %>、<%= link_to "プライバシーポリシー", privacy_path %>に同意の上 </p>
         <%= f.submit "予約する", class:"submit-btn orange-btn btn-hover", title: "イベント予約", data: {confirm: "イベントの予約を行ってよろしいでしょうか？", cancel: "やめる", commit: "確定"} %>
       </div>
     <% end %>

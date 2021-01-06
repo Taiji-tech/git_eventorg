@@ -59,6 +59,7 @@
           </div>
           <div id="event-form__img"></div>
           <div class="event-submit">
+            <p><%= link_to "利用規約", term_path, style:"font-weight: bold;" %>、<%= link_to "プライバシーポリシー", privacy_path, style:"font-weight: bold;" %>に同意の上 </p>
             <%= f.submit "イベント作成", class:"submit-btn orange-btn btn-hover" %>
           </div>
         <% end %>

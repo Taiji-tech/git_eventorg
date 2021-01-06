@@ -20,8 +20,10 @@
         <% @events.each do |event| %>
         <div class="event-box box-wrap">
           <div class="event-box__btn">
+            <% if to_date_and_time(event.start_date, event.start_time) > Time.zone.now %>
             <p><%= link_to "編集する", "/events/#{event.id}/edit", method: :get, class:"grey-btn" %></p>
             <p><%= link_to "中止する", "/events/#{event.id}", method: :delete, title: "イベントの中止", data: {confirm: "中止しますか？", cancel: "やめる", commit: "確定"}, class:"grey-btn" %></p>
+            <% end %>
           </div>
           <div class='event-box__detail'>
             <h2><%= event.title %></h2>
