@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "/tokushohyo",  to: "static_page#tokushohyo"
   get "/term",        to: "static_page#term"
   get "/privacy",     to: "static_page#privacy"
+  get "/howtouse",     to: "static_page#howtouse"
   
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',

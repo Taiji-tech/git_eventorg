@@ -26,6 +26,9 @@ class StaticPageController < ApplicationController
   def term
   end
   
+  def howtouse
+  end
+  
       private 
         def contact_params
           params.require(:contact).permit(:name, :email, :title, :content)
