@@ -97,13 +97,12 @@
   margin-top: 2rem;
 }
 .howtouse{
-  width: 100rem;
-  margin: auto;
-  font-size: 1.8rem;
+  width: 100%;
   
-  @media only screen and (max-width: 575px){
-    width: 100%;
-    padding: 0 1rem;
-  }
-  
+}
+p.img_center{
+  text-align: center;
+}
+.howtouse-image{
+ width: 80%;
 }
