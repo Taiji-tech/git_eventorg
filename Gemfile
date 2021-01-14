@@ -116,3 +116,5 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+
+gem 'rails_admin', '~> 2.0'

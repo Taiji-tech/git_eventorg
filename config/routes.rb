@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root "events#top"
   get "/contact",   to: "static_page#contact"
   post "/contact",  to: "static_page#contact_for_admin"
