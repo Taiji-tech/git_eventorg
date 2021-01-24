@@ -18,7 +18,7 @@ $(function(){
         <div class="event-attend__detail-info">
           <table>
             <tr>
-              <th>ニックネーム</th>
+              <th>名前</th>
               <td><%= current_user.nickname %></td>
             </tr>
             <tr>
@@ -76,7 +76,7 @@ $(function(){
         <%= form_with(model: @reserve, url: event_reserves_path(@event.id)) do |f| %>
           <div class="event-attend__form-box">
             <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
-            <%= f.text_field:nickname, placeholder: "ニックネーム" %>
+            <%= f.text_field:nickname, placeholder: "名前" %>
           </div>
           <div class="event-attend__form-box">
             <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
@@ -100,7 +100,7 @@ $(function(){
     <%= form_with(model: @user, url: event_create_with_resistration_path(@event.id)) do |f| %>
       <div class="event-attend__form-box">
         <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
-        <%= f.text_field:nickname, placeholder: "ニックネーム" %>
+        <%= f.text_field:nickname, placeholder: "名前" %>
       </div>
       <div class="event-attend__form-box">
         <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>
@@ -127,7 +127,7 @@ $(function(){
     <%= form_with(model: @reserve, url: event_reserves_path(@event.id)) do |f| %>
       <div class="event-attend__form-box">
         <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
-        <%= f.text_field:nickname, placeholder: "ニックネーム" %>
+        <%= f.text_field:nickname, placeholder: "名前" %>
       </div>
       <div class="event-attend__form-box">
         <p><i class="fa fa-envelope-o" aria-hidden="true"></i></p>

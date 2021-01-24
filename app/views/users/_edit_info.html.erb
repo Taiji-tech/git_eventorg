@@ -13,11 +13,18 @@ $(function(){
         <%= form_with(model:@user, url: user_update_path) do |f| %>
           <div class="user-form__box">
             <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
-            <%= f.text_field:nickname, placeholder: "ニックネーム" %>
+            <%= f.text_field:nickname, placeholder: "名前" %>
           </div>
           <div class="user-form__box">
             <p><i class="fa fa-lock" aria-hidden="true"></i></p>
             <%= f.email_field:email, placeholder: "E-mail" %>
+          </div>
+          <div class="user-form__box">
+            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
+            <%= f.text_field:profile, placeholder: "自己紹介" %>
+          </div>
+          <div>
+            <p>プロフィール画像</p>
           </div>
           <div class="user-form__box">
             <p><i class="fa fa-unlock-alt" aria-hidden="true"></i></p>

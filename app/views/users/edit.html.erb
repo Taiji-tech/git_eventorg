@@ -17,12 +17,20 @@
       <div class="user-edit__info box-wrap">
         <h2>基本情報</h2>
         <div class="user-edit__info-box">
-          <h3><i class="fa fa-user-o" aria-hidden="true"></i> ニックネーム</h3>
+          <h3><i class="fa fa-user-o" aria-hidden="true"></i> 名前</h3>
           <p><%= current_user.nickname %></p>
         </div>
         <div class="user-edit__info-box">
           <h3><i class="fa fa-envelope-o" aria-hidden="true"></i> E-mail</h3>
           <p><%= current_user.email %></p>
+        </div>
+        <div class="user-edit__info-box">
+          <h3><i class="fa fa-envelope-o" aria-hidden="true"></i> プロフィール写真</h3>
+          <p><%= current_user.image %></p>
+        </div>
+        <div class="user-edit__info-box">
+          <h3><i class="fa fa-envelope-o" aria-hidden="true"></i> 自己紹介</h3>
+          <p><%= current_user.profile %></p>
         </div>
       </div>
       
