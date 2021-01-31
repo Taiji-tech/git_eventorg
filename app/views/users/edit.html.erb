@@ -25,12 +25,12 @@
           <p><%= current_user.email %></p>
         </div>
         <div class="user-edit__info-box">
-          <h3><i class="fa fa-envelope-o" aria-hidden="true"></i> プロフィール写真</h3>
-          <p><%= current_user.image %></p>
+          <h3><i class="fa fa-image" aria-hidden="true"></i> プロフィール写真</h3>
+          <p><% if current_user.image.attached? %><%= image_tag current_user.image, class:"user-edit__info-image" %><% end %></p>
         </div>
         <div class="user-edit__info-box">
-          <h3><i class="fa fa-envelope-o" aria-hidden="true"></i> 自己紹介</h3>
-          <p><%= current_user.profile %></p>
+          <h3><i class="fa fa-id-badge" aria-hidden="true"></i> 自己紹介</h3>
+          <p><%= simple_format(current_user.profile) %></p>
         </div>
       </div>
       

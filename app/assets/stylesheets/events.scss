@@ -634,6 +634,51 @@
   }
   
 }
-
+.event-box__hostinfo-box{
+  position: fixed;
+  top: 5%;
+  left: 0;
+  z-index: 50;
+  width: 100vw;
+  height: 100vh;
+}
+.event-box__hostinfo{
+  z-index: 50;
+  width: 50rem;
+  max-height: 90%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: #fff;
+}
+.event-box__hostinfo-title{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.event-box__hostinfo-content{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 1rem;
+  
+  img{
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+  }
+  .event-box__hostinfo-name{
+    margin: auto 0;
+    padding: 2rem;
+    font-size: 1.8rem;
+  }
+}
+.event-box__hostinfo-subtitle{
+  width: 100%;
+  font-size: 1.8rem;
+  text-decoration: underline;
+}
 
 }

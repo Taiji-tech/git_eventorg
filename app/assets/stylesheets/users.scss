@@ -29,9 +29,9 @@
     border-radius: .5rem 0 0 .5rem;
 	  border: solid .1rem #adb5bd;
   }
-  input{
+  input, textarea{
     width: 100%;
-    padding: 0 1rem;
+    padding: 1rem;
     border-radius: 0 .5rem .5rem 0;
 	  border: solid .1rem #adb5bd;
   }
@@ -154,6 +154,7 @@
 }
 .user-edit__info-box{
   width: 50%;
+  margin-bottom: 1rem;
   
   h3{
     font-size: 2rem;
@@ -182,4 +183,9 @@
     list-style: none;
     font-size: 1.8rem;
   }
+}
+.user-edit__info-image{
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
 }

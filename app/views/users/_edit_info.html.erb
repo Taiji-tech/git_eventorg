@@ -20,11 +20,17 @@ $(function(){
             <%= f.email_field:email, placeholder: "E-mail" %>
           </div>
           <div class="user-form__box">
-            <p><i class="fa fa-lock" aria-hidden="true"></i></p>
-            <%= f.text_field:profile, placeholder: "自己紹介" %>
+            <p><i class="fa fa-id-badge" aria-hidden="true"></i></p>
+            <%= f.text_area:profile, placeholder: "自己紹介" %>
           </div>
-          <div>
-            <p>プロフィール画像</p>
+          <div class="user-form__box">
+            <p><i class="fa fa-image" aria-hidden="true"></i></p>
+            <% if @user.image.attached? %>
+              <%= f.file_field:image, class:"" %>
+            <% else %>
+              <%= f.file_field:image, class:"" %>
+            <% end %>
+            
           </div>
           <div class="user-form__box">
             <p><i class="fa fa-unlock-alt" aria-hidden="true"></i></p>

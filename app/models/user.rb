@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   
+  # avtive storage
+  has_one_attached :image
+  
+  
   # validation
   validates :nickname, presence: true
   
