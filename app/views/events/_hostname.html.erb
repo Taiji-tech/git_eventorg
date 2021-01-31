@@ -1,0 +1,32 @@
+<script>
+$(function(){
+  var hostinfo = 
+  `<div class="event-box__hostinfo">
+    <div class="event-box__hostinfo-title"><span>プロフィール</span><p class="btn-hover" id="event-box__hostinfo-close">×</p></div>
+    <div class="event-box__hostinfo-content">
+      <% if @event.user.image.attached? %><%= image_tag @event.user.image %><% else %><%= image_tag "NoImage.png" %><% end %>
+      <p class="event-box__hostinfo-name"><%= @event.user.nickname %></p>
+    </div>
+    <div class="event-box__hostinfo-content">
+      <p class="event-box__hostinfo-subtitle">自己紹介</p>
+      <div class=""><%= simple_format(@event.user.profile) %></div>
+    </div>  
+  </div>`
+  
+  $(".host-info").on("click", function(){
+    $.when(
+      $("#display").css("display", ""),
+      $(".event-box__hostinfo-box").css("display", "")
+    ).done(function(){
+      $("#display").css("opacity", .8);
+      $(".event-box__hostinfo-box").append(hostinfo);
+      
+      $("#event-box__hostinfo-close").on("click", function(){
+        $("#display").css("display", "none");
+        $(".event-box__hostinfo-box").css("display", "none");
+        $(".event-box__hostinfo").remove();
+      });
+    });
+  });
+});
+</script>

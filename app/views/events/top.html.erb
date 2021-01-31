@@ -67,12 +67,19 @@
               <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> 参加費</th>
               <td><%= event.price.to_s(:delimited) %> 円</td>
             </tr>
+            <tr>
+              <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> ホスト</th>
+              <td><span class="link host-info"><%= event.user.nickname %></span></td>
+            </tr>
           </table>
+          <div class="event-box__hostinfo-box" style="display: none;"></div>
         </div>
         
         <div class="event-top__btn">
           <p class=""><%= link_to "詳細をみる", event_path(event.id), class:"wide-submit-btn btn-hover orange-btn" %></p>
         </div>
+        <% @event = event %>
+        <%= render "events/hostname", collection: @event %>
       </div>
       <% end %>
       <%= paginate(@events) %>

@@ -102,6 +102,8 @@
 .user-edit{
   position: fixed;
   top: 10%;
+  max-height: 80vh;
+  overflow-y: auto;
   margin: auto;
   z-index: 50;
   border-radius: 1rem;
