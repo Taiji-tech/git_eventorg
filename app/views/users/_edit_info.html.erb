@@ -26,7 +26,8 @@ $(function(){
           <div class="user-form__box">
             <p><i class="fa fa-image" aria-hidden="true"></i></p>
             <% if @user.image.attached? %>
-              <%= f.file_field:image, class:"" %>
+                <div class="link user-form__box-editimage-btn">画像を変更する</div>
+                <%= f.file_field:image, class:"user-form__box-editimage", style:"display:none;" %>
             <% else %>
               <%= f.file_field:image, class:"" %>
             <% end %>
@@ -98,6 +99,11 @@ $(function(){
       $(".user-edit__info").append(editInfo);
     });
     
+    // プロフィール画像の変更
+    $(".user-form__box-editimage-btn").on("click", function(){
+      $(".user-form__box-editimage-btn").css("display", "none");
+      $(".user-form__box-editimage").css("display", "");
+    });
     removeAll.editBox();
   });
   
@@ -113,7 +119,6 @@ $(function(){
   });
 
 
-  
 });  
   
   

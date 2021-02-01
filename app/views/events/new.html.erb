@@ -135,12 +135,14 @@ $(function(){
 <script>
 $(function(){
   var dataBox = new DataTransfer();
-  var file_field = $('input[type=file]');
+  var file_field = document.querySelector('input[type=file]');
+  
   $('#img-file').on("change", function(){
     var files = $('input[type="file"]').prop('files')[0];
     $.each(this.files, function(i, file){
       var fileReader = new FileReader();
       dataBox.items.add(file);
+      
       file_field.files = dataBox.files;
       var num = $('.item-image').length + 1 + i;
       fileReader.readAsDataURL(file);
