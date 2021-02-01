@@ -69,10 +69,10 @@
             </tr>
             <tr>
               <th><i class="fa fa-bookmark-o" aria-hidden="true"></i> ホスト</th>
-              <td><span class="link host-info"><%= event.user.nickname %></span></td>
+              <td><span class="link host-info-<%= event.id %>"><%= event.user.nickname %></span></td>
             </tr>
           </table>
-          <div class="event-box__hostinfo-box" style="display: none;"></div>
+          <div class="event-box__hostinfo-box" id="event-box__hostinfo-box-<%= event.id %>" style="display: none;"></div>
         </div>
         
         <div class="event-top__btn">

@@ -28,7 +28,7 @@
         </tr>
         <tr>
           <th><i class="fa fa-user-secret" aria-hidden="true"></i> ホスト</th>
-          <td><span class="host-info link"><%= @event.user.nickname %></span></td>
+          <td><span class="host-info-<%= @event.id %> link"><%= @event.user.nickname %></span></td>
         </tr>
         <tr>
           <% if @event.venue_method == "online" %>
@@ -90,7 +90,7 @@
       <% end %>
     </div>
     <% end %>
-    <div style="display: none;" class="event-box__hostinfo-box"></div>
+    <div style="display: none;" class="event-box__hostinfo-box" id="event-box__hostinfo-box-<%= @event.id %>"></div>
   </div>
 </div>
 <%= render "events/hostname", collection: @event %>

@@ -14,4 +14,10 @@ class User < ApplicationRecord
   # association
   has_many :events
   has_one :tenant
+  
+  # after confirmation
+  def after_confirmation
+    UserMailer.mail_user_registered(self).deliver_now
+  end
+  
 end
