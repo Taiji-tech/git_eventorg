@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   
+  # enum role: { general: 1, admin: 99 }
+  
   # avtive storage
   has_one_attached :image
   

@@ -118,4 +118,4 @@ group :production do
 end
 
 gem 'rails_admin', '~> 2.0'
-gem 'cancancan'
+# gem 'cancancan'
