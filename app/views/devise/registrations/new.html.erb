@@ -3,9 +3,9 @@
     <h1>新規ユーザー登録</h1>
   </div>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "shared/error_notice", model: resource %>
   <div class="user-form">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "shared/error_notice", model: resource %>
     <div class="user-form__box">
       <p><i class="fa fa-user-o" aria-hidden="true"></i></p>
       <%= f.text_field :nickname, autofocus: true, placeholder: "名前", class: "" %>
@@ -37,5 +37,6 @@
         <%= link_to "ログイン", new_user_session_path, class:"wide-submit-btn btn-hover grey-btn" %>
       </p>
     </div>
+    
   </div>
 </div>  
