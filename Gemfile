@@ -82,6 +82,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails', '~> 4.10.0'
   gem 'rails-controller-testing'
+  # gem 'rubocop', require: false
+  # gem 'rubocop-performance', require: false
+  # gem 'rubocop-rails', require: false
+  # gem 'rubocop-rspec'
 end
 
 group :development do
