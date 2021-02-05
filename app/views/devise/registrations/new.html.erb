@@ -4,7 +4,10 @@
   </div>
   <div class="user-form">
     
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "shared/error_notice", model: resource %>
 
+    <% end %>
     
     <div class="user-form__link user-form__notice">
       <p>アカウントをお持ちの方はこちら</p>
