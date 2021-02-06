@@ -74,9 +74,9 @@
 $(function(){
   // ios向け対応
   window.onload = function () {
-    var ua        = navigator.userAgent,
+    var ua        = window.navigator.userAgent.toLowerCase(),
         bodyClass = document.body.classList;
-    if (ua.indexOf('iPhone') > 0){
+    if (ua.indexOf('safari') != -1){
       $("#event-form__img-label-new").css("display", "none");
       $(".event-form__img-file-new").css("display", "");
     }
